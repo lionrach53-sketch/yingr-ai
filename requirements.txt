@@ -11,7 +11,7 @@ python-multipart==0.0.7
 
 # 3. COMPUTER VISION & IMAGE PROCESSING (IA LOCALE)
 # --only-binary=:all: : IMPORTANT ! Force l'installation du paquet pré-compilé
-Pillow==10.1.0 --only-binary=:all:
+Pillow==10.4.0 
 numpy==1.26.2
 
 # 4. BUILD TOOLS & UTILITIES (Stabilise l'environnement de build)
