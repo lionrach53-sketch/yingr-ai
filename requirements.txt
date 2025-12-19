@@ -1,0 +1,18 @@
+# RESOLVE HUB v2.0 - Requirements avec IA Locale
+
+# Web Framework
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+sqlalchemy==2.0.23
+python-multipart==0.0.6
+
+# Computer Vision & IA Locale
+Pillow==10.1.0
+numpy==1.26.2
+
+# Pour version future avec TensorFlow (optionnel pour l'instant)
+# tensorflow==2.15.0  # Décommenter quand prêt
+# opencv-python==4.8.1.78  # Pour traitement image avancé
+
+# Utilities
+python-dotenv==1.0.0
