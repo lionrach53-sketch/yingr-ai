@@ -1,18 +1,23 @@
-# RESOLVE HUB v2.0 - Requirements avec IA Locale
+# RESOLVE HUB v2.0 - Backend FastAPI (Configuration Render)
+# ========================================================
 
-# Web Framework
+# 1. CORE WEB FRAMEWORK
 fastapi==0.104.1
-uvicorn[standard]==0.24.0
+uvicorn[standard]==0.23.2          # Version légèrement antérieure, très stable
 sqlalchemy==2.0.23
+
+# 2. FILE UPLOAD & FORM DATA
 python-multipart==0.0.7
 
-# Computer Vision & IA Locale
-Pillow==10.2.0
+# 3. COMPUTER VISION & IMAGE PROCESSING (IA LOCALE)
+# --only-binary=:all: : IMPORTANT ! Force l'installation du paquet pré-compilé
+Pillow==10.1.0 --only-binary=:all:
 numpy==1.26.2
 
-# Pour version future avec TensorFlow (optionnel pour l'instant)
-# tensorflow==2.15.0  # Décommenter quand prêt
-# opencv-python==4.8.1.78  # Pour traitement image avancé
+# 4. BUILD TOOLS & UTILITIES (Stabilise l'environnement de build)
+setuptools==70.0.0                 # Rend le processus d'installation plus fiable
+python-dotenv==1.0.0               # Pour gérer les variables d'environnement
 
-# Utilities
-python-dotenv==1.0.0
+# 5. FUTURE AI/ML (Décommentez quand prêt)
+# tensorflow==2.15.0
+# opencv-python-headless==4.8.1.78  # Utilisez 'headless' pour le serveur
