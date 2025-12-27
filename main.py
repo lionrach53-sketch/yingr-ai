@@ -204,8 +204,12 @@ app.add_middleware(
         "http://localhost:5174",
         "http://localhost:3000",
         "http://localhost:5176",
-        # Frontend prod servi par `serve` sur la VM
+        # Frontend user prod servi par `serve` sur la VM
         "http://34.173.253.235:4173",
+        # Frontend admin prod (autre port sur la même VM)
+        "http://34.173.253.235:4174",
+        # Frontend expert prod (encore un autre port)
+        "http://34.173.253.235:4175",
     ],
     allow_credentials=True,
     allow_methods=["*"],
