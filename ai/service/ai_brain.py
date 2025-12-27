@@ -217,6 +217,7 @@ class AIBrain:
                 "Explique simplement pour un public burkinabè, en tenant compte du contexte de vie au Burkina (ville, village, niveau de revenu).\n"
                 "Compose ta réponse à partir des briques fournies (idée principale, explication, conseil, avertissement) en évitant de répéter plusieurs fois la même idée.\n"
                 "Utilise uniquement les informations qui répondent directement à la question posée ; ignore les briques qui parlent d'autres thèmes (par exemple citoyenneté, politique, sujets trop éloignés).\n"
+                "Si la question contient plusieurs questions différentes, réponds à chacune séparément de manière structurée (1., 2., 3.), avant ta question finale.\n"
                 "Propose ensuite 2 à 4 pistes concrètes ou options adaptées à la situation décrite, sous forme de phrases courtes et pratiques.\n"
                 "Ne récite pas les textes tels quels, reformule de manière naturelle.\n"
                 "Réponds globalement en 3 à 7 phrases maximum (hors ta question finale).\n"
