@@ -442,58 +442,40 @@ class Database:
     
     @staticmethod
     def load():
-        """Charge les données"""
-        try:
-            with open(DB_FILE, 'r', encoding='utf-8') as f:
-                return json.load(f)
-        except Exception as e:
-            logger.error(f"Erreur chargement DB: {e}")
-            # Retourner une structure vide si le fichier n'existe pas
-            return {"contributions": [], "validation_queue": [], "documents": [], "stats": {}}
+        """[DÉPRÉCIÉ] Ancienne lecture JSON remplacée par MongoDB.
+
+        Conservée uniquement pour compatibilité, mais ne doit plus être utilisée.
+        """
+        logger.warning("Database.load() est déprécié - utiliser MongoDB à la place")
+        return {"contributions": [], "validation_queue": [], "documents": [], "stats": {}, "api_keys": []}
     
     @staticmethod
     def save(data):
-        """Sauvegarde les données"""
-        try:
-            with open(DB_FILE, 'w', encoding='utf-8') as f:
-                json.dump(data, f, indent=2, default=str)
-        except Exception as e:
-            logger.error(f"Erreur sauvegarde DB: {e}")
-            raise HTTPException(status_code=500, detail="Erreur sauvegarde des données")
+        """[DÉPRÉCIÉ] Ancienne écriture JSON remplacée par MongoDB.
+
+        Ne fait plus rien, gardée pour compatibilité.
+        """
+        logger.warning("Database.save() est déprécié - aucune écriture effectuée")
+        return
     
     @staticmethod
     def add_log(action: str, expert_id: str = "anonymous", details: dict = None):
-        """Ajoute un log d'activité"""
+        """[DÉPRÉCIÉ] Redirigé vers les logs admin MongoDB pour compatibilité."""
         try:
-            log_entry = {
-                "timestamp": datetime.now().isoformat(),
-                "action": action,
-                "expert_id": expert_id,
-                "details": details or {}
-            }
-            
-            logs = []
-            if os.path.exists(LOGS_FILE):
-                with open(LOGS_FILE, 'r', encoding='utf-8') as f:
-                    logs = json.load(f)
-            
-            logs.append(log_entry)
-            
-            # Garder seulement les 1000 derniers logs
-            if len(logs) > 1000:
-                logs = logs[-1000:]
-            
-            with open(LOGS_FILE, 'w', encoding='utf-8') as f:
-                json.dump(logs, f, indent=2, default=str)
-                
+            if db is not None:
+                # Utiliser la collection admin_logs de MongoDB
+                db.add_admin_log(action, admin_id=expert_id, details=details or {})
+            else:
+                logger.warning(f"add_log sans MongoDB: {action} ({expert_id})")
         except Exception as e:
-            logger.error(f"Erreur log: {e}")
+            logger.error(f"Erreur log (MongoDB): {e}")
 
 # Dépendances
 async def verify_expert(credentials: HTTPAuthorizationCredentials = Depends(security)):
     """Vérifie l'authentification expert"""
     if credentials.credentials != EXPERT_KEY:
-        Database.add_log("auth_failed", "unknown", {"reason": "invalid_token"})
+        if db is not None:
+            db.add_admin_log("auth_failed", admin_id="expert_unknown", details={"reason": "invalid_token"})
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Token expert invalide",
@@ -504,7 +486,8 @@ async def verify_expert(credentials: HTTPAuthorizationCredentials = Depends(secu
 async def verify_admin(credentials: HTTPAuthorizationCredentials = Depends(security)):
     """Vérifie l'authentification admin"""
     if credentials.credentials != ADMIN_KEY:
-        Database.add_log("auth_failed_admin", "unknown", {"reason": "invalid_admin_key"})
+        if db is not None:
+            db.add_admin_log("auth_failed_admin", admin_id="unknown", details={"reason": "invalid_admin_key"})
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Clé d'administration invalide",
@@ -599,7 +582,8 @@ async def expert_login(auth: ExpertLogin):
         expert = EXPERT_DATABASE.get(auth.username)
         
         if not expert or expert["password"] != auth.password:
-            Database.add_log("login_failed", "unknown", {"username": auth.username})
+            if db is not None:
+                db.add_admin_log("login_failed", admin_id="expert_unknown", details={"username": auth.username})
             raise HTTPException(
                 status_code=status.HTTP_401_UNAUTHORIZED,
                 detail="Identifiants invalides"
@@ -609,7 +593,8 @@ async def expert_login(auth: ExpertLogin):
         expert_info = expert.copy()
         del expert_info["password"]
         
-        Database.add_log("login_success", expert_info["id"], {"name": expert_info["name"]})
+        if db is not None:
+            db.add_admin_log("login_success", admin_id=expert_info["id"], details={"name": expert_info["name"]})
         logger.info(f"Expert connecté: {expert_info['name']}")
         
         return expert_info
@@ -913,29 +898,34 @@ async def get_profile(_: bool = Depends(verify_expert)):
 async def get_expert_stats(_: bool = Depends(verify_expert)):
     """Obtenir les statistiques pour l'expert"""
     try:
-        data = Database.load()
-        
-        # Calculer les stats personnelles
-        contributions = data.get("contributions", [])
-        expert_contributions = [c for c in contributions if c.get("expertId") == "exp_001"]
-        
+        # Récupérer les contributions et stats depuis MongoDB
+        expert_id = "exp_001"  # TODO: extraire depuis le token dans une version future
+
+        # Contributions personnelles
+        expert_contributions = db.get_contributions(filter_by={"expertId": expert_id}) if db is not None else []
         validated_count = len([c for c in expert_contributions if c.get("status") == "validated"])
         pending_count = len([c for c in expert_contributions if c.get("status") == "pending"])
-        
-        # Calculer le taux de validation (si des validations ont été faites)
-        validation_queue = data.get("validation_queue", [])
-        validated_items = [v for v in validation_queue if v.get("validated")]
-        validation_rate = len(validated_items) / len(validation_queue) * 100 if validation_queue else 0
-        
+
+        # Taux de validation basé sur la file de validation MongoDB
+        validation_items = db.get_validation_queue() if db is not None else []
+        validated_items = [v for v in validation_items if v.get("validated")]
+        validation_rate = len(validated_items) / len(validation_items) * 100 if validation_items else 0
+
+        # Documents uploadés par l'expert
+        documents_uploaded = db.documents.count_documents({"uploaded_by": expert_id}) if db is not None else 0
+
+        # Stats globales depuis MongoDB
+        global_stats = db.get_system_stats() if db is not None else {}
+
         return {
             "personal": {
                 "total_contributions": len(expert_contributions),
                 "validated_contributions": validated_count,
                 "pending_contributions": pending_count,
                 "validation_rate": round(validation_rate, 1),
-                "documents_uploaded": len([d for d in data.get("documents", []) if d.get("uploaded_by") == "exp_001"])
+                "documents_uploaded": documents_uploaded
             },
-            "global": data.get("stats", {})
+            "global": global_stats
         }
         
     except Exception as e:
@@ -1124,18 +1114,25 @@ async def get_admin_conversations(
 async def get_admin_api_keys(_: bool = Depends(verify_admin)):
     """Lister toutes les clés API"""
     try:
-        data = Database.load()
-        api_keys = data.get("api_keys", [])
-        
-        # Convertir les dates
-        for key in api_keys:
-            if isinstance(key.get("created_at"), str):
-                key["created_at"] = datetime.fromisoformat(key["created_at"].replace('Z', '+00:00'))
-            if key.get("last_used") and isinstance(key["last_used"], str):
-                key["last_used"] = datetime.fromisoformat(key["last_used"].replace('Z', '+00:00'))
-        
-        Database.add_log("get_api_keys", "admin", {"count": len(api_keys)})
-        
+        # Récupérer directement depuis MongoDB
+        api_keys_cursor = db.api_keys.find({}) if db is not None else []
+        api_keys: List[Dict[str, Any]] = []
+
+        for key in api_keys_cursor:
+            item = {
+                "id": key.get("id", str(key.get("_id", ""))),
+                "name": key.get("name", ""),
+                "key": key.get("key", ""),
+                "created_at": key.get("created_at", datetime.now()),
+                "active": key.get("active", True),
+                "last_used": key.get("last_used"),
+                "permissions": key.get("permissions", {"read": True, "write": False, "delete": False})
+            }
+            api_keys.append(item)
+
+        if db is not None:
+            db.add_admin_log("get_api_keys", "admin", {"count": len(api_keys)})
+
         return api_keys
     except Exception as e:
         logger.error(f"Erreur get_api_keys: {e}")
@@ -1149,8 +1146,6 @@ async def create_admin_api_key(
 ):
     """Créer une nouvelle clé API"""
     try:
-        data = Database.load()
-        
         # Générer une clé unique
         new_key_id = str(uuid.uuid4())
         new_key_value = f"sk_live_{uuid.uuid4().hex[:24]}"
@@ -1163,17 +1158,13 @@ async def create_admin_api_key(
             "active": True,
             "permissions": key_data.permissions
         }
-        
-        # Initialiser la liste si elle n'existe pas
-        if "api_keys" not in data:
-            data["api_keys"] = []
-        
-        data["api_keys"].append(new_key)
-        Database.save(data)
+        # Sauvegarde dans MongoDB
+        if db is not None:
+            db.api_keys.insert_one(new_key)
         
         # Ajouter un log
         background_tasks.add_task(
-            Database.add_log,
+            db.add_admin_log,
             "api_key_created",
             "admin",
             {"key_id": new_key_id, "name": key_data.name}
@@ -1194,26 +1185,15 @@ async def revoke_admin_api_key(
 ):
     """Révoquer une clé API"""
     try:
-        data = Database.load()
-        
-        if "api_keys" not in data:
-            raise HTTPException(status_code=404, detail="Aucune clé API trouvée")
-        
-        key_found = False
-        for key in data["api_keys"]:
-            if key["id"] == key_id:
-                key["active"] = False
-                key_found = True
-                break
-        
-        if not key_found:
+        # Mettre à jour la clé dans MongoDB
+        result = db.api_keys.update_one({"id": key_id}, {"$set": {"active": False}}) if db is not None else None
+
+        if result is None or result.matched_count == 0:
             raise HTTPException(status_code=404, detail="Clé API non trouvée")
-        
-        Database.save(data)
         
         # Log
         background_tasks.add_task(
-            Database.add_log,
+            db.add_admin_log,
             "api_key_revoked",
             "admin",
             {"key_id": key_id}
@@ -2003,7 +1983,7 @@ async def admin_system_action(
         if action == "restart":
             # Simuler un redémarrage
             background_tasks.add_task(
-                Database.add_log,
+                db.add_admin_log,
                 "system_restart",
                 "admin",
                 {"force": action_data.force}
@@ -2012,37 +1992,53 @@ async def admin_system_action(
             return {"message": "Redémarrage initié", "action": "restart"}
             
         elif action == "backup":
-            # Créer une sauvegarde
+            # Créer une sauvegarde à partir des collections MongoDB
             backup_file = f"data/backup_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
-            data = Database.load()
-            
+
+            if db is None:
+                raise HTTPException(status_code=500, detail="MongoDB non disponible pour la sauvegarde")
+
+            snapshot = {
+                "contributions": list(db.contributions.find({})),
+                "validation_queue": list(db.validation_queue.find({})),
+                "experts": list(db.experts.find({})),
+                "admin_logs": list(db.admin_logs.find({})),
+                "api_keys": list(db.api_keys.find({})),
+                "system_stats": list(db.system_stats.find({})),
+                "chat_conversations": list(db.chat_conversations.find({})),
+                "chat_categories": list(db.chat_categories.find({})),
+                "documents": list(db.documents.find({})),
+                "notifications": list(db.notifications.find({})),
+                "audit_logs": list(db.audit_logs.find({}))
+            }
+
+            # Sérialisation en JSON (ObjectId/datetime -> str)
             with open(backup_file, 'w', encoding='utf-8') as f:
-                json.dump(data, f, indent=2, default=str)
-            
+                json.dump(snapshot, f, indent=2, default=str)
+
             background_tasks.add_task(
-                Database.add_log,
+                db.add_admin_log,
                 "system_backup",
                 "admin",
                 {"backup_file": backup_file}
             )
-            
+
             logger.info(f"Sauvegarde créée: {backup_file}")
             return {"message": "Sauvegarde créée", "backup_file": backup_file}
             
         elif action == "clear_logs":
-            # Nettoyer les logs
-            if os.path.exists("data/logs.json"):
-                with open("data/logs.json", 'w', encoding='utf-8') as f:
-                    json.dump([], f)
-            
+            # Nettoyer les logs dans MongoDB
+            if db is not None:
+                db.admin_logs.delete_many({})
+
             background_tasks.add_task(
-                Database.add_log,
+                db.add_admin_log,
                 "clear_logs",
                 "admin",
                 {}
             )
-            
-            logger.info("Logs nettoyés")
+
+            logger.info("Logs nettoyés dans MongoDB")
             return {"message": "Logs nettoyés avec succès"}
             
         else:
