@@ -783,14 +783,28 @@ async def chat_voice(
             )
         
         logger.info(f"📝 Transcription brute: '{transcription}' (longueur: {len(transcription)})")
-        
+
+        # Si Whisper n'a rien compris, renvoyer une réponse gentille plutôt qu'une erreur 400
         if not transcription or len(transcription.strip()) == 0:
-            logger.error("❌ Transcription vide")
-            raise HTTPException(
-                status_code=400,
-                detail="Impossible de transcrire l'audio. Parlez plus fort ou plus longtemps (3-5 secondes minimum)."
-            )
-        
+            logger.error("❌ Transcription vide, Whisper n'a rien compris")
+            return {
+                "session_id": session_id or f"voice_{uuid4().hex[:8]}",
+                "transcription": "",
+                "transcription_confidence": 0.0,
+                "response": (
+                    "Je n'ai pas bien entendu ce que tu as dit. "
+                    "Peux-tu répéter en parlant un peu plus fort et pendant 3 à 5 secondes ?"
+                ),
+                "language": language or "fr",
+                "intent": "incomprehensible_audio",
+                "category": category or "general",
+                "sources_count": 0,
+                "mode": "voice_intelligent",
+                "context": [],
+                "audio_url": None,
+                "audio_mode": "not_available",
+            }
+
         logger.info(f"✅ Transcription réussie: '{transcription}' (langue: {detected_language}, confiance: {confidence:.2%})")
         
         # 4️⃣ Traiter le texte transcrit avec l'endpoint intelligent
@@ -821,12 +835,48 @@ async def chat_voice(
         # Normaliser le texte (correction typos)
         normalized_message = text_normalizer.normalize(transcription)
         logger.info(f"📝 Message normalisé: '{normalized_message}'")
-        
+
         # Utiliser la langue choisie par l'utilisateur (pas d'auto-détection)
         detected_lang = language
         intent = conversation_service.detect_intent(normalized_message, detected_lang)
-        
-        # Interroger RAG
+
+        # 📌 Cas spécial : salutations vocales
+        if intent == "greeting":
+            logger.info("🙋 Intent vocal détecté: greeting – réponse d'accueil sans RAG")
+
+            greeting_text = conversation_service.generate_greeting_response(detected_lang)
+
+            audio_url = None
+            audio_mode = "not_available"
+            if detected_lang in ["mo", "di"]:
+                try:
+                    audio_url, audio_mode = tts_service.generate_audio(
+                        text=greeting_text,
+                        language=detected_lang
+                    )
+                    logger.info(f"🔊 Audio réponse greeting généré: {audio_url} (mode: {audio_mode})")
+                except Exception as e:
+                    logger.warning(f"⚠️ Audio réponse greeting non disponible: {e}")
+
+            return {
+                "session_id": session_id,
+                "transcription": transcription,
+                "transcription_confidence": confidence,
+                "response": greeting_text,
+                "language": detected_lang,
+                "intent": intent,
+                "category": category,
+                "sources_count": 0,
+                "mode": "voice_greeting",
+                "context": [],
+                "timestamp": datetime.utcnow().isoformat(),
+                "audio_url": audio_url,
+                "audio_mode": audio_mode,
+                "stt_service": "whisper",
+                "workflow": "voice → stt → greeting"
+            }
+
+        # Interroger RAG pour les autres intents
         answer_raw, context_raw = rag.ask(
             query=normalized_message,
             k=3,
@@ -834,7 +884,7 @@ async def chat_voice(
             category=category,
             min_confidence=0.35
         )
-        
+
         # Transformer contexte RAG
         rag_results = []
         for block in _rag_context_to_blocks(context_raw)[:3]:
@@ -842,7 +892,7 @@ async def chat_voice(
                 "question": normalized_message,
                 "reponse": block
             })
-        
+
         # Génération intelligente avec AI Brain
         intelligent_response = ai_brain.generate_intelligent_response(
             question=normalized_message,

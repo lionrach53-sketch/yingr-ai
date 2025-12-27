@@ -35,3 +35,6 @@ torchaudio==2.1.0
 
 # OU pour CPU seulement (plus léger)
 # torch==2.1.0+cpu --index-url https://download.pytorch.org/whl/cpu
+
+# Speech-to-Text (Whisper) pour la voix
+openai-whisper
