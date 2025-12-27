@@ -1,105 +1,147 @@
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
-from typing import Optional
-import logging
+from typing import Optional, List, Dict, Any
 
-from ..service.rag import rag_service
+# Services existants
 from ..service.ai_brain import ai_brain
-from ..service.intelligent_chat import intelligent_chat
-from ..utils.text_utils import detect_language, fix_mojibake
+from ..service.rag_engine import rag_engine
+from ..service.stt_service import speech_to_text
+from ..service.tts_service import text_to_speech
+from ..service.language_detector import detect_language
 
-logger = logging.getLogger(__name__)
+# ===============================
+# ✅ CORRECTION CRITIQUE
+# ===============================
+# intelligent_chat était utilisé mais jamais défini
+# On le mappe proprement vers ai_brain
+intelligent_chat = ai_brain
+
 router = APIRouter()
 
-# =========================
-# 📦 MODELS
-# =========================
+# ===============================
+# 📦 SCHEMAS
+# ===============================
 
 class ChatRequest(BaseModel):
-    message: str
-    category: Optional[str] = None
-    language: Optional[str] = None
+    message: Optional[str] = None
+    language: Optional[str] = "fr"
+    use_rag: Optional[bool] = True
+    audio_base64: Optional[str] = None
 
 
 class ChatResponse(BaseModel):
-    answer: str
-    confidence: float
-    source: str
+    response: str
+    language: str
+    used_rag: bool
+    audio_base64: Optional[str] = None
 
 
-# =========================
-# 🧠 CORE FUNCTION
-# =========================
+# ===============================
+# 🧠 ROUTE CHAT SIMPLE
+# ===============================
 
-def _process_chat(question: str, category: Optional[str], language: Optional[str]):
-    question = question.strip()
-    if not question:
-        raise HTTPException(status_code=400, detail="Message vide")
+@router.post("/chat", response_model=ChatResponse)
+def chat(request: ChatRequest):
 
-    detected_language = language or detect_language(question)
+    if not request.message and not request.audio_base64:
+        raise HTTPException(status_code=400, detail="Message ou audio requis")
 
-    logger.info(f"🧠 Question: {question}")
-    logger.info(f"🌍 Langue: {detected_language}")
+    # 🎙️ Speech to Text
+    message = request.message
+    if request.audio_base64:
+        message = speech_to_text(request.audio_base64)
 
-    # 🔍 RAG
-    answer_raw, context_raw, rag_results = rag_service.ask(
-        question=question,
-        category=category,
-        language=detected_language
+    # 🌍 Détection de langue si absente
+    language = request.language or detect_language(message)
+
+    # 📚 RAG
+    used_rag = False
+    context = ""
+    if request.use_rag:
+        context = rag_engine.search(message)
+        used_rag = True
+
+    # 🧠 Génération réponse
+    response_text = ai_brain.generate_response(
+        prompt=message,
+        context=context,
+        language=language
     )
 
-    # 🧠 LLM
-    intelligent_response = ai_brain.generate_intelligent_response(
-        question=question,
-        rag_results=rag_results,
-        category=category,
-        language=detected_language
+    # 🔊 Text to Speech
+    audio_response = text_to_speech(response_text, language)
+
+    return ChatResponse(
+        response=response_text,
+        language=language,
+        used_rag=used_rag,
+        audio_base64=audio_response
     )
 
-    final_answer = intelligent_response.get("reponse")
 
-    # 🔁 FALLBACK LOGIQUE
-    if not final_answer or len(final_answer.strip()) < 30:
-        logger.warning("⚠️ Réponse LLM faible → fallback RAG")
-        if answer_raw and len(answer_raw.strip()) > 30:
-            final_answer = answer_raw
-            source = "rag"
-        else:
-            final_answer = (
-                "Je n’ai pas encore assez d’informations structurées pour répondre précisément. "
-                "Peux-tu préciser ta question ?"
-            )
-            source = "fallback"
-    else:
-        source = "rag+llm"
+# ===============================
+# 🤖 ROUTE CHAT INTELLIGENT
+# ===============================
 
-    final_answer = fix_mojibake(final_answer)
+@router.post("/chat/intelligent", response_model=ChatResponse)
+def intelligent_chat_route(request: ChatRequest):
 
-    confidence = 0.0
-    if rag_results:
-        confidence = max(doc.get("score", 0.0) for doc in rag_results)
+    if not request.message and not request.audio_base64:
+        raise HTTPException(status_code=400, detail="Message ou audio requis")
 
+    # 🎙️ STT
+    message = request.message
+    if request.audio_base64:
+        message = speech_to_text(request.audio_base64)
+
+    # 🌍 Langue
+    language = request.language or detect_language(message)
+
+    # 🧠 Analyse intelligente (clarification, intention, etc.)
+    if intelligent_chat.should_ask_clarification(message):
+        clarification = intelligent_chat.ask_clarification(message, language)
+
+        return ChatResponse(
+            response=clarification,
+            language=language,
+            used_rag=False,
+            audio_base64=text_to_speech(clarification, language)
+        )
+
+    # 📚 RAG avancé
+    used_rag = False
+    context = ""
+    if request.use_rag:
+        context = rag_engine.search(message)
+        used_rag = True
+
+    # 🤖 Réponse intelligente
+    response_text = intelligent_chat.generate_intelligent_response(
+        user_input=message,
+        context=context,
+        language=language
+    )
+
+    # 🔊 TTS
+    audio_response = text_to_speech(response_text, language)
+
+    return ChatResponse(
+        response=response_text,
+        language=language,
+        used_rag=used_rag,
+        audio_base64=audio_response
+    )
+
+
+# ===============================
+# 🩺 ROUTE HEALTH CHECK
+# ===============================
+
+@router.get("/health")
+def health():
     return {
-        "answer": final_answer,
-        "confidence": round(confidence, 3),
-        "source": source
+        "status": "ok",
+        "ai": "YINGRE AI",
+        "rag": "enabled",
+        "intelligent_chat": True
     }
-
-
-# =========================
-# 🤖 ROUTES
-# =========================
-
-@router.post("/ai/chat", response_model=ChatResponse)
-def chat(req: ChatRequest):
-    return _process_chat(req.message, req.category, req.language)
-
-
-@router.post("/ai/chat/guest", response_model=ChatResponse)
-def chat_guest(req: ChatRequest):
-    return _process_chat(req.message, req.category, req.language)
-
-
-@router.post("/ai/chat/intelligent", response_model=ChatResponse)
-def chat_intelligent(req: ChatRequest):
-    return _process_chat(req.message, req.category, req.language)
