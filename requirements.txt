@@ -9,7 +9,19 @@ pydantic==2.5.0
 pydantic-settings==2.1.0
 psycopg2-binary==2.9.9
 pymongo[srv]>=4.0.0
-sentence-transformers>=2.2.2
+
+# IMPORTANT : de nombreux modules (faiss, torch, scikit-learn...) ne sont pas
+# encore compatibles avec NumPy 2.x, on force donc NumPy 1.x.
+numpy<2.0.0
+
+# Versions stables pour la stack NLP/RAG (évite les erreurs de compatibilité)
+sentence-transformers==2.2.2
+transformers==4.30.2
+huggingface-hub==0.24.0
+
+# Validation d'email pour les modèles Pydantic
+email-validator
+
 faiss-cpu
 openpyxl>=3.1.0
 pandas>=2.0.0
