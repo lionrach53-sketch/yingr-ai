@@ -83,84 +83,22 @@ class RAGService:
 
         # Filtrer par langue ET catégorie si spécifiées, en gardant les scores
         # ⚠️ IMPORTANT: Si category='general', on filtre SEULEMENT par langue (pas de filtre catégorie)
-        if language or (category and category.lower() != 'general'):
+        if language:
             filtered_results = []
             filtered_scores = []
             for idx, r in enumerate(results):
                 source = r.get("source", "")
-                
-                # Critères de filtrage
-                lang_match = True
-                cat_match = True
-                
-                # Vérifier la langue (ex: admin-json-Histoire-fr)
-                if language:
-                    lang_match = f"-{language}" in source
-                
-                # Vérifier la catégorie (ex: admin-json-Agriculture-fr)
-                # ⚠️ On ignore si category='general'
-                if category and category.lower() != 'general':
-                    # Normaliser : enlever accents, espaces, tirets, tout en minuscule pour comparaison
-                    import unicodedata
-                    def normalize_text(text):
-                        # Enlever accents
-                        text = unicodedata.normalize('NFD', text)
-                        text = ''.join(c for c in text if unicodedata.category(c) != 'Mn')
-                        return text.lower().replace(' ', '').replace('&', '').replace('-', '')
-                    
-                    cat_norm = normalize_text(category)
-                    source_norm = normalize_text(source)
-                    
-                    # Chercher la catégorie normalisée dans la source normalisée
-                    cat_match = cat_norm in source_norm
-                    
-                    if len(filtered_results) == 0:  # Logger TOUS les tests jusqu'à trouver un match
-                        logger.info(f"🔍 Test #{len([r for r in results[:20] if r == r])+1} source: {source}")
-                        logger.info(f"   Cat demandée: '{category}' → '{cat_norm}'")
-                        logger.info(f"   Source norm: '{source_norm}'")
-                        logger.info(f"   Match: {cat_match}")
-                
-                # Ajouter si les deux critères sont respectés
-                if lang_match and cat_match:
+                lang_match = f"-{language}" in source
+                if lang_match:
                     filtered_results.append(r)
                     filtered_scores.append(similarities[idx] if idx < len(similarities) else 0.0)
-                
-                # Limiter au nombre demandé
                 if len(filtered_results) >= k:
                     break
-            
-            # Si aucun résultat avec filtres, essayer SANS filtre catégorie
             if len(filtered_results) == 0:
-                logger.warning(f"⚠️ Aucun résultat pour catégorie={category}")
-                logger.info(f"🔄 Nouvelle recherche SANS filtre de catégorie...")
-                
-                # Recommencer la recherche sans filtre de catégorie
-                filtered_results = []
-                filtered_scores = []
-                for idx, r in enumerate(results):
-                    source = r.get("source", "")
-                    
-                    # Filtrer SEULEMENT par langue
-                    lang_match = True
-                    if language:
-                        lang_match = f"-{language}" in source
-                    
-                    if lang_match:
-                        filtered_results.append(r)
-                        filtered_scores.append(similarities[idx] if idx < len(similarities) else 0.0)
-                    
-                    if len(filtered_results) >= k:
-                        break
-                
-                # Si toujours rien, retourner message d'erreur
-                if len(filtered_results) == 0:
-                    logger.error(f"❌ Aucun résultat même sans filtre catégorie")
-                    return "Je n'ai pas trouvé d'information sur ce sujet. Pourriez-vous reformuler votre question ?", ""
-                else:
-                    logger.info(f"✅ {len(filtered_results)} résultats trouvés sans filtre catégorie")
-                    results = filtered_results
-                    similarities = filtered_scores
+                logger.error(f"❌ Aucun résultat pour la langue {language}")
+                return "Je n'ai pas trouvé d'information sur ce sujet dans cette langue. Pourriez-vous reformuler votre question ?", ""
             else:
+                logger.info(f"✅ {len(filtered_results)} résultats trouvés pour la langue {language}")
                 results = filtered_results
                 similarities = filtered_scores
         
