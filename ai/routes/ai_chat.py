@@ -683,7 +683,7 @@ def chat_intelligent(req: ChatRequest):
                 audio_url = None
                 audio_mode = "not_available"
         
-        # 1️⃣2️⃣ Retourner la réponse intelligente avec audio
+        # 1️⃣2️⃣ Préparer la réponse intelligente avec audio
         response_text = _fix_mojibake(intelligent_response["reponse"])
         context_first = _fix_mojibake(rag_results[0]["reponse"]) if rag_results else ""
 
@@ -700,6 +700,27 @@ def chat_intelligent(req: ChatRequest):
             "audio_url": audio_url,
             "audio_mode": audio_mode
         }
+
+        # 1️⃣3️⃣ Sauvegarder la conversation invité dans MongoDB (panel user/admin)
+        try:
+            if db is not None:
+                conversation_data = {
+                    "user_id": f"guest_{session_id}",
+                    "session_id": session_id,
+                    "category": payload["category"],
+                    "question": req.message,
+                    "answer": response_text,
+                    "context": payload["context"],
+                    "language": detected_language,
+                    "intent": intent,
+                    "mode": payload["mode"],
+                    "audio_url": audio_url,
+                    "audio_mode": audio_mode,
+                    "timestamp": datetime.utcnow(),
+                }
+                db.save_chat_conversation(conversation_data)
+        except Exception as e:
+            logger.warning(f"⚠️ Impossible de sauvegarder la conversation invitée: {e}")
 
         # Certains clients (ex: PowerShell Invoke-WebRequest) affichent des accents cassés
         # si le charset n'est pas précisé. On force UTF-8 pour un rendu correct.
@@ -836,9 +857,21 @@ async def chat_voice(
         normalized_message = text_normalizer.normalize(transcription)
         logger.info(f"📝 Message normalisé: '{normalized_message}'")
 
-        # Utiliser la langue choisie par l'utilisateur (pas d'auto-détection)
-        detected_lang = language
+        # Langue choisie par l'utilisateur (prioritaire pour la réponse)
+        detected_lang = language or "fr"
+
+        # Détecter aussi automatiquement la langue du texte pour mieux capter les salutations
+        auto_lang = conversation_service.detect_language(normalized_message)
+
+        # Intent basé sur la langue choisie
         intent = conversation_service.detect_intent(normalized_message, detected_lang)
+
+        # Si pas greeting avec la langue choisie, réessayer avec la langue détectée automatiquement
+        if intent != "greeting":
+            alt_intent = conversation_service.detect_intent(normalized_message, auto_lang)
+            if alt_intent == "greeting":
+                intent = "greeting"
+                detected_lang = auto_lang
 
         # 📌 Cas spécial : salutations vocales
         if intent == "greeting":
@@ -917,7 +950,7 @@ async def chat_voice(
                 logger.warning(f"⚠️ Audio réponse non disponible: {e}")
         
         # 7️⃣ Retourner la réponse complète
-        return {
+        voice_payload = {
             "session_id": session_id,
             "transcription": transcription,  # ← Texte transcrit
             "transcription_confidence": confidence,
@@ -934,6 +967,30 @@ async def chat_voice(
             "stt_service": "whisper",
             "workflow": "voice → stt → rag+llm → tts → voice"
         }
+
+        # 8️⃣ Sauvegarder aussi les conversations vocales dans MongoDB
+        try:
+            if db is not None:
+                conversation_data = {
+                    "user_id": f"voice_{session_id}",
+                    "session_id": session_id,
+                    "category": voice_payload["category"],
+                    "question": normalized_message,
+                    "answer": voice_payload["response"],
+                    "context": voice_payload["context"],
+                    "language": detected_lang,
+                    "intent": intent,
+                    "mode": voice_payload["mode"],
+                    "audio_url": audio_url,
+                    "audio_mode": audio_mode,
+                    "transcription": transcription,
+                    "timestamp": datetime.utcnow(),
+                }
+                db.save_chat_conversation(conversation_data)
+        except Exception as e:
+            logger.warning(f"⚠️ Impossible de sauvegarder la conversation vocale: {e}")
+
+        return voice_payload
     
     except HTTPException:
         raise
