@@ -1,12 +1,11 @@
 """
 AI BRAIN – Cerveau conversationnel YINGR-AI 🇧🇫
 
-PRODUCTION READY:
-- Historique conversation persistant dans Redis
-- Cache RAG ultra rapide avec monitoring
-- Limitation longueur RAG + max 3 sources
-- Multi-langues: fr / mo / di
-- CPU only, fallback robuste
+AMÉLIORATIONS :
+- Réponses conversationnelles courtes en premier
+- Suggestions de dialogue pour poursuivre
+- Réponses adaptées au contexte (salutations, remerciements)
+- Réponses structurées mais optimisées pour le chat
 """
 
 import os
@@ -124,146 +123,319 @@ class AIBrain:
             "redis_active": self.redis_client is not None
         }
 
-    # ------------------- GENERATION REPONSE -------------------
+    # ------------------- GÉNÉRATION RÉPONSE AMÉLIORÉE -------------------
     def generate_response(self, question: str, rag_results: List[Dict], language: str, category: str = "general") -> Dict:
-        # IMPORTANT: Le LLM est le juge final. Les scores RAG ou le nombre de documents ne bloquent jamais la réponse.
-        # Le fallback ne s'active QUE si aucun document trouvé ET aucune réponse LLM générée.
+        """Version améliorée pour des réponses plus conversationnelles"""
+        
+        # Détection d'intention simple
+        question_lower = question.lower().strip()
+        if self._is_greeting(question_lower, language):
+            return self._generate_greeting_response(language, category)
+        
+        if self._is_thanks(question_lower, language):
+            return self._generate_thanks_response(language, category)
+        
+        if self._is_simple_question(question_lower):
+            return self._generate_concise_response(question, rag_results, language, category)
+        
+        # Pour les questions complexes, utiliser le cache
         cached_response = self._get_cached_response(question, language)
         if cached_response:
             self.add_to_history("user", question)
             self.add_to_history("assistant", cached_response.get("reponse", ""))
             return {**cached_response, "cache_hit": True}
 
-        # On ne bloque jamais sur le score ou le nombre de docs
-        system_prompt, user_prompt = self._build_prompts(question, rag_results or [], language)
-
+        # Génération de réponse intelligente avec structure optimisée
+        self.cache_misses += 1
+        system_prompt, user_prompt = self._build_conversational_prompts(question, rag_results or [], language)
+        
         try:
-            self.cache_misses += 1
             response = self._call_ollama(system_prompt, user_prompt)
-            # Si le LLM a généré une réponse exploitable, elle doit TOUJOURS être renvoyée
+            
             if response and len(response.strip()) > 30:
+                # Extraire la réponse principale et les suggestions
+                main_response, suggestions = self._extract_main_response_and_suggestions(response, language)
+                
                 result = {
-                    "reponse": response,
-                    "mode": "intelligent",
+                    "reponse": main_response,
+                    "suggestions": suggestions[:3],  # Limiter à 3 suggestions max
+                    "mode": "conversational",
                     "langue": language,
                     "categorie": category,
                     "sources_utilisees": len(rag_results or []),
                     "sources": len(rag_results or []),
                     "timestamp": datetime.utcnow().isoformat(),
-                    "cache_hit": False
+                    "cache_hit": False,
+                    "full_response": response  # Garder la réponse complète pour référence
                 }
+                
                 self.add_to_history("user", question)
-                self.add_to_history("assistant", response)
+                self.add_to_history("assistant", main_response)
                 self._set_cached_response(question, language, result)
                 return result
-            # Si pas de réponse LLM, fallback uniquement si aucun doc et aucune réponse
-            fallback = self._fallback_response(question, rag_results or [], language)
-            return {
-                "reponse": fallback,
-                "mode": "structured_rag",
-                "langue": language,
-                "categorie": category,
-                "sources_utilisees": len(rag_results or []),
-                "sources": len(rag_results or []),
-                "timestamp": datetime.utcnow().isoformat(),
-                "cache_hit": False
-            }
+            
+            # Fallback si pas de réponse générée
+            return self._fallback_conversational_response(question, rag_results or [], language, category)
+            
         except Exception as e:
-            fallback = self._fallback_response(question, rag_results or [], language)
-            return {
-                "reponse": fallback,
-                "mode": "structured_rag",
-                "erreur": str(e),
-                "langue": language,
-                "categorie": category,
-                "sources_utilisees": len(rag_results or []),
-                "sources": len(rag_results or []),
-                "timestamp": datetime.utcnow().isoformat(),
-                "cache_hit": False
-            }
+            return self._fallback_conversational_response(question, rag_results or [], language, category)
 
     def generate_intelligent_response(self, question: str, rag_results: List[Dict], category: str = "general", language: str = "fr") -> Dict:
         return self.generate_response(question, rag_results, language, category)
 
-    # ------------------- PROMPTS -------------------
-    def _build_prompts(self, question: str, rag_results: List[Dict], language: str) -> Tuple[str, str]:
-        """Construit les prompts système/utilisateur à partir de briques pédagogiques.
+    # ------------------- DÉTECTION D'INTENTIONS -------------------
+    def _is_greeting(self, question: str, language: str) -> bool:
+        greetings = {
+            "fr": ["bonjour", "salut", "coucou", "hello", "bjr", "slt", "bonsoir"],
+            "mo": ["kɩbare", "ne y taabo", "ne y taare", "ne y windga"],
+            "di": ["i ni sɔgɔma", "i ni tile", "i ni wula", "i ni su"]
+        }
+        lang_greetings = greetings.get(language, greetings["fr"])
+        return any(greet in question for greet in lang_greetings)
 
-        Compatible avec deux formats de RAG:
-        - Ancien: {"question": str, "reponse": str}
-        - Enrichi: {"reponse_courte", "reponse_detaillee", "conseil", "avertissement", ...}
-        """
+    def _is_thanks(self, question: str, language: str) -> bool:
+        thanks = {
+            "fr": ["merci", "remerci", "merci beaucoup", "merci bien"],
+            "mo": ["barka", "barika", "a bɩɩn", "a yiib"],
+            "di": ["a ni ce", "i ni ce", "a barika", "i ni ce ka"]
+        }
+        lang_thanks = thanks.get(language, thanks["fr"])
+        return any(th in question for th in lang_thanks)
 
-        blocks = []
+    def _is_simple_question(self, question: str) -> bool:
+        simple_patterns = ["ok", "d'accord", "compris", "entendu", "super", "génial", "parfait"]
+        return any(pattern in question for pattern in simple_patterns)
+
+    # ------------------- RÉPONSES COURTES -------------------
+    def _generate_greeting_response(self, language: str, category: str) -> Dict:
+        greetings = {
+            "fr": "Bonjour ! Je suis votre assistant YINGR-AI. Comment puis-je vous aider aujourd'hui ?",
+            "mo": "Kɩbare ! Mam yaa YINGR-AI. Tõnd nonglem maana yaa ?",
+            "di": "I ni sɔgɔma ! N ye YINGR-AI ye. N bɛ se ka i dɛmɛ di cogo jumɛn na ?"
+        }
+        return {
+            "reponse": greetings.get(language, greetings["fr"]),
+            "mode": "greeting",
+            "langue": language,
+            "categorie": category,
+            "sources_utilisees": 0,
+            "timestamp": datetime.utcnow().isoformat()
+        }
+
+    def _generate_thanks_response(self, language: str, category: str) -> Dict:
+        thanks = {
+            "fr": "Je vous en prie ! N'hésitez pas si vous avez d'autres questions.",
+            "mo": "Barka ! Kãadem b sã yɩɩ n kɩt yõodo.",
+            "di": "Baaraka ! Aw bɛna ɲininkali wɛrɛw kɛ wa, i k'a fɔ."
+        }
+        return {
+            "reponse": thanks.get(language, thanks["fr"]),
+            "mode": "thanks",
+            "langue": language,
+            "categorie": category,
+            "sources_utilisees": 0,
+            "timestamp": datetime.utcnow().isoformat()
+        }
+
+    def _generate_concise_response(self, question: str, rag_results: List[Dict], language: str, category: str) -> Dict:
+        """Réponse concise pour des questions simples"""
+        if rag_results and len(rag_results) > 0:
+            # Prendre la première réponse courte si disponible
+            short_responses = [r.get("reponse_courte", "").strip() for r in rag_results[:1] if r.get("reponse_courte")]
+            if short_responses:
+                response = short_responses[0]
+            else:
+                response = "👍 Parfait ! Voulez-vous approfondir ce sujet ou passer à autre chose ?"
+        else:
+            confirmations = {
+                "fr": "👍 Parfait ! Voulez-vous approfondir ce sujet ou passer à autre chose ?",
+                "mo": "👍 Yɩɩ sõma ! Fo sẽn tõog n bas tɩ yel woto wa tɩ tʋm taaba ?",
+                "di": "👍 A ka ɲi ! Yala i b'a fɛ ka kuma in jigin wa, walima kuma wɛrɛw la ?"
+            }
+            response = confirmations.get(language, confirmations["fr"])
+        
+        return {
+            "reponse": response,
+            "suggestions": self._generate_suggestions(rag_results, language),
+            "mode": "concise",
+            "langue": language,
+            "categorie": category,
+            "sources_utilisees": len(rag_results or []),
+            "timestamp": datetime.utcnow().isoformat()
+        }
+
+    # ------------------- PROMPTS CONVERSATIONNELS -------------------
+    def _build_conversational_prompts(self, question: str, rag_results: List[Dict], language: str) -> Tuple[str, str]:
+        """Construit des prompts pour des réponses conversationnelles"""
+        
+        # Extraire les informations clés du RAG
+        knowledge_blocks = []
         for r in rag_results[:3]:
-            # Nouveau format enrichi UNIQUEMENT
             short = (r.get("reponse_courte") or "").strip()
             detailed = (r.get("reponse_detaillee") or "").strip()
-            advice = (r.get("conseil") or "").strip()
-            warning = (r.get("avertissement") or "").strip()
-
-            if not (short or detailed or advice or warning):
-                # Ancien champ "reponse" n'est plus utilisé
-                continue
-
-            # Construire un petit bloc structuré pour le LLM
-            lines = []
+            
             if short:
-                lines.append(f"Idée principale : {short}")
-            if detailed:
-                # Limiter la taille pour éviter de saturer le contexte
-                detail_trimmed = detailed[:500] + "..." if len(detailed) > 500 else detailed
-                lines.append(f"Explication : {detail_trimmed}")
-            if advice:
-                lines.append(f"Conseil pratique : {advice}")
-            if warning:
-                lines.append(f"Avertissement : {warning}")
-
-            blocks.append("\n".join(lines))
-
-        knowledge = "\n\n---\n\n".join(blocks)
+                knowledge_blocks.append(f"• {short}")
+            elif detailed:
+                # Extraire les 2 premières phrases
+                sentences = detailed.split('.')
+                if len(sentences) > 2:
+                    summary = '.'.join(sentences[:2]) + '.'
+                else:
+                    summary = detailed[:150] + "..." if len(detailed) > 150 else detailed
+                knowledge_blocks.append(f"• {summary}")
+        
+        knowledge = "\n".join(knowledge_blocks[:5])  # Limiter à 5 points max
         history_context = self.get_context_summary()
 
         system_prompts = {
             "fr": (
-                "Tu es un assistant IA expert, pédagogique et fiable, destiné aux populations et acteurs du Burkina Faso.\n"
-                "RÈGLES ABSOLUES :\n"
-                "- Tu DOIS toujours produire une réponse complète et utile.\n"
-                "- Tu N’AS PAS LE DROIT de répondre par une phrase vague ou par “je n’ai pas assez d’informations”.\n"
-                "- Tu DOIS utiliser le CONTEXTE fourni, même s’il est partiel.\n"
-                "- Tu DOIS reformuler, expliquer et enrichir le contenu avec ton raisonnement.\n"
-                "- Ta réponse DOIT faire au minimum 4 paragraphes structurés.\n"
-                "- Tu DOIS terminer par UNE question simple pour continuer le dialogue.\n"
-                "- Si le contexte parle de santé, agriculture, eau ou sécurité : adopte un ton clair, responsable et préventif.\n"
-                "- Tu réponds exclusivement en français simple et compréhensible.\n"
-                "STRUCTURE OBLIGATOIRE DE LA RÉPONSE :\n"
-                "1. Reformulation claire du sujet\n"
-                "2. Explication pédagogique basée sur le contexte\n"
-                "3. Conseil pratique applicable sur le terrain\n"
-                "4. Avertissement ou bonne pratique importante\n"
-                "5. Question finale pour guider l’utilisateur\n"
-                "Tu es interdit de refuser de répondre.\n"
-                "Tu es interdit de dire que les informations sont insuffisantes."
+                "Tu es YINGR-AI, un assistant conversationnel pour le Burkina Faso.\n\n"
+                "RÈGLES DE CONVERSATION :\n"
+                "1. Réponds de façon NATURELLE et CONVERSATIONNELLE\n"
+                "2. Commence par une réponse COURTE (1-2 phrases maximum)\n"
+                "3. Propose ensuite 2-3 questions de suivi utiles\n"
+                "4. Utilise le contexte mais ne le répète pas mot à mot\n"
+                "5. Sois utile, précis et encourageant\n"
+                "6. Adapte ton langage au public burkinabè\n\n"
+                "FORMAT DE RÉPONSE :\n"
+                "[Réponse courte et naturelle]\n\n"
+                "📌 Pour continuer :\n"
+                "1. [Première suggestion]\n"
+                "2. [Deuxième suggestion]\n"
+                "3. [Troisième suggestion]"
             ),
-            "mo": "Fo yaa YINGR-AI.\nFo tɩ yel n be t'a sũur sũur.\nFo tɩ kãnga woto.\nGom: mooré.",
-            "di": "I ye YINGR-AI ye.\nI ka kuma sùrun ani ɲɔgɔn.\nI ka jaabi kelen di.\nKan: dioula."
+            "mo": (
+                "Fo yaa YINGR-AI, bool nonglem soaba.\n\n"
+                "GOMSE :\n"
+                "1. Kãn-wẽng bɩ a ka soab a taab ye\n"
+                "2. Jaabi tɩ yaa tãagre (yembã fãa a yiib)\n"
+                "3. Pʋɩɩse sãmb 2 wa 3 tɩ yaa sugr ne f meng ye\n"
+                "4. Tʋm tõnd tagmasgã la a ra tɩ wa tʋg n pʋgẽ ye\n"
+                "5. Yaa boolma, yɩɩme n ta yãnde\n"
+                "6. Gom n bas Burkina Faso soabã ye"
+            ),
+            "di": (
+                "I ye YINGR-AI ye, dɛmɛbaga ye Burkina Faso.\n\n"
+                "KAN SIRI :\n"
+                "1. Jaabi ka ɲɛnamaya ani kumakan\n"
+                "2. Jaabi dɔɔnin-dɔɔnin (ɲɔgɔn fɔlɔ kelen wa fila)\n"
+                "3. ɲininkali 2 wa 3 di minnu bɛ se ka i ɲɛsin\n"
+                "4. K'o t'a jira o jira, k'a sɔr fɛn wɛrɛw fɛ\n"
+                "5. Ka dɛmɛ di, ka dɔn ko ɲɛ, ka dɛsɛ\n"
+                "6. Kan fɔ Burkinabèw ye"
+            )
         }
 
         system_prompt = system_prompts.get(language, system_prompts["fr"])
 
-        user_prompt = f"""{history_context}Voici des éléments de connaissance issus de la base :
+        user_prompt = f"""{history_context}
 
-{knowledge}
+INFORMATIONS DISPONIBLES :
+{knowledge if knowledge else "Aucune information spécifique trouvée."}
 
-Question de l’utilisateur :
+QUESTION DE L'UTILISATEUR :
 {question}
 
-Contexte issu de la base de connaissances (RAG) :
-{knowledge}
+GÉNÈRE une réponse conversationnelle courte suivie de suggestions pour continuer le dialogue."""
 
-Instruction :
-En te basant sur le contexte ci-dessus, produis une réponse complète, utile et bien structurée selon les règles imposées.\n"""
         return system_prompt, user_prompt
+
+    # ------------------- EXTRACTION RÉPONSE ET SUGGESTIONS -------------------
+    def _extract_main_response_and_suggestions(self, response: str, language: str) -> Tuple[str, List[str]]:
+        """Extrait la réponse principale et les suggestions du texte généré"""
+        
+        lines = response.split('\n')
+        main_response_lines = []
+        suggestions = []
+        
+        in_suggestions = False
+        
+        for line in lines:
+            line = line.strip()
+            if not line:
+                continue
+                
+            # Détecter le début des suggestions
+            suggestion_markers = {
+                "fr": ["📌", "➡️", "💡", "pour continuer", "suggestion", "question"],
+                "mo": ["📌", "➡️", "💡", "tɩ pʋɩɩse", "sugr", "sãmblem"],
+                "di": ["📌", "➡️", "💡", "ka taa ɲɛ", "siri", "ɲininkali"]
+            }
+            
+            markers = suggestion_markers.get(language, suggestion_markers["fr"])
+            if any(marker in line.lower() for marker in markers):
+                in_suggestions = True
+            
+            # Si on est dans les suggestions
+            if in_suggestions:
+                # Détecter les éléments de liste
+                if line.startswith(('1.', '2.', '3.', '4.', '5.', '- ', '• ', '▶ ', '✓ ')):
+                    # Nettoyer la suggestion
+                    clean_suggestion = line[2:].strip() if line[0].isdigit() else line[2:].strip() if line.startswith('- ') else line[1:].strip()
+                    if clean_suggestion:
+                        suggestions.append(clean_suggestion)
+                elif line and not line.startswith('==='):  # Éviter les séparateurs
+                    suggestions.append(line)
+            else:
+                # Ajouter à la réponse principale (sauf les marqueurs)
+                if not any(marker in line.lower() for marker in markers):
+                    main_response_lines.append(line)
+        
+        # Si pas de suggestions détectées, en générer automatiquement
+        if not suggestions:
+            suggestions = self._generate_suggestions([], language)
+        
+        # Nettoyer la réponse principale
+        main_response = ' '.join(main_response_lines).strip()
+        if len(main_response) > 500:  # Limiter la taille
+            main_response = main_response[:497] + "..."
+        
+        return main_response, suggestions[:3]  # Limiter à 3 suggestions
+
+    def _generate_suggestions(self, rag_results: List[Dict], language: str) -> List[str]:
+        """Génère des suggestions de suivi basées sur le contexte"""
+        
+        suggestions_dict = {
+            "fr": [
+                "Pouvez-vous me donner plus de détails ?",
+                "Quels sont les meilleurs conseils pratiques ?",
+                "Y a-t-il des pièges à éviter ?",
+                "Comment appliquer cela dans ma situation ?",
+                "Quelles sont les alternatives possibles ?"
+            ],
+            "mo": [
+                "Fo tõog n maan f meng fãa n yɩɩle ?",
+                "Tõnd pʋgẽ yaa bõe-y ye ?",
+                "Bɩ yaa bõe ne fo sagl n tɩ pa wẽng n tʋm ?",
+                "Tɩ maan bʋɩl-woto fo leb n be pʋgẽ ?",
+                "Yembã bãnga ne tɩ tʋm yel-woto ?"
+            ],
+            "di": [
+                "Yala i bɛ se ka fɛn caman fɔ wa ?",
+                "Dɛmɛ minnu ka di kosɛbɛ ?",
+                "Yala fɛn minnu ka kan ka kɛ wa ?",
+                "N bɛ se ka o kɛ cogo jumɛn na n yɛrɛ la ?",
+                "Yala fɛn wɛrɛw bɛ yen wa ?"
+            ]
+        }
+        
+        # Suggestions spécifiques basées sur le RAG
+        specific_suggestions = []
+        for r in rag_results[:2]:
+            short = r.get("reponse_courte", "").strip()
+            if short:
+                # Créer une suggestion basée sur le contenu
+                if language == "fr":
+                    specific_suggestions.append(f"En savoir plus sur : {short[:50]}...")
+                elif language == "mo":
+                    specific_suggestions.append(f"Tɩ bɩɩd t'a maan tɩ : {short[:30]}...")
+                elif language == "di":
+                    specific_suggestions.append(f"Ka o lajɛ : {short[:40]}...")
+        
+        # Combiner les suggestions
+        all_suggestions = specific_suggestions + suggestions_dict.get(language, suggestions_dict["fr"])
+        return list(set(all_suggestions))[:3]  # Éviter les doublons, limiter à 3
 
     # ------------------- OLLAMA -------------------
     def _call_ollama(self, system_prompt: str, user_prompt: str) -> str:
@@ -274,45 +446,59 @@ En te basant sur le contexte ci-dessus, produis une réponse complète, utile et
                 {"role": "user", "content": user_prompt}
             ],
             "stream": False,
-            "options": {"temperature":0.4, "top_p":0.85, "num_predict":350, "num_ctx":1024, "repeat_penalty":1.2}
+            "options": {
+                "temperature": 0.3,  # Plus bas pour plus de cohérence
+                "top_p": 0.8,
+                "num_predict": 250,  # Plus court
+                "num_ctx": 1024,
+                "repeat_penalty": 1.1
+            }
         }
-        r = requests.post(f"{self.ollama_url}/api/chat", json=payload, timeout=120)
-        r.raise_for_status()
-        data = r.json()
-        return (data.get("message", {}).get("content") or "").strip()
+        try:
+            r = requests.post(f"{self.ollama_url}/api/chat", json=payload, timeout=60)
+            r.raise_for_status()
+            data = r.json()
+            return (data.get("message", {}).get("content") or "").strip()
+        except Exception:
+            return ""
 
-    # ------------------- FALLBACK -------------------
-    def _fallback_response(self, question: str, rag_results: List[Dict], language: str) -> str:
-        bullets = []
-        for r in rag_results[:3]:
+    # ------------------- FALLBACK CONVERSATIONNEL -------------------
+    def _fallback_conversational_response(self, question: str, rag_results: List[Dict], language: str, category: str) -> Dict:
+        """Fallback conversationnel amélioré"""
+        
+        # Essayer de construire une réponse basée sur le RAG
+        main_points = []
+        for r in rag_results[:2]:
             short = (r.get("reponse_courte") or "").strip()
-            detailed = (r.get("reponse_detaillee") or "").strip()
-            # Préférer la courte, sinon un extrait de la détaillée
             if short:
-                bullets.append(f"- {short}")
-            elif detailed:
-                detail_trimmed = detailed[:200] + "..." if len(detailed) > 200 else detailed
-                bullets.append(f"- {detail_trimmed}")
-        if not bullets:
-            bullets = ["- Réponse contextuelle indisponible, mais je vais te donner une explication utile basée sur mes connaissances générales du Burkina Faso."]
-        base = "\n".join(bullets)
-        questions = {"fr":"Laquelle de ces pistes vous intéresse le plus ?","mo":"Yembã bãnga ne fo kẽe ?","di":"Min bɛ i fɛ kosɛbɛ ?"}
-        return f"{base}\n\n{questions.get(language, questions['fr'])}"
-
-    # ------------------- NO DATA -------------------
-    def _no_data_response(self, question: str, language: str, category: str = "general") -> Dict:
-        messages = {
-            "fr":"Je n'ai pas assez d'informations dans ma base.\nPouvez-vous préciser votre question ou donner un exemple ?",
-            "mo":"Tɩɩs sã n tɩ laar ra.\nFo tõe yel makre sã fo kẽe ?",
-            "di":"Kunnafoni tɛ se ka ɲɔgɔn.\nI bɛ se ka kuma wɛrɛ fɔ wa ?"
-        }
+                main_points.append(short)
+        
+        if main_points:
+            # Prendre le premier point comme réponse principale
+            main_response = main_points[0]
+            if len(main_response) > 200:
+                main_response = main_response[:197] + "..."
+        else:
+            # Réponse générique
+            fallback_responses = {
+                "fr": "Je vais vous donner des informations utiles basées sur mes connaissances du Burkina Faso.",
+                "mo": "M na maan tagmasg n bas Burkina Faso yel-wεεnẽ ye.",
+                "di": "N bɛna kunnafoni di i ma minnu bɛ se ka i dɛmɛ Burkina Faso la."
+            }
+            main_response = fallback_responses.get(language, fallback_responses["fr"])
+        
+        # Générer des suggestions
+        suggestions = self._generate_suggestions(rag_results, language)
+        
         return {
-            "reponse": messages.get(language, messages["fr"]),
-            "mode": "no_rag",
+            "reponse": main_response,
+            "suggestions": suggestions,
+            "mode": "structured_rag",
             "langue": language,
             "categorie": category,
-            "sources_utilisees":0,
-            "timestamp": datetime.utcnow().isoformat()
+            "sources_utilisees": len(rag_results),
+            "timestamp": datetime.utcnow().isoformat(),
+            "cache_hit": False
         }
 
 
