@@ -77,9 +77,10 @@ class RAGService:
         best_similarity = max(similarities) if similarities else 0.0
         logger.info(f"📊 Meilleure similarité: {best_similarity:.3f} (seuil: {min_confidence})")
         
+        # IMPORTANT: Le LLM est le juge final. Les scores RAG ne bloquent jamais la réponse.
         if best_similarity < min_confidence:
-            logger.warning(f"❌ Similarité trop faible ({best_similarity:.3f} < {min_confidence})")
-            return "Je ne suis pas sûr de comprendre votre question. Pourriez-vous la reformuler ou choisir un sujet parmi les catégories disponibles ?", ""
+            logger.warning(f"⚠️ Similarité faible ({best_similarity:.3f} < {min_confidence}) - CONTEXTE transmis au LLM quand même.")
+            # On log seulement, on ne bloque pas la réponse. Le LLM décidera.
 
         # Filtrer par langue ET catégorie si spécifiées, en gardant les scores
         # ⚠️ IMPORTANT: Si category='general', on filtre SEULEMENT par langue (pas de filtre catégorie)

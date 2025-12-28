@@ -126,44 +126,58 @@ class AIBrain:
 
     # ------------------- GENERATION REPONSE -------------------
     def generate_response(self, question: str, rag_results: List[Dict], language: str, category: str = "general") -> Dict:
+        # IMPORTANT: Le LLM est le juge final. Les scores RAG ou le nombre de documents ne bloquent jamais la réponse.
+        # Le fallback ne s'active QUE si aucun document trouvé ET aucune réponse LLM générée.
         cached_response = self._get_cached_response(question, language)
         if cached_response:
             self.add_to_history("user", question)
             self.add_to_history("assistant", cached_response.get("reponse", ""))
             return {**cached_response, "cache_hit": True}
 
-        if not rag_results:
-            return self._no_data_response(question, language, category)
-
-        system_prompt, user_prompt = self._build_prompts(question, rag_results, language)
+        # On ne bloque jamais sur le score ou le nombre de docs
+        system_prompt, user_prompt = self._build_prompts(question, rag_results or [], language)
 
         try:
             self.cache_misses += 1
             response = self._call_ollama(system_prompt, user_prompt)
-            result = {
-                "reponse": response,
-                "mode": "intelligent",
+            # Si le LLM a généré une réponse exploitable, elle doit TOUJOURS être renvoyée
+            if response and len(response.strip()) > 30:
+                result = {
+                    "reponse": response,
+                    "mode": "intelligent",
+                    "langue": language,
+                    "categorie": category,
+                    "sources_utilisees": len(rag_results or []),
+                    "sources": len(rag_results or []),
+                    "timestamp": datetime.utcnow().isoformat(),
+                    "cache_hit": False
+                }
+                self.add_to_history("user", question)
+                self.add_to_history("assistant", response)
+                self._set_cached_response(question, language, result)
+                return result
+            # Si pas de réponse LLM, fallback uniquement si aucun doc et aucune réponse
+            fallback = self._fallback_response(question, rag_results or [], language)
+            return {
+                "reponse": fallback,
+                "mode": "structured_rag",
                 "langue": language,
                 "categorie": category,
-                "sources_utilisees": len(rag_results),
-                "sources": len(rag_results),
+                "sources_utilisees": len(rag_results or []),
+                "sources": len(rag_results or []),
                 "timestamp": datetime.utcnow().isoformat(),
                 "cache_hit": False
             }
-            self.add_to_history("user", question)
-            self.add_to_history("assistant", response)
-            self._set_cached_response(question, language, result)
-            return result
         except Exception as e:
-            fallback = self._fallback_response(question, rag_results, language)
+            fallback = self._fallback_response(question, rag_results or [], language)
             return {
                 "reponse": fallback,
                 "mode": "structured_rag",
                 "erreur": str(e),
                 "langue": language,
                 "categorie": category,
-                "sources_utilisees": len(rag_results),
-                "sources": len(rag_results),
+                "sources_utilisees": len(rag_results or []),
+                "sources": len(rag_results or []),
                 "timestamp": datetime.utcnow().isoformat(),
                 "cache_hit": False
             }
