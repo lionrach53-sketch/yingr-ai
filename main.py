@@ -195,7 +195,7 @@ try:
 except Exception as e:
     print(f"[DEBUG] Erreur import/include routers: {e}")
 
-# CORS configuration - autoriser front local + front déployé sur la VM
+# # CORS configuration - autoriser front local + front déployé sur la VM
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
@@ -204,6 +204,7 @@ app.add_middleware(
         "http://localhost:5174",
         "http://localhost:3000",
         "http://localhost:5176",
+        # Frontend prod servi par `serve` sur la VM
         # Frontend user prod servi par `serve` sur la VM
         "http://34.173.253.235:4173",
         # Frontend admin prod (autre port sur la même VM)
