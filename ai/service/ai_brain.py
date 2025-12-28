@@ -226,17 +226,24 @@ class AIBrain:
 
         system_prompts = {
             "fr": (
-                "Tu es YINGR-AI, assistant burkinabè.\n"
-                "Commence par reformuler en une phrase la situation de la personne (lieu, niveau d'étude, activité si mentionnée).\n"
-                "Explique simplement pour un public burkinabè, en tenant compte du contexte de vie au Burkina (ville, village, niveau de revenu).\n"
-                "Compose ta réponse à partir des briques fournies (idée principale, explication, conseil, avertissement) en évitant de répéter plusieurs fois la même idée.\n"
-                "Utilise uniquement les informations qui répondent directement à la question posée ; ignore les briques qui parlent d'autres thèmes (par exemple citoyenneté, politique, sujets trop éloignés).\n"
-                "Si la question contient plusieurs questions différentes, réponds à chacune séparément de manière structurée (1., 2., 3.), avant ta question finale.\n"
-                "Propose ensuite 2 à 4 pistes concrètes ou options adaptées à la situation décrite, sous forme de phrases courtes et pratiques.\n"
-                "Ne récite pas les textes tels quels, reformule de manière naturelle.\n"
-                "Réponds globalement en 3 à 7 phrases maximum (hors ta question finale).\n"
-                "Termine toujours par UNE seule question courte à l'utilisateur pour continuer le dialogue.\n"
-                "Langue: français simple et naturel."
+                "Tu es un assistant IA expert, pédagogique et fiable, destiné aux populations et acteurs du Burkina Faso.\n"
+                "RÈGLES ABSOLUES :\n"
+                "- Tu DOIS toujours produire une réponse complète et utile.\n"
+                "- Tu N’AS PAS LE DROIT de répondre par une phrase vague ou par “je n’ai pas assez d’informations”.\n"
+                "- Tu DOIS utiliser le CONTEXTE fourni, même s’il est partiel.\n"
+                "- Tu DOIS reformuler, expliquer et enrichir le contenu avec ton raisonnement.\n"
+                "- Ta réponse DOIT faire au minimum 4 paragraphes structurés.\n"
+                "- Tu DOIS terminer par UNE question simple pour continuer le dialogue.\n"
+                "- Si le contexte parle de santé, agriculture, eau ou sécurité : adopte un ton clair, responsable et préventif.\n"
+                "- Tu réponds exclusivement en français simple et compréhensible.\n"
+                "STRUCTURE OBLIGATOIRE DE LA RÉPONSE :\n"
+                "1. Reformulation claire du sujet\n"
+                "2. Explication pédagogique basée sur le contexte\n"
+                "3. Conseil pratique applicable sur le terrain\n"
+                "4. Avertissement ou bonne pratique importante\n"
+                "5. Question finale pour guider l’utilisateur\n"
+                "Tu es interdit de refuser de répondre.\n"
+                "Tu es interdit de dire que les informations sont insuffisantes."
             ),
             "mo": "Fo yaa YINGR-AI.\nFo tɩ yel n be t'a sũur sũur.\nFo tɩ kãnga woto.\nGom: mooré.",
             "di": "I ye YINGR-AI ye.\nI ka kuma sùrun ani ɲɔgɔn.\nI ka jaabi kelen di.\nKan: dioula."
@@ -246,19 +253,16 @@ class AIBrain:
 
         user_prompt = f"""{history_context}Voici des éléments de connaissance issus de la base :
 
-    {knowledge}
+{knowledge}
 
-    Ta mission :
-    - Synthétiser l'idée principale.
-    - Donner une explication simple et concrète adaptée au Burkina Faso.
-    - Ajouter au moins un conseil pratique si disponible.
-    - Mentionner un avertissement si pertinent.
-    - Utiliser uniquement les éléments qui aident vraiment à répondre à la question (ignorer les informations hors-sujet par rapport à la demande de l'utilisateur).
-    - Ne répète pas la question mot pour mot.
-    - Termine par UNE seule question pour continuer le dialogue.
+Question de l’utilisateur :
+{question}
 
-    Question utilisateur : {question}
-    """
+Contexte issu de la base de connaissances (RAG) :
+{knowledge}
+
+Instruction :
+En te basant sur le contexte ci-dessus, produis une réponse complète, utile et bien structurée selon les règles imposées.\n"""
         return system_prompt, user_prompt
 
     # ------------------- OLLAMA -------------------
@@ -270,7 +274,7 @@ class AIBrain:
                 {"role": "user", "content": user_prompt}
             ],
             "stream": False,
-            "options": {"temperature":0.4, "top_p":0.85, "num_predict":100, "num_ctx":1024, "repeat_penalty":1.2}
+            "options": {"temperature":0.4, "top_p":0.85, "num_predict":350, "num_ctx":1024, "repeat_penalty":1.2}
         }
         r = requests.post(f"{self.ollama_url}/api/chat", json=payload, timeout=120)
         r.raise_for_status()
@@ -290,7 +294,7 @@ class AIBrain:
                 detail_trimmed = detailed[:200] + "..." if len(detailed) > 200 else detailed
                 bullets.append(f"- {detail_trimmed}")
         if not bullets:
-            bullets = ["- Je n'ai pas assez d'informations structurées pour répondre précisément."]
+            bullets = ["- Réponse contextuelle indisponible, mais je vais te donner une explication utile basée sur mes connaissances générales du Burkina Faso."]
         base = "\n".join(bullets)
         questions = {"fr":"Laquelle de ces pistes vous intéresse le plus ?","mo":"Yembã bãnga ne fo kẽe ?","di":"Min bɛ i fɛ kosɛbɛ ?"}
         return f"{base}\n\n{questions.get(language, questions['fr'])}"
