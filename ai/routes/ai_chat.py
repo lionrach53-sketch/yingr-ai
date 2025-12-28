@@ -311,18 +311,30 @@ def chat_intelligent(req: ChatRequest):
             except Exception as e:
                 logger.warning(f"⚠️ Audio non disponible: {e}")
 
-        response_text = _fix_mojibake(intelligent_response["reponse"])
-        context_first = _fix_mojibake(rag_results[0]["reponse"]) if rag_results else ""
+        # ✅ CORRECTION : Utiliser le contexte RAG comme réponse principale
+        context_blocks = _rag_context_to_blocks(context_raw)
+        
+        # Déterminer la réponse principale
+        if context_blocks and len(context_blocks) > 0:
+            # Prendre le premier bloc de contexte comme réponse principale
+            main_response = _fix_mojibake(context_blocks[0])
+            # Garder les autres blocs comme contexte supplémentaire
+            additional_context = [_fix_mojibake(b) for b in context_blocks[1:]] if len(context_blocks) > 1 else []
+        else:
+            # Fallback sur la réponse générée
+            main_response = _fix_mojibake(intelligent_response["reponse"])
+            additional_context = []
 
+        # ✅ CORRECTION : Construire le payload avec la réponse contextuelle comme réponse principale
         payload = {
             "session_id": session_id,
-            "response": response_text,
+            "response": main_response,  # Réponse contextuelle (premier bloc) ou réponse générée
             "language": detected_language,
             "intent": intent,
             "category": intelligent_response["categorie"],
             "sources_count": intelligent_response.get("sources_utilisees", 0),
             "mode": intelligent_response.get("mode", "intelligent"),
-            "context": [context_first] if context_first else [],
+            "context": additional_context,  # Autres blocs de contexte si disponibles
             "timestamp": intelligent_response.get("timestamp", datetime.utcnow().isoformat()),
             "audio_url": audio_url,
             "audio_mode": audio_mode
@@ -336,7 +348,7 @@ def chat_intelligent(req: ChatRequest):
                     "session_id": session_id,
                     "category": payload["category"],
                     "question": req.message,
-                    "answer": response_text,
+                    "answer": main_response,
                     "context": payload["context"],
                     "language": detected_language,
                     "intent": intent,
