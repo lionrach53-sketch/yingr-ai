@@ -6,7 +6,6 @@ from typing import Optional
 from uuid import uuid4
 from datetime import datetime
 import logging
-import random
 
 from ..service.rag import RAGService
 from ..service.conversation import ConversationService
@@ -87,6 +86,7 @@ def chat(req: ChatRequest, user=Depends(require_expert)):
         detected_language = req.language or "fr"
         intent = conversation_service.detect_intent(req.message, detected_language)
 
+        # Gérer les salutations
         if intent == 'greeting':
             greeting_response = conversation_service.generate_greeting_response(detected_language)
             return {
@@ -129,6 +129,21 @@ def chat(req: ChatRequest, user=Depends(require_expert)):
 
         # Contexte RAG
         answer_raw, context = rag.ask(req.message, k=5)
+        
+        # Pour les questions normales, utiliser le contexte comme réponse
+        context_blocks = _rag_context_to_blocks(context)
+        
+        if context_blocks and len(context_blocks) > 0:
+            # Prendre le premier bloc de contexte comme réponse principale
+            main_response = _fix_mojibake(context_blocks[0])
+            # Garder les autres blocs comme contexte supplémentaire
+            additional_context = [_fix_mojibake(b) for b in context_blocks[1:]] if len(context_blocks) > 1 else []
+        else:
+            # Fallback sur la réponse générée par RAG
+            main_response = _fix_mojibake(answer_raw) if answer_raw else "Je n'ai pas trouvé d'information pertinente."
+            additional_context = []
+
+        # Récupérer l'historique
         history = []
         try:
             past_conversations = db.get_chat_conversations(user_id=user.get("id"))
@@ -140,25 +155,17 @@ def chat(req: ChatRequest, user=Depends(require_expert)):
         except:
             history = []
 
-        # Réponse intelligente
-        rag_context_full = context if isinstance(context, str) else ("\n\n".join(context) if context else "")
-        intelligent_answer, metadata = ai_brain.generate_intelligent_response(
-            question=req.message,
-            rag_context=rag_context_full,
-            language=detected_language,
-            conversation_history=history
-        )
-
+        # Sauvegarder dans MongoDB
         conversation_data = {
             "user_id": user.get("id"),
             "session_id": session_id,
             "category": req.category,
             "question": req.message,
-            "answer": intelligent_answer,
-            "context": context,
+            "answer": main_response,
+            "context": additional_context,
             "language": detected_language,
             "intent": intent,
-            "metadata": metadata,
+            "metadata": {"method": "rag_context"},
             "timestamp": datetime.utcnow()
         }
         conversation_id = db.save_chat_conversation(conversation_data)
@@ -167,11 +174,11 @@ def chat(req: ChatRequest, user=Depends(require_expert)):
             "session_id": session_id,
             "conversation_id": conversation_id,
             "question": req.message,
-            "answer": intelligent_answer,
+            "answer": main_response,
             "language": detected_language,
             "intent": intent,
-            "context": context,
-            "metadata": metadata
+            "context": additional_context,
+            "metadata": {"method": "rag_context"}
         }
 
     except Exception as e:
@@ -196,35 +203,28 @@ def get_history(user=Depends(require_expert), session_id: Optional[str] = None, 
 def chat_guest(req: ChatRequest):
     try:
         session_id = req.session_id or str(uuid4())
-        detected_language = conversation_service.detect_language(req.message)
+        detected_language = req.language or "fr"
         intent = conversation_service.detect_intent(req.message, detected_language)
 
-        # Salut / Thanks
+        # Salut / Thanks - utiliser conversation_service
         if intent == "greeting":
-            greetings = {
-                "fr": "Bonjour ! Comment puis-je vous aider aujourd'hui ?",
-                "mo": "Kɩbare ! Tõnd nonglem maana yaa ?",
-                "di": "I ni sɔgɔma ! N bɛ se ka i dɛmɛ di cogo jumɛn na ?"
-            }
+            greeting_response = conversation_service.generate_greeting_response(detected_language)
             return {
                 "session_id": session_id,
                 "conversation_id": None,
-                "response": greetings.get(detected_language, greetings["fr"]),
+                "response": greeting_response,
                 "language": detected_language,
                 "intent": intent,
                 "context": [],
                 "timestamp": datetime.utcnow().isoformat()
             }
+            
         if intent == "thanks":
-            thanks_responses = {
-                "fr": "Je vous en prie ! N'hésitez pas si vous avez d'autres questions.",
-                "mo": "Barka ! Kãadem b sã yɩɩ n kɩt yõodo.",
-                "di": "Baaraka ! Aw bɛna ɲininkali wɛrɛw kɛ wa, i k'a fɔ."
-            }
+            thanks_response = conversation_service.generate_thanks_response(detected_language)
             return {
                 "session_id": session_id,
                 "conversation_id": None,
-                "response": thanks_responses.get(detected_language, thanks_responses["fr"]),
+                "response": thanks_response,
                 "language": detected_language,
                 "intent": intent,
                 "context": [],
@@ -245,7 +245,7 @@ def chat_guest(req: ChatRequest):
                 "timestamp": datetime.utcnow().isoformat()
             }
 
-        # RAG
+        # RAG avec contexte
         answer_raw, context = rag.ask(
             query=req.message, 
             k=5,
@@ -253,14 +253,26 @@ def chat_guest(req: ChatRequest):
             category=req.category,
             min_confidence=0.40
         )
+        
+        # Traiter le contexte
+        context_blocks = _rag_context_to_blocks(context)
+        
+        if context_blocks and len(context_blocks) > 0:
+            # Prendre le premier bloc comme réponse principale
+            main_response = _fix_mojibake(context_blocks[0])
+            # Garder les autres comme contexte
+            additional_context = [_fix_mojibake(b) for b in context_blocks[1:]] if len(context_blocks) > 1 else []
+        else:
+            main_response = _fix_mojibake(answer_raw) if answer_raw else "Je n'ai pas trouvé d'information pertinente."
+            additional_context = []
 
         return {
             "session_id": session_id,
             "conversation_id": None,
-            "response": answer_raw,
+            "response": main_response,
             "language": detected_language,
             "intent": intent,
-            "context": context,
+            "context": additional_context,
             "timestamp": datetime.utcnow().isoformat()
         }
     except Exception as e:
@@ -280,7 +292,38 @@ def chat_intelligent(req: ChatRequest):
         req.message = normalized_message
         session_id = req.session_id or str(uuid4())
         detected_language = req.language or "fr"
+        
+        # Détecter l'intention
         intent = conversation_service.detect_intent(req.message, detected_language)
+        
+        # Gérer les salutations avec conversation_service
+        if intent == "greeting":
+            greeting_response = conversation_service.generate_greeting_response(detected_language)
+            ai_brain.add_to_history("user", req.message)
+            ai_brain.add_to_history("assistant", greeting_response)
+            
+            return {
+                "session_id": session_id,
+                "response": greeting_response,
+                "language": detected_language,
+                "intent": intent,
+                "mode": "greeting",
+                "timestamp": datetime.utcnow().isoformat()
+            }
+        
+        if intent == "thanks":
+            thanks_response = conversation_service.generate_thanks_response(detected_language)
+            ai_brain.add_to_history("user", req.message)
+            ai_brain.add_to_history("assistant", thanks_response)
+            
+            return {
+                "session_id": session_id,
+                "response": thanks_response,
+                "language": detected_language,
+                "intent": intent,
+                "mode": "thanks",
+                "timestamp": datetime.utcnow().isoformat()
+            }
 
         # RAG enrichi
         understanding = QueryUnderstanding.understand_health_query(req.message)
@@ -292,26 +335,8 @@ def chat_intelligent(req: ChatRequest):
             category=req.category,
             min_confidence=0.15
         )
-        rag_results = [{"question": req.message, "reponse": b} for b in _rag_context_to_blocks(context_raw)[:3]]
-        intelligent_response = ai_brain.generate_intelligent_response(
-            question=req.message,
-            rag_results=rag_results,
-            category=req.category,
-            language=detected_language
-        )
-
-        # Audio
-        audio_url, audio_mode = None, "not_available"
-        if detected_language in ["mo", "di"]:
-            try:
-                audio_url, audio_mode = tts_service.generate_audio(
-                    text=intelligent_response["reponse"],
-                    language=detected_language
-                )
-            except Exception as e:
-                logger.warning(f"⚠️ Audio non disponible: {e}")
-
-        # ✅ CORRECTION : Utiliser le contexte RAG comme réponse principale
+        
+        # Traiter le contexte RAG
         context_blocks = _rag_context_to_blocks(context_raw)
         
         # Déterminer la réponse principale
@@ -320,22 +345,47 @@ def chat_intelligent(req: ChatRequest):
             main_response = _fix_mojibake(context_blocks[0])
             # Garder les autres blocs comme contexte supplémentaire
             additional_context = [_fix_mojibake(b) for b in context_blocks[1:]] if len(context_blocks) > 1 else []
+            
+            # Utiliser AI Brain pour améliorer la réponse si nécessaire
+            rag_results = [{"question": req.message, "reponse": b} for b in context_blocks[:3]]
+            intelligent_response = ai_brain.generate_intelligent_response(
+                question=req.message,
+                rag_results=rag_results,
+                category=req.category,
+                language=detected_language
+            )
+            
+            # Combiner réponse RAG avec amélioration IA
+            enhanced_response = intelligent_response["reponse"] if intelligent_response else main_response
+            mode = intelligent_response.get("mode", "rag_enhanced") if intelligent_response else "rag_context"
         else:
-            # Fallback sur la réponse générée
-            main_response = _fix_mojibake(intelligent_response["reponse"])
+            # Fallback sur la réponse générée par AI Brain
+            enhanced_response = "Je n'ai pas trouvé d'information pertinente dans ma base de connaissances."
             additional_context = []
+            mode = "fallback"
 
-        # ✅ CORRECTION : Construire le payload avec la réponse contextuelle comme réponse principale
+        # Audio pour mooré et dioula
+        audio_url, audio_mode = None, "not_available"
+        if detected_language in ["mo", "di"]:
+            try:
+                audio_url, audio_mode = tts_service.generate_audio(
+                    text=enhanced_response,
+                    language=detected_language
+                )
+            except Exception as e:
+                logger.warning(f"⚠️ Audio non disponible: {e}")
+
+        # Construire le payload
         payload = {
             "session_id": session_id,
-            "response": main_response,  # Réponse contextuelle (premier bloc) ou réponse générée
+            "response": enhanced_response,
             "language": detected_language,
             "intent": intent,
-            "category": intelligent_response["categorie"],
-            "sources_count": intelligent_response.get("sources_utilisees", 0),
-            "mode": intelligent_response.get("mode", "intelligent"),
-            "context": additional_context,  # Autres blocs de contexte si disponibles
-            "timestamp": intelligent_response.get("timestamp", datetime.utcnow().isoformat()),
+            "category": req.category,
+            "sources_count": len(context_blocks),
+            "mode": mode,
+            "context": additional_context,
+            "timestamp": datetime.utcnow().isoformat(),
             "audio_url": audio_url,
             "audio_mode": audio_mode
         }
@@ -348,7 +398,7 @@ def chat_intelligent(req: ChatRequest):
                     "session_id": session_id,
                     "category": payload["category"],
                     "question": req.message,
-                    "answer": main_response,
+                    "answer": enhanced_response,
                     "context": payload["context"],
                     "language": detected_language,
                     "intent": intent,
