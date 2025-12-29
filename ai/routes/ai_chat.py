@@ -272,6 +272,8 @@ def chat_guest(req: ChatRequest):
 # -----------------------------
 # chat_intelligent & chat_voice
 # -----------------------------
+
+
 @router.post("/chat/intelligent")
 def chat_intelligent(req: ChatRequest):
     try:
@@ -282,65 +284,80 @@ def chat_intelligent(req: ChatRequest):
         detected_language = req.language or "fr"
         intent = conversation_service.detect_intent(req.message, detected_language)
 
-        # RAG enrichi
+        # RAG enrichi avec paramètres OPTIMISÉS
         understanding = QueryUnderstanding.understand_health_query(req.message)
         expanded_query = understanding['reformulated_query'] if understanding else req.message
+        
+        # 🔥 PARAMÈTRES OPTIMISÉS POUR 8GB RAM
         answer_raw, context_raw = rag.ask(
             query=expanded_query,
-            k=10,
+            k=3,  # Réduit de 10 à 3 pour moins de tokens
             language=detected_language,
             category=req.category,
-            min_confidence=0.15
+            min_confidence=0.65  # Augmenté pour plus de pertinence
         )
-        rag_results = [{"question": req.message, "reponse": b} for b in _rag_context_to_blocks(context_raw)[:3]]
-        intelligent_response = ai_brain.generate_intelligent_response(
-            question=req.message,
-            rag_results=rag_results,
-            category=req.category,
-            language=detected_language
-        )
+        
+        # 🔥 GESTION AMÉLIORÉE DU CONTEXTE
+        # Si le RAG retourne une réponse de fallback, on l'utilise directement
+        fallback_phrases = [
+            "Je n'ai pas d'information",
+            "Je n'ai pas cette information",
+            "M pa tara tagmasg",
+            "N tɛ kunnafoni"
+        ]
+        
+        is_fallback = any(phrase in answer_raw for phrase in fallback_phrases)
+        
+        if is_fallback:
+            # C'est une réponse de fallback, on la retourne telle quelle
+            main_response = answer_raw
+            additional_context = []
+        else:
+            # C'est une réponse normale, on traite avec ai_brain
+            rag_results = [{"question": req.message, "reponse": b} for b in _rag_context_to_blocks(context_raw)[:2]]  # 2 max
+            intelligent_response = ai_brain.generate_intelligent_response(
+                question=req.message,
+                rag_results=rag_results,
+                category=req.category,
+                language=detected_language
+            )
+            
+            context_blocks = _rag_context_to_blocks(context_raw)
+            if context_blocks and len(context_blocks) > 0:
+                main_response = _fix_mojibake(context_blocks[0])
+                additional_context = [_fix_mojibake(b) for b in context_blocks[1:]] if len(context_blocks) > 1 else []
+            else:
+                main_response = _fix_mojibake(intelligent_response["reponse"])
+                additional_context = []
 
-        # Audio
+        # Audio (inchangé)
         audio_url, audio_mode = None, "not_available"
         if detected_language in ["mo", "di"]:
             try:
                 audio_url, audio_mode = tts_service.generate_audio(
-                    text=intelligent_response["reponse"],
+                    text=main_response,
                     language=detected_language
                 )
             except Exception as e:
                 logger.warning(f"⚠️ Audio non disponible: {e}")
 
-        # ✅ CORRECTION : Utiliser le contexte RAG comme réponse principale
-        context_blocks = _rag_context_to_blocks(context_raw)
-        
-        # Déterminer la réponse principale
-        if context_blocks and len(context_blocks) > 0:
-            # Prendre le premier bloc de contexte comme réponse principale
-            main_response = _fix_mojibake(context_blocks[0])
-            # Garder les autres blocs comme contexte supplémentaire
-            additional_context = [_fix_mojibake(b) for b in context_blocks[1:]] if len(context_blocks) > 1 else []
-        else:
-            # Fallback sur la réponse générée
-            main_response = _fix_mojibake(intelligent_response["reponse"])
-            additional_context = []
-
-        # ✅ CORRECTION : Construire le payload avec la réponse contextuelle comme réponse principale
+        # Payload final
         payload = {
             "session_id": session_id,
-            "response": main_response,  # Réponse contextuelle (premier bloc) ou réponse générée
+            "response": main_response,
             "language": detected_language,
             "intent": intent,
-            "category": intelligent_response["categorie"],
-            "sources_count": intelligent_response.get("sources_utilisees", 0),
-            "mode": intelligent_response.get("mode", "intelligent"),
-            "context": additional_context,  # Autres blocs de contexte si disponibles
-            "timestamp": intelligent_response.get("timestamp", datetime.utcnow().isoformat()),
+            "category": req.category if not is_fallback else "general",
+            "sources_count": 0 if is_fallback else len(additional_context) + 1,
+            "mode": "fallback" if is_fallback else intelligent_response.get("mode", "intelligent"),
+            "context": additional_context,
+            "timestamp": datetime.utcnow().isoformat(),
             "audio_url": audio_url,
-            "audio_mode": audio_mode
+            "audio_mode": audio_mode,
+            "is_fallback": is_fallback  # Nouveau champ pour debug
         }
 
-        # Save conversation
+        # Save conversation (inchangé)
         try:
             if db:
                 conversation_data = {
@@ -367,6 +384,7 @@ def chat_intelligent(req: ChatRequest):
         import traceback
         traceback.print_exc()
         raise HTTPException(status_code=500, detail=f"Erreur service AI intelligent: {str(e)}")
+
 
 
 @router.post("/chat/voice")

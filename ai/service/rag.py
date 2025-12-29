@@ -47,15 +47,14 @@ class RAGService:
         self.vector_store.add(embeddings, metadata)
         logger.info(f"{len(texts)} documents ingérés dans l'index.")
 
-    def ask(self, query: str, k: int = 5, language: str = None, category: str = None, min_confidence: float = 0.40) -> Tuple[str, str]:
+# ... [le reste du code reste identique] ...
+
+    def ask(self, query: str, k: int = 5, language: str = None, category: str = None, min_confidence: float = 0.65) -> Tuple[str, str]:
         """
         Récupérer une réponse pertinente et le contexte
-        Filtre par langue et catégorie si spécifiés
-        min_confidence: seuil de similarité (0-1). Plus bas = plus permissif. Défaut 0.40
-        
-        AMÉLIORÉ avec enrichissement de requête et re-ranking hybride
+        Version OPTIMISÉE avec filtrage strict et formatage propre.
         """
-        # 🔥 NOUVEAU : Enrichir la question avec synonymes et contexte
+        # Enrichissement de requête
         enriched_query = rag_enhancer.enrich_query(query, category)
         logger.info(f"📝 Requête enrichie: '{enriched_query[:100]}'")
         
@@ -66,42 +65,101 @@ class RAGService:
         results, scores = self.vector_store.search(query_vector, k=search_k, return_scores=True)
 
         if not results:
-            return "Je n'ai pas trouvé d'information sur ce sujet. Pourriez-vous reformuler votre question ?", ""
+            return self._get_fallback_response(language), ""
         
         # Convertir distance L2 en score de similarité (0-1)
-        # Distance L2: 0 = identique, plus grand = plus différent
-        # On normalise: similarité = 1 / (1 + distance)
         similarities = [1.0 / (1.0 + d) for d in scores]
-        
-        # Vérifier si le meilleur résultat dépasse le seuil
         best_similarity = max(similarities) if similarities else 0.0
         logger.info(f"📊 Meilleure similarité: {best_similarity:.3f} (seuil: {min_confidence})")
         
-        # IMPORTANT: Le LLM est le juge final. Les scores RAG ne bloquent jamais la réponse.
+        # 🔥 FILTRE CRITIQUE : rejeter si similarité trop faible
         if best_similarity < min_confidence:
-            logger.warning(f"⚠️ Similarité faible ({best_similarity:.3f} < {min_confidence}) - CONTEXTE transmis au LLM quand même.")
-            # On log seulement, on ne bloque pas la réponse. Le LLM décidera.
-
-        # Filtrer par langue ET catégorie si spécifiées, en gardant les scores
-        # ⚠️ IMPORTANT: Si category='general', on filtre SEULEMENT par langue (pas de filtre catégorie)
+            logger.warning(f"⚠️ Similarité trop faible ({best_similarity:.3f} < {min_confidence}) - Fallback activé.")
+            return self._get_fallback_response(language), ""
+        
+        # Filtrer par langue
         if language:
             filtered_results = []
-            filtered_scores = []
+            filtered_similarities = []
             for idx, r in enumerate(results):
                 source = r.get("source", "")
                 lang_match = f"-{language}" in source
-                if lang_match:
+                if lang_match and similarities[idx] >= min_confidence:
                     filtered_results.append(r)
-                    filtered_scores.append(similarities[idx] if idx < len(similarities) else 0.0)
+                    filtered_similarities.append(similarities[idx])
                 if len(filtered_results) >= k:
                     break
-            if len(filtered_results) == 0:
-                logger.error(f"❌ Aucun résultat pour la langue {language}")
-                return "Je n'ai pas trouvé d'information sur ce sujet dans cette langue. Pourriez-vous reformuler votre question ?", ""
-            else:
-                logger.info(f"✅ {len(filtered_results)} résultats trouvés pour la langue {language}")
+            
+            if filtered_results:
                 results = filtered_results
-                similarities = filtered_scores
+                similarities = filtered_similarities
+            else:
+                logger.error(f"❌ Aucun résultat pour la langue {language} avec seuil {min_confidence}")
+                return self._get_fallback_response(language), ""
+        
+        # Re-ranking hybride
+        logger.info(f"🎯 Re-ranking hybride de {len(results)} résultats...")
+        results, similarities = HybridSearch.rerank_results(
+            query=query,
+            results=results,
+            semantic_scores=similarities,
+            keyword_weight=0.5
+        )
+        
+        # Prendre les k meilleurs
+        results = results[:k]
+        similarities = similarities[:k]
+        
+        # 🔥 FORMATAGE PROPRE DU CONTEXTE (CRITIQUE)
+        # On prend UNIQUEMENT le meilleur résultat comme contexte principal
+        if results:
+            best_result = results[0]
+            
+            # Extraire les parties utiles de votre JSON
+            text_content = best_result.get("text", "")
+            context_for_llm = ""
+            
+            # Si le texte contient votre structure JSON parsée
+            if "reponse_detaillee" in text_content or "REPONSE_DETAIL:" in text_content:
+                # Format optimisé pour le LLM
+                lines = text_content.split('\n')
+                for line in lines:
+                    if line.startswith("QUESTION:") or line.startswith("REPONSE_DETAIL:") or line.startswith("REPONSE_COURTE:"):
+                        context_for_llm += line + "\n"
+                    elif line.startswith("CONSEIL:") and line.strip() != "CONSEIL:":
+                        context_for_llm += line + "\n"
+            else:
+                # Fallback : utiliser tout le texte mais limiter la longueur
+                context_for_llm = text_content[:500] + "..." if len(text_content) > 500 else text_content
+            
+            # La réponse finale à retourner
+            final_answer = ""
+            if "reponse_courte" in text_content:
+                # Extraire la réponse courte
+                import re
+                match = re.search(r"REPONSE_COURTE:\s*(.+)", text_content)
+                if match:
+                    final_answer = match.group(1).strip()
+            
+            if not final_answer:
+                # Fallback : prendre le début du texte
+                final_answer = text_content[:150].strip() + "..."
+            
+            logger.info(f"✅ Contexte formaté ({len(context_for_llm)} chars), similarité: {similarities[0]:.3f}")
+            return final_answer, context_for_llm
+        
+        return self._get_fallback_response(language), ""
+    
+    def _get_fallback_response(self, language: str) -> str:
+        """Réponses de fallback par langue"""
+        fallbacks = {
+            "fr": "Je n'ai pas d'information suffisamment précise sur ce point. Pouvez-vous reformuler ou poser une question sur un autre sujet ?",
+            "mo": "M pa tara tagmasg sẽn yɩɩd sẽn na yɩlẽ f meng ye. F tõog n kãn-y a wa tɩ f sẽn dat n kẽ sabl fãa ?",
+            "di": "N tɛ kunnafoni ɲɛman sɔr o kɔnɔ. Yala i bɛ se ka ɲininkali in labɛn wa, walima ɲininkali wɛrɛ ye wa ?"
+        }
+        return fallbacks.get(language, fallbacks["fr"])
+
+
         
         # 🔥 NOUVEAU : Re-ranking hybride (sémantique + mots-clés)
         logger.info(f"🎯 Re-ranking hybride de {len(results)} résultats...")
