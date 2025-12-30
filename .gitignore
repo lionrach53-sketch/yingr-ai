@@ -8,3 +8,6 @@ téléchargements/
 venv/
 .venv/
 instance/
+
+data/backup_*.json
+data/expert_db.json

@@ -1,164 +1,561 @@
 [
   {
-    "categorie": "Plantes Medicinales",
-    "sous_categorie": "Troubles digestifs",
+    "categorie": "Agriculture",
+    "sous_categorie": "Mil - calendrier",
     "niveau": "grand_public",
     "langues": {
       "fr": {
-        "question": "Quelle plante utilise-t-on traditionnellement pour soigner les maux d'estomac au Burkina Faso ?",
-        "reponse_courte": "Le neem est couramment utilisé pour soulager les maux d’estomac.",
-        "reponse_detaillee": "Au Burkina Faso, les feuilles ou l’écorce du neem (Azadirachta indica) sont souvent préparées en infusion pour soulager les douleurs d’estomac et certains troubles digestifs.",
         "intention": "information",
-        "question_type": "sante_traditionnelle",
-        "conseil": "Boire l’infusion tiède après le repas.",
-        "avertissement": "Consulter un agent de santé si les douleurs persistent."
-      },
-      "mo": {},
-      "di": {}
+        "question_type": "calendrier",
+        "reponse_courte": "En zone sahélienne, le mil se sème généralement au début des pluies, entre juin et juillet.",
+        "reponse_detaillee": "Dans de nombreuses régions du Burkina Faso, le mil se sème juste après les premières pluies utiles, souvent entre début juin et mi-juillet. Si on sème trop tôt, les jeunes plants peuvent souffrir d'une longue pause pluviométrique. Si on sème trop tard, la plante n'aura pas le temps de bien mûrir avant la fin des pluies.",
+        "conseil": "Observe la régularité des pluies sur une à deux semaines avant de semer tout ton champ.",
+        "avertissement": "Les conseils de calendrier peuvent varier selon les zones agroclimatiques, renseigne-toi auprès du service agricole local."
+      }
+    }
+  },
+  {
+    "categorie": "Agriculture",
+    "sous_categorie": "Conservation du maïs",
+    "niveau": "grand_public",
+    "langues": {
+      "fr": {
+        "intention": "conservation_recolte",
+        "question_type": "procedure",
+        "reponse_courte": "Pour bien conserver le maïs, il faut le sécher correctement, le trier et le stocker dans un endroit sec et aéré.",
+        "reponse_detaillee": "Après la récolte, le maïs doit être bien séché au soleil sur des nattes propres ou sur des claies, en le remuant régulièrement. Ensuite, il faut enlever les épis ou grains abîmés. Le stockage se fait dans des greniers propres, des sacs jute ou polypropylène bien fermés, posés sur des palettes, à l'abri de l'humidité et des rongeurs. L'utilisation de méthodes traditionnelles (feuilles de neem, cendres propres) peut aider à limiter les insectes.",
+        "conseil": "Évite de poser les sacs directement sur le sol, utilise des palettes ou des pierres pour les surélever.",
+        "avertissement": "En cas d'attaque importante d'insectes ou de moisissures, le maïs peut devenir impropre à la consommation."
+      }
+    }
+  },
+  {
+    "categorie": "Agriculture",
+    "sous_categorie": "Compost organique",
+    "niveau": "grand_public",
+    "langues": {
+      "fr": {
+        "intention": "amelioration_sol",
+        "question_type": "procedure",
+        "reponse_courte": "Le compost est un engrais organique fabriqué à partir de résidus végétaux et de fumier bien décomposés.",
+        "reponse_detaillee": "Pour préparer du compost au village, on peut creuser une fosse peu profonde ou faire un tas à l'ombre. On alterne des couches de résidus végétaux (pailles, feuilles, résidus de récolte) et de fumier ou déjections animales. On humidifie légèrement sans détremper et on recouvre le tas. Il faut retourner le compost plusieurs fois pendant la saison sèche ou la saison des pluies afin d'accélérer la décomposition. Au bout de quelques mois, on obtient un compost sombre, friable, qui améliore la fertilité et la structure du sol.",
+        "conseil": "Évite de mettre dans le compost des plastiques, du métal ou des produits chimiques.",
+        "avertissement": "Le compost ne remplace pas totalement les engrais minéraux dans les sols très pauvres, mais il les complète efficacement."
+      }
+    }
+  },
+  {
+    "categorie": "Agriculture",
+    "sous_categorie": "Lutte contre les oiseaux",
+    "niveau": "grand_public",
+    "langues": {
+      "fr": {
+        "intention": "protection_culture",
+        "question_type": "strategie",
+        "reponse_courte": "Pour protéger les champs des oiseaux granivores, on utilise des épouvantails, des rubans brillants et la présence humaine.",
+        "reponse_detaillee": "Dans les champs de mil ou de riz au Burkina Faso, les oiseaux granivores peuvent causer de grosses pertes. Les producteurs utilisent souvent des épouvantails en forme humaine, des rubans plastiques brillants, des boîtes métalliques qui font du bruit avec le vent, et des cris coordonnés des enfants ou des adultes au moment critique de la maturité. La surveillance plus intense se fait surtout le matin et en fin d'après-midi, pendant la période de remplissage des grains.",
+        "conseil": "Organise une surveillance collective avec les voisins pour réduire la fatigue et protéger plusieurs champs en même temps.",
+        "avertissement": "Évite les méthodes dangereuses pour les enfants ou qui détruisent d'autres animaux utiles."
+      }
+    }
+  },
+  {
+    "categorie": "Agriculture",
+    "sous_categorie": "Rotation mil-niébé",
+    "niveau": "grand_public",
+    "langues": {
+      "fr": {
+        "intention": "gestion_parcelle",
+        "question_type": "strategie",
+        "reponse_courte": "Alterner mil et niébé sur la même parcelle permet d'améliorer la fertilité du sol et de réduire certaines maladies.",
+        "reponse_detaillee": "Le niébé est une légumineuse qui aide à fixer l'azote de l'air dans le sol. En pratiquant la rotation des cultures, par exemple mil une année puis niébé l'année suivante, on limite l'épuisement du sol, on réduit certains ravageurs et maladies spécifiques à une culture et on améliore les rendements à long terme. Cette pratique est particulièrement intéressante dans les sols pauvres des zones soudano-sahéliennes.",
+        "conseil": "Planifie la rotation sur plusieurs années et garde une trace simple de ce que tu as cultivé sur chaque parcelle.",
+        "avertissement": "La rotation n'empêche pas tous les problèmes de ravageurs, mais elle limite et doit être complétée par d'autres bonnes pratiques."
+      }
+    }
+  },
+
+  {
+    "categorie": "Santé",
+    "sous_categorie": "Paludisme - symptômes",
+    "niveau": "grand_public",
+    "langues": {
+      "fr": {
+        "intention": "information_sante",
+        "question_type": "information",
+        "reponse_courte": "Les principaux symptômes du paludisme sont la fièvre, les frissons, les maux de tête et la grande fatigue.",
+        "reponse_detaillee": "Le paludisme est très fréquent en Afrique de l'Ouest. Les signes classiques sont une forte fièvre, des frissons, des maux de tête, des courbatures, parfois des vomissements et une grande fatigue. Chez l'enfant, il peut aussi y avoir un refus de s'alimenter ou de boire, et une somnolence inhabituelle. Un accès grave peut provoquer des convulsions et une perte de connaissance.",
+        "conseil": "En cas de fièvre, surtout pendant la saison des pluies, il est important de faire rapidement un test de diagnostic rapide au CSPS.",
+        "avertissement": "Le paludisme grave peut entraîner la mort, surtout chez les enfants et les femmes enceintes. Consulte toujours un agent de santé dès les premiers signes."
+      }
+    }
+  },
+  {
+    "categorie": "Santé",
+    "sous_categorie": "Paludisme - prévention",
+    "niveau": "grand_public",
+    "langues": {
+      "fr": {
+        "intention": "prevention_sante",
+        "question_type": "conseil",
+        "reponse_courte": "La meilleure prévention du paludisme est l'utilisation régulière de moustiquaires imprégnées.",
+        "reponse_detaillee": "Dormir chaque nuit sous une moustiquaire imprégnée d'insecticide réduit fortement le risque de paludisme. Les femmes enceintes et les enfants de moins de 5 ans doivent être prioritaires. Il est aussi conseillé de limiter les eaux stagnantes autour des habitations, de couvrir les récipients d'eau et de participer aux campagnes de pulvérisation quand elles sont organisées.",
+        "conseil": "Contrôle régulièrement ta moustiquaire pour vérifier qu'il n'y a pas de trous et répare-les rapidement.",
+        "avertissement": "Même avec la moustiquaire, si des symptômes apparaissent, il faut consulter sans attendre."
+      }
+    }
+  },
+  {
+    "categorie": "Santé",
+    "sous_categorie": "Hydratation chaleur",
+    "niveau": "grand_public",
+    "langues": {
+      "fr": {
+        "intention": "prevention_sante",
+        "question_type": "conseil",
+        "reponse_courte": "Pendant les fortes chaleurs, il faut boire régulièrement de l'eau potable, même sans soif.",
+        "reponse_detaillee": "En saison chaude au Sahel, le corps perd beaucoup d'eau par la transpiration. Il est recommandé de boire plusieurs fois par jour de l'eau propre, bouillie ou traitée, même si on ne ressent pas encore la soif. Les personnes âgées, les enfants et les travailleurs de plein air (champs, chantiers) sont les plus exposés aux coups de chaleur.",
+        "conseil": "Évite l'exposition prolongée au soleil aux heures les plus chaudes et cherche l'ombre pour te reposer.",
+        "avertissement": "Les signes de déshydratation ou de coup de chaleur (vertiges, maux de tête intenses, confusion) nécessitent une consultation médicale urgente."
+      }
+    }
+  },
+  {
+    "categorie": "Santé",
+    "sous_categorie": "Diarrhée enfant",
+    "niveau": "grand_public",
+    "langues": {
+      "fr": {
+        "intention": "prevention_sante",
+        "question_type": "conseil",
+        "reponse_courte": "Pour prévenir la diarrhée chez l'enfant, il faut utiliser de l'eau potable et se laver les mains avant de préparer les repas.",
+        "reponse_detaillee": "Beaucoup de diarrhées chez les enfants sont liées à l'eau contaminée et au manque d'hygiène. Il est important de donner à boire une eau sûre (bouillie, filtrée ou traitée) et de bien se laver les mains avec de l'eau et du savon avant de préparer la nourriture, après être allé aux latrines et après avoir changé un enfant. L'allaitement maternel exclusif les six premiers mois protège aussi contre certaines infections.",
+        "conseil": "Garde les ustensiles de cuisine propres et couverts, à l'abri des mouches.",
+        "avertissement": "Une diarrhée avec sang, fièvre élevée, ou un enfant très abattu nécessite une consultation rapide au centre de santé."
+      }
+    }
+  },
+  {
+    "categorie": "Santé",
+    "sous_categorie": "Signes d'alerte",
+    "niveau": "grand_public",
+    "langues": {
+      "fr": {
+        "intention": "information_sante",
+        "question_type": "liste",
+        "reponse_courte": "Certains signes comme la difficulté à respirer, la convulsion ou la perte de connaissance sont des urgences.",
+        "reponse_detaillee": "Chez l'adulte comme chez l'enfant, la difficulté importante à respirer, la peau très pâle ou jaunâtre, les convulsions, la perte de connaissance, les vomissements répétés ou l'incapacité à boire sont des signes de gravité. Ces situations nécessitent une prise en charge immédiate au CSPS ou à l'hôpital le plus proche.",
+        "conseil": "Prévois un moyen rapide de transport vers le centre de santé en cas d'urgence (moto, tricycle, voiture partagée).",
+        "avertissement": "Ne donne pas de médicaments forts ou de remèdes traditionnels en grande quantité sans avis d'un agent de santé, cela peut aggraver la situation."
+      }
+    }
+  },
+
+  {
+    "categorie": "Histoire",
+    "sous_categorie": "Nom du pays",
+    "niveau": "grand_public",
+    "langues": {
+      "fr": {
+        "intention": "information",
+        "question_type": "information",
+        "reponse_courte": "Le nom Burkina Faso signifie « pays des hommes intègres ».",
+        "reponse_detaillee": "En 1984, le président Thomas Sankara a changé le nom de la Haute-Volta pour Burkina Faso. « Burkina » vient du mooré et signifie « intègre » ou « honnête ». « Faso » vient du dioula et signifie « patrie » ou « maison du père ». Ensemble, cela donne « pays des hommes intègres », pour valoriser la dignité et la probité du peuple.",
+        "conseil": "Ce nom peut servir de point de départ pour sensibiliser les jeunes à l'importance de l'honnêteté dans la vie publique et privée.",
+        "avertissement": ""
+      }
+    }
+  },
+  {
+    "categorie": "Histoire",
+    "sous_categorie": "Indépendance",
+    "niveau": "grand_public",
+    "langues": {
+      "fr": {
+        "intention": "information",
+        "question_type": "information",
+        "reponse_courte": "La Haute-Volta a obtenu son indépendance le 5 août 1960.",
+        "reponse_detaillee": "Ancienne colonie de l'Afrique-Occidentale française, la Haute-Volta est devenue un État indépendant le 5 août 1960. Plus tard, en 1984, le pays a été rebaptisé Burkina Faso. Cette histoire fait partie du mouvement plus large des indépendances africaines des années 1950-1960.",
+        "conseil": "Les enseignants peuvent utiliser cette date pour organiser des activités éducatives sur l'histoire du pays.",
+        "avertissement": ""
+      }
+    }
+  },
+  {
+    "categorie": "Histoire",
+    "sous_categorie": "Chefferies traditionnelles",
+    "niveau": "grand_public",
+    "langues": {
+      "fr": {
+        "intention": "information",
+        "question_type": "information",
+        "reponse_courte": "Les chefferies traditionnelles jouent un rôle important dans la cohésion sociale et la gestion des conflits locaux.",
+        "reponse_detaillee": "Dans de nombreuses communautés du Burkina Faso, les chefs coutumiers, chefs de terre ou de village conservent une autorité morale forte. Ils interviennent dans la gestion des terres, la résolution des conflits familiaux ou fonciers, et l'organisation des cérémonies. Leur collaboration avec les autorités administratives et religieuses est souvent essentielle pour maintenir la paix locale.",
+        "conseil": "Lorsque tu as un problème foncier ou un conflit de voisinage, il est souvent utile de passer d'abord par les instances coutumières.",
+        "avertissement": ""
+      }
+    }
+  },
+  {
+    "categorie": "Histoire",
+    "sous_categorie": "Fête nationale",
+    "niveau": "grand_public",
+    "langues": {
+      "fr": {
+        "intention": "information",
+        "question_type": "information",
+        "reponse_courte": "La fête nationale du Burkina Faso est célébrée le 11 décembre.",
+        "reponse_detaillee": "Le 11 décembre marque la commémoration de la proclamation de la République de Haute-Volta en 1958. Aujourd'hui, cette date est célébrée comme la fête nationale. Chaque année, une ville différente accueille les festivités, avec des défilés, des discours et des activités culturelles.",
+        "conseil": "C'est une occasion d'enseigner aux jeunes l'histoire du pays et ses valeurs de cohésion.",
+        "avertissement": ""
+      }
+    }
+  },
+  {
+    "categorie": "Histoire",
+    "sous_categorie": "Langues nationales",
+    "niveau": "grand_public",
+    "langues": {
+      "fr": {
+        "intention": "information",
+        "question_type": "information",
+        "reponse_courte": "Le Burkina Faso compte de nombreuses langues nationales en plus du français.",
+        "reponse_detaillee": "En plus du français, langue officielle, le Burkina Faso compte des dizaines de langues nationales, comme le mooré, le dioula, le fulfuldé, le gulmancema, le bissa, le dagara et bien d'autres. Ces langues sont utilisées dans la vie quotidienne, les marchés, les radios locales et de plus en plus dans les écoles et les campagnes de sensibilisation.",
+        "conseil": "Utiliser les langues locales dans la communication permet de mieux toucher les populations rurales et les personnes peu scolarisées.",
+        "avertissement": ""
+      }
+    }
+  },
+
+  {
+    "categorie": "Finance",
+    "sous_categorie": "Épargne villageoise",
+    "niveau": "grand_public",
+    "langues": {
+      "fr": {
+        "intention": "education_financiere",
+        "question_type": "conseil",
+        "reponse_courte": "Les groupes d'épargne villageoise permettent aux membres de mettre de côté de petites sommes régulièrement.",
+        "reponse_detaillee": "Les associations villageoises d'épargne et de crédit (AVEC) ou tontines sont des groupes où chaque membre contribue un montant fixé à intervalles réguliers. Le fonds ainsi constitué sert à octroyer des prêts aux membres ou à distribuer les sommes épargnées à tour de rôle. Ce système aide les ménages à faire face aux dépenses scolaires, aux soins de santé ou à investir dans de petites activités génératrices de revenus.",
+        "conseil": "Choisis un groupe où les règles sont claires et écrites, et participe régulièrement pour profiter pleinement du système.",
+        "avertissement": "Même dans un groupe de confiance, il est bon de tenir un registre écrit des contributions et des prêts pour éviter les conflits."
+      }
+    }
+  },
+  {
+    "categorie": "Finance",
+    "sous_categorie": "Crédit et surendettement",
+    "niveau": "grand_public",
+    "langues": {
+      "fr": {
+        "intention": "education_financiere",
+        "question_type": "avertissement",
+        "reponse_courte": "Avant de prendre un crédit, il faut vérifier sa capacité à rembourser.",
+        "reponse_detaillee": "Les microcrédits, les achats à crédit ou les prêts entre particuliers peuvent aider à lancer une activité ou faire face à une urgence. Mais si l'on emprunte sans plan de remboursement, on risque le surendettement, la vente de biens importants ou des tensions familiales. Il est important de comparer les taux d'intérêt, de lire les conditions et de s'assurer qu'une partie du revenu futur pourra couvrir les remboursements.",
+        "conseil": "Évite de multiplier les crédits dans plusieurs institutions ou chez plusieurs personnes en même temps.",
+        "avertissement": "Ne t'engage pas comme garant pour un crédit si tu n'es pas prêt à payer à la place de la personne."
+      }
+    }
+  },
+  {
+    "categorie": "Finance",
+    "sous_categorie": "Budget familial",
+    "niveau": "grand_public",
+    "langues": {
+      "fr": {
+        "intention": "education_financiere",
+        "question_type": "procedure",
+        "reponse_courte": "Un budget familial simple aide à prévoir les dépenses et à éviter les surprises.",
+        "reponse_detaillee": "Faire un budget consiste à lister les revenus attendus (vente de récoltes, petit commerce, salaire, transferts) et les dépenses prévues (alimentation, scolarité, santé, cérémonies, investissements). Même avec un petit revenu, noter ces éléments sur un cahier aide à mieux décider : différer certaines dépenses, épargner un peu, ou discuter en famille des priorités.",
+        "conseil": "Prends un moment chaque mois pour revoir le budget avec les membres clés de la famille.",
+        "avertissement": "Un budget n'empêche pas toutes les difficultés, mais l'absence de plan augmente le risque de dettes non maîtrisées."
+      }
+    }
+  },
+  {
+    "categorie": "Finance",
+    "sous_categorie": "Diversification des revenus",
+    "niveau": "grand_public",
+    "langues": {
+      "fr": {
+        "intention": "education_financiere",
+        "question_type": "conseil",
+        "reponse_courte": "Avoir plusieurs petites sources de revenus réduit les risques liés à une seule activité.",
+        "reponse_detaillee": "Dans un contexte de forte variabilité climatique et économique, dépendre uniquement d'une seule culture ou d'un seul emploi est risqué. Diversifier peut signifier avoir une culture de rente et une culture vivrière, pratiquer un petit élevage, tenir un petit commerce saisonnier, ou développer un artisanat. Cette diversification permet de mieux absorber les chocs comme une mauvaise récolte ou une baisse de prix.",
+        "conseil": "Commence petit, avec une activité complémentaire que tu maîtrises déjà un peu et qui ne demande pas un gros investissement.",
+        "avertissement": "Évite de te lancer dans plusieurs nouvelles activités à la fois sans expérience ni accompagnement, car cela peut disperser tes forces."
+      }
+    }
+  },
+  {
+    "categorie": "Finance",
+    "sous_categorie": "Prudence numérique",
+    "niveau": "grand_public",
+    "langues": {
+      "fr": {
+        "intention": "education_financiere",
+        "question_type": "avertissement",
+        "reponse_courte": "Il faut se méfier des offres de gains rapides sur téléphone ou Internet.",
+        "reponse_detaillee": "De plus en plus d'escroqueries utilisent le téléphone et les réseaux sociaux pour promettre des gains rapides, des doubles mises ou des prêts sans conditions. Souvent, ces offres demandent d'envoyer d'abord de l'argent ou des codes de transfert. Beaucoup de personnes en Afrique de l'Ouest ont perdu de l'argent ainsi.",
+        "conseil": "Ne communique jamais ton code secret ou les codes de retrait d'argent à quelqu'un par téléphone.",
+        "avertissement": "Si une offre semble trop belle pour être vraie, il s'agit probablement d'une arnaque."
+      }
+    }
+  },
+
+  {
+    "categorie": "Environnement",
+    "sous_categorie": "Arbres et ombre",
+    "niveau": "grand_public",
+    "langues": {
+      "fr": {
+        "intention": "sensibilisation_environnement",
+        "question_type": "information",
+        "reponse_courte": "Les arbres protègent les sols, donnent de l'ombre et améliorent le microclimat.",
+        "reponse_detaillee": "Dans les villages sahéliens, les arbres autour des concessions et des champs réduisent la force du vent, apportent de l'ombre et améliorent l'humidité du sol. Certaines espèces comme le néré, le karité ou le moringa fournissent aussi des produits alimentaires ou médicinaux. Planter et protéger les jeunes arbres contribue à lutter contre la dégradation des terres.",
+        "conseil": "Protège les jeunes plants avec des grillages simples ou des branches pour éviter que les animaux ne les broutent.",
+        "avertissement": "Évite de couper des arbres utiles sans autorisation, cela peut entraîner des sanctions et appauvrir le milieu."
+      }
+    }
+  },
+  {
+    "categorie": "Environnement",
+    "sous_categorie": "Zai et demi-lunes",
+    "niveau": "grand_public",
+    "langues": {
+      "fr": {
+        "intention": "amelioration_sol",
+        "question_type": "procedure",
+        "reponse_courte": "Les techniques de zai et de demi-lunes permettent de retenir l'eau de pluie sur les sols dégradés.",
+        "reponse_detaillee": "Le zai consiste à creuser de petits trous dans lesquels on met du fumier et on sème des cultures comme le mil ou le sorgho. Les demi-lunes sont des cuvettes en forme de croissant qui retiennent l'eau de ruissellement. Ces techniques, utilisées au Burkina Faso et au Niger, ont permis de restaurer des sols très pauvres et d'augmenter les rendements dans certaines zones sèches.",
+        "conseil": "Commence sur une petite surface pour maîtriser la technique avant de l'étendre à tout ton champ.",
+        "avertissement": "Ces techniques demandent du travail manuel important, il est donc utile de s'organiser en groupe ou en chantier collectif."
+      }
+    }
+  },
+  {
+    "categorie": "Environnement",
+    "sous_categorie": "Feux de brousse",
+    "niveau": "grand_public",
+    "langues": {
+      "fr": {
+        "intention": "sensibilisation_environnement",
+        "question_type": "avertissement",
+        "reponse_courte": "Les feux de brousse non maîtrisés détruisent la végétation, la faune et les biens des populations.",
+        "reponse_detaillee": "Dans plusieurs régions, les feux de brousse sont encore utilisés pour la chasse ou le nettoyage des parcelles. Mal contrôlés, ils détruisent les jeunes arbres, les herbes fourragères, la faune et parfois les maisons et greniers. Ils augmentent aussi la dégradation des sols. De nombreuses communes ont mis en place des comités de lutte contre les feux et des pare-feux.",
+        "conseil": "Participe aux campagnes locales de sensibilisation et respecte les périodes et zones interdites de brûlis.",
+        "avertissement": "Allumer un feu de brousse sans autorisation peut être puni par la loi et mettre des vies en danger."
+      }
+    }
+  },
+  {
+    "categorie": "Environnement",
+    "sous_categorie": "Eau et puits",
+    "niveau": "grand_public",
+    "langues": {
+      "fr": {
+        "intention": "sensibilisation_environnement",
+        "question_type": "conseil",
+        "reponse_courte": "La protection des puits et forages est essentielle pour garantir une eau de qualité.",
+        "reponse_detaillee": "Autour des puits et des forages, il faut éviter les eaux stagnantes, les dépôts d'ordures et la présence d'animaux. Des aménagements simples comme une dalle, un caniveau pour évacuer l'eau usée et une clôture améliorent la qualité de l'eau et réduisent les risques de maladies hydriques.",
+        "conseil": "Organise, avec le comité de point d'eau, des journées de nettoyage régulièrement.",
+        "avertissement": "Boire une eau contaminée peut provoquer des diarrhées, des parasitoses et d'autres maladies graves."
+      }
+    }
+  },
+  {
+    "categorie": "Environnement",
+    "sous_categorie": "Déchets plastiques",
+    "niveau": "grand_public",
+    "langues": {
+      "fr": {
+        "intention": "sensibilisation_environnement",
+        "question_type": "conseil",
+        "reponse_courte": "Les déchets plastiques jetés dans la nature polluent durablement les sols et l'eau.",
+        "reponse_detaillee": "Les sachets plastiques, bouteilles et autres emballages abandonnés dans la nature mettent des dizaines d'années à se décomposer. Ils bouchent les caniveaux, polluent les sols et les cours d'eau, et peuvent être mangés par les animaux. Dans plusieurs villes africaines, des initiatives de collecte, de tri ou de valorisation du plastique (pavés, objets) se développent.",
+        "conseil": "Réduis l'utilisation des sachets jetables, réutilise les contenants solides et participe aux journées de nettoyage communautaires.",
+        "avertissement": "Brûler les plastiques à l'air libre dégage des fumées toxiques pour la santé et l'environnement."
+      }
+    }
+  },
+  {
+    "categorie": "Education",
+    "sous_categorie": "Scolarisation primaire",
+    "niveau": "grand_public",
+    "langues": {
+      "fr": {
+        "intention": "information",
+        "question_type": "information",
+        "reponse_courte": "L'école primaire au Burkina Faso commence généralement à 6 ans et dure 6 ans.",
+        "reponse_detaillee": "Au Burkina Faso, l'école primaire est accessible à tous les enfants dès l'âge de 6 ans. Elle dure 6 ans et se termine par le Certificat d'Études Primaires (CEP). L'accès à l'école est gratuit dans les établissements publics, mais certains frais annexes peuvent exister.",
+        "conseil": "Encourage les enfants à fréquenter régulièrement l'école pour améliorer leurs chances de réussite.",
+        "avertissement": "L'abandon scolaire peut limiter les opportunités futures."
+      }
+    }
+  },
+  {
+    "categorie": "Education",
+    "sous_categorie": "Importance de l'éducation des filles",
+    "niveau": "grand_public",
+    "langues": {
+      "fr": {
+        "intention": "sensibilisation",
+        "question_type": "information",
+        "reponse_courte": "L'éducation des filles favorise le développement de toute la communauté.",
+        "reponse_detaillee": "Lorsque les filles sont scolarisées, elles ont plus de chances d'améliorer leur santé, de participer à la vie économique et de soutenir l'éducation de leurs propres enfants. Cela réduit aussi les mariages précoces et les grossesses non désirées.",
+        "conseil": "Soutiens la scolarisation des filles dans ta famille et ton quartier.",
+        "avertissement": "Priver une fille d'éducation peut avoir des conséquences négatives sur sa vie et celle de sa communauté."
+      }
+    }
+  },
+  {
+    "categorie": "Education",
+    "sous_categorie": "Education générale",
+    "niveau": "grand_public",
+    "langues": {
+      "fr": {
+        "intention": "information",
+        "question_type": "information",
+        "reponse_courte": "L'éducation est essentielle pour le développement du Burkina Faso.",
+        "reponse_detaillee": "L'éducation permet aux enfants et aux adultes d'acquérir des connaissances, des compétences et des valeurs utiles pour la vie. Au Burkina Faso, investir dans l'éducation favorise la croissance économique, la santé, la cohésion sociale et la réduction de la pauvreté. L'accès à l'éducation pour tous, filles et garçons, est une priorité nationale.",
+        "conseil": "Encourage l'éducation dans ta famille et ta communauté pour améliorer les opportunités de chacun.",
+        "avertissement": "Le manque d'éducation limite les chances de réussite et le développement du pays."
+      }
+    }
+  },
+  {
+    "categorie": "Education",
+    "sous_categorie": "Education des filles",
+    "niveau": "grand_public",
+    "langues": {
+      "fr": {
+        "intention": "sensibilisation",
+        "question_type": "information",
+        "reponse_courte": "L'éducation des filles est très importante pour le développement du Burkina Faso.",
+        "reponse_detaillee": "L'éducation des filles au Burkina Faso améliore la santé, réduit la pauvreté et favorise l'égalité. Une fille instruite a plus de chances de participer à la vie économique, de prendre soin de sa famille et de soutenir l'éducation de ses enfants. Cela contribue à un développement durable et à une société plus juste.",
+        "conseil": "Soutiens la scolarisation des filles et lutte contre les obstacles comme le mariage précoce ou le travail domestique excessif.",
+        "avertissement": "Priver une fille d'éducation a des conséquences négatives sur sa vie et celle de la communauté."
+      }
+    }
+  },
+  {
+    "categorie": "Education",
+    "sous_categorie": "Apprentissage en langue nationale",
+    "niveau": "grand_public",
+    "langues": {
+      "fr": {
+        "intention": "information",
+        "question_type": "information",
+        "reponse_courte": "Apprendre à lire et écrire en mooré ou dioula facilite la compréhension des élèves.",
+        "reponse_detaillee": "L'enseignement en langue nationale permet aux enfants de mieux comprendre les notions de base avant d'apprendre le français. Plusieurs écoles au Burkina Faso proposent des cours en mooré, dioula ou fulfuldé pour faciliter l'apprentissage.",
+        "conseil": "Encourage l'apprentissage dans la langue maternelle pour renforcer les bases scolaires.",
+        "avertissement": "Ne pas valoriser les langues locales peut freiner la réussite scolaire."
+      }
+    }
+  },
+  {
+    "categorie": "Education",
+    "sous_categorie": "Éducation informelle",
+    "niveau": "grand_public",
+    "langues": {
+      "fr": {
+        "intention": "information",
+        "question_type": "information",
+        "reponse_courte": "L'éducation informelle inclut l'apprentissage à la maison, au marché ou dans la communauté.",
+        "reponse_detaillee": "En dehors de l'école, les enfants apprennent beaucoup par l'observation, la participation aux activités familiales, les discussions avec les aînés et les jeux. Cette éducation informelle complète l'école et prépare à la vie quotidienne.",
+        "conseil": "Valorise les savoirs transmis par les parents et les anciens.",
+        "avertissement": "L'éducation informelle ne remplace pas l'école mais la complète."
+      }
+    }
+  },
+  {
+    "categorie": "Education",
+    "sous_categorie": "Formation professionnelle",
+    "niveau": "grand_public",
+    "langues": {
+      "fr": {
+        "intention": "information",
+        "question_type": "information",
+        "reponse_courte": "La formation professionnelle prépare à des métiers utiles comme la couture, la mécanique ou l'agriculture.",
+        "reponse_detaillee": "Au Burkina Faso, de nombreux centres proposent des formations en artisanat, agriculture, informatique, mécanique, couture, etc. Ces formations permettent aux jeunes d'acquérir des compétences pratiques pour trouver un emploi ou créer leur propre activité.",
+        "conseil": "Renseigne-toi sur les centres de formation près de chez toi pour les jeunes en recherche d'emploi.",
+        "avertissement": "La formation professionnelle demande de la motivation et de la régularité."
+      }
     }
   },
   {
     "categorie": "Plantes Medicinales",
-    "sous_categorie": "Energie et fatigue",
+    "sous_categorie": "Moringa",
     "niveau": "grand_public",
     "langues": {
       "fr": {
-        "question": "Comment utiliser le moringa contre la fatigue ?",
-        "reponse_courte": "Le moringa aide à réduire la fatigue et à renforcer l’organisme.",
-        "reponse_detaillee": "On consomme généralement une cuillère à soupe de poudre de feuilles séchées de moringa par jour, mélangée dans la bouillie, la sauce ou une boisson.",
-        "intention": "utilisation",
-        "question_type": "sante_traditionnelle",
-        "conseil": "Prendre le moringa le matin.",
-        "avertissement": "Consulter un agent de santé si la fatigue dure longtemps."
-      },
-      "mo": {},
-      "di": {}
+        "intention": "information",
+        "question_type": "utilisation",
+        "reponse_courte": "Le moringa est utilisé pour lutter contre la fatigue et l'anémie.",
+        "reponse_detaillee": "Les feuilles de moringa sont riches en vitamines et minéraux. Au Burkina Faso, on les consomme en poudre ou en sauce pour renforcer l'énergie et prévenir l'anémie.",
+        "conseil": "Consomme une cuillère à soupe de poudre de feuilles séchées par jour, mélangée à la bouillie ou à la sauce.",
+        "avertissement": "En cas de maladie grave, consulte un agent de santé."
+      }
     }
   },
   {
-    "categorie": "Transformation PFNL",
-    "sous_categorie": "Karité",
+    "categorie": "Plantes Medicinales",
+    "sous_categorie": "Neem",
     "niveau": "grand_public",
     "langues": {
       "fr": {
-        "question": "Quelles sont les étapes de base pour transformer la noix de karité en beurre ?",
-        "reponse_courte": "La transformation du karité suit plusieurs étapes traditionnelles.",
-        "reponse_detaillee": "Les étapes sont : collecte et dépulpage, séchage et concassage, torréfaction, broyage, malaxage, filtration de l’huile, puis refroidissement pour obtenir le beurre.",
-        "intention": "procedure",
-        "question_type": "artisanat",
-        "conseil": "Utiliser de l’eau propre pendant le malaxage.",
-        "avertissement": ""
-      },
-      "mo": {},
-      "di": {}
+        "intention": "information",
+        "question_type": "utilisation",
+        "reponse_courte": "Le neem est utilisé pour ses propriétés antiparasitaires et médicinales.",
+        "reponse_detaillee": "Les feuilles et l'huile de neem sont utilisées pour traiter les infections de la peau, repousser les moustiques et protéger les récoltes contre les insectes.",
+        "conseil": "Utilise les feuilles de neem en infusion ou en décoction pour les soins de la peau.",
+        "avertissement": "Ne pas utiliser l'huile de neem pure sur les enfants sans avis médical."
+      }
     }
   },
   {
-    "categorie": "Transformation PFNL",
+    "categorie": "Plantes Medicinales",
+    "sous_categorie": "Bissap",
+    "niveau": "grand_public",
+    "langues": {
+      "fr": {
+        "intention": "information",
+        "question_type": "utilisation",
+        "reponse_courte": "Le bissap est utilisé pour ses vertus rafraîchissantes et digestives.",
+        "reponse_detaillee": "La fleur d'hibiscus (bissap) est consommée en jus ou en infusion pour faciliter la digestion et rafraîchir le corps pendant la saison chaude.",
+        "conseil": "Prépare le bissap en infusion ou en jus, sucré selon le goût.",
+        "avertissement": "Éviter une consommation excessive chez les personnes souffrant d'hypertension."
+      }
+    }
+  },
+  {
+    "categorie": "Plantes Medicinales",
+    "sous_categorie": "Gingembre",
+    "niveau": "grand_public",
+    "langues": {
+      "fr": {
+        "intention": "information",
+        "question_type": "utilisation",
+        "reponse_courte": "Le gingembre est utilisé pour stimuler la digestion et lutter contre les nausées.",
+        "reponse_detaillee": "Le gingembre frais ou en poudre est utilisé dans la cuisine et en infusion pour améliorer la digestion, réduire les nausées et apporter de l'énergie.",
+        "conseil": "Ajoute du gingembre frais dans les sauces ou prépare une infusion avec du citron.",
+        "avertissement": "Éviter chez les personnes souffrant d'ulcères gastriques sans avis médical."
+      }
+    }
+  },
+  {
+    "categorie": "Plantes Medicinales",
     "sous_categorie": "Baobab",
     "niveau": "grand_public",
     "langues": {
       "fr": {
-        "question": "Comment produire de la farine nutritive à base de baobab ?",
-        "reponse_courte": "La farine de baobab est riche en vitamine C.",
-        "reponse_detaillee": "Il faut sécher la pulpe du fruit de baobab, la moudre finement puis la tamiser avant utilisation dans les bouillies ou boissons.",
-        "intention": "utilisation",
-        "question_type": "artisanat",
-        "conseil": "Conserver la farine dans un récipient sec et fermé.",
-        "avertissement": ""
-      },
-      "mo": {},
-      "di": {}
-    }
-  },
-  {
-    "categorie": "Science Pratique - Saponification",
-    "sous_categorie": "Calcul de soude",
-    "niveau": "grand_public",
-    "langues": {
-      "fr": {
-        "question": "Quelle est la formule pour calculer la quantité de soude nécessaire pour saponifier une huile ?",
-        "reponse_courte": "On utilise l’indice de saponification de l’huile.",
-        "reponse_detaillee": "La quantité de soude se calcule avec la formule : masse d’huile × indice de saponification ÷ 1000. Pour le karité, l’indice est d’environ 128 à 138.",
         "intention": "information",
-        "question_type": "calcul",
-        "conseil": "Toujours vérifier l’indice de l’huile utilisée.",
-        "avertissement": "Manipuler la soude avec prudence."
-      },
-      "mo": {},
-      "di": {}
-    }
-  },
-  {
-    "categorie": "Metiers Informels",
-    "sous_categorie": "Réparation téléphones",
-    "niveau": "grand_public",
-    "langues": {
-      "fr": {
-        "question": "Quel est le capital de départ pour un atelier informel de réparation de téléphones ?",
-        "reponse_courte": "Un capital moyen de 150 000 à 300 000 FCFA est nécessaire.",
-        "reponse_detaillee": "Ce budget couvre les outils de base (tournevis, station de soudure) et quelques pièces de rechange courantes comme les écrans et batteries.",
-        "intention": "quantite",
-        "question_type": "metier",
-        "conseil": "Commencer petit et investir progressivement.",
-        "avertissement": ""
-      },
-      "mo": {},
-      "di": {}
-    }
-  },
-  {
-    "categorie": "Civisme",
-    "sous_categorie": "Devoirs du citoyen",
-    "niveau": "grand_public",
-    "langues": {
-      "fr": {
-        "question": "Quels sont mes devoirs de citoyen ?",
-        "reponse_courte": "Un citoyen doit respecter les lois et contribuer au développement du pays.",
-        "reponse_detaillee": "Les devoirs incluent le respect des lois, le paiement des impôts, la participation aux élections et la protection des biens publics.",
-        "intention": "liste",
-        "question_type": "civisme",
-        "conseil": "Être un bon exemple dans sa communauté.",
-        "avertissement": ""
-      },
-      "mo": {},
-      "di": {}
-    }
-  },
-  {
-    "categorie": "Spiritualite et Traditions",
-    "sous_categorie": "Initiation",
-    "niveau": "grand_public",
-    "langues": {
-      "fr": {
-        "question": "Quelle cérémonie traditionnelle marque l'entrée des jeunes garçons dans l'âge adulte chez les Sénoufo ?",
-        "reponse_courte": "Le Poro marque l’entrée dans l’âge adulte.",
-        "reponse_detaillee": "Le Poro est une cérémonie d’initiation où les jeunes apprennent les valeurs, les règles sociales et les responsabilités de la communauté.",
-        "intention": "information",
-        "question_type": "culture",
-        "conseil": "Respecter les traditions locales.",
-        "avertissement": ""
-      },
-      "mo": {},
-      "di": {}
-    }
-  },
-  {
-    "categorie": "Developpement Personnel",
-    "sous_categorie": "Compétences",
-    "niveau": "grand_public",
-    "langues": {
-      "fr": {
-        "question": "Comment développer mes compétences personnelles ?",
-        "reponse_courte": "Le développement personnel demande discipline et apprentissage continu.",
-        "reponse_detaillee": "Il faut se fixer des objectifs clairs, gérer son temps, apprendre régulièrement et accepter les critiques constructives.",
-        "intention": "utilisation",
-        "question_type": "developpement_personnel",
-        "conseil": "Avancer petit à petit chaque jour.",
-        "avertissement": ""
-      },
-      "mo": {},
-      "di": {}
+        "question_type": "utilisation",
+        "reponse_courte": "Le fruit du baobab est riche en vitamine C et utilisé pour renforcer l'immunité.",
+        "reponse_detaillee": "La pulpe du fruit de baobab (pain de singe) est consommée en boisson ou ajoutée à la bouillie pour ses propriétés antioxydantes et son apport en vitamine C.",
+        "conseil": "Ajoute la pulpe de baobab à la bouillie ou prépare une boisson rafraîchissante.",
+        "avertissement": "Conserve la pulpe dans un endroit sec pour éviter la moisissure."
+      }
     }
   }
 ]

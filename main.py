@@ -1,3 +1,5 @@
+from dotenv import load_dotenv
+load_dotenv()
 from fastapi import FastAPI, HTTPException, Depends, status, BackgroundTasks, UploadFile, File, Form
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
@@ -13,6 +15,7 @@ import hashlib
 import shutil
 from enum import Enum
 import logging
+
 
 # Configuration logging AVANT d'importer mongodb
 logging.basicConfig(level=logging.INFO)
