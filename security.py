@@ -61,9 +61,32 @@ security = HTTPBearer()
 async def require_expert(
     credentials: HTTPAuthorizationCredentials = Depends(security)
 ):
+    """Vérifie qu'un appelant est un expert uniquement."""
     token = credentials.credentials
 
     if token != os.getenv("EXPERT_API_KEY", "expert-burkina-2024"):
         raise HTTPException(status_code=403, detail="Invalid API token")
 
     return {"token": token, "role": "expert"}
+
+
+async def require_admin_or_expert(
+    credentials: HTTPAuthorizationCredentials = Depends(security)
+):
+    """Autorise soit la clé expert, soit la clé admin.
+
+    Utilisé pour les routes d'ingestion IA (/ai/ingest, /ai/ingest/photo)
+    afin que le panel admin puisse aussi ingérer des connaissances.
+    """
+    token = credentials.credentials
+
+    expert_key = os.getenv("EXPERT_API_KEY", "expert-burkina-2024")
+    admin_key = os.getenv("ADMIN_API_KEY", "admin-souverain-burkina-2024")
+
+    if token == expert_key:
+        return {"token": token, "role": "expert"}
+
+    if token == admin_key:
+        return {"token": token, "role": "admin"}
+
+    raise HTTPException(status_code=403, detail="Invalid API token")

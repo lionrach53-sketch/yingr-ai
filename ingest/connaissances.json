@@ -1,561 +1,458 @@
 [
   {
-    "categorie": "Agriculture",
-    "sous_categorie": "Mil - calendrier",
+    "id": "4b374d07-6892-4cf7-98a0-64f28217f573",
+    "categorie": "general",
+    "sous_categorie": "general",
     "niveau": "grand_public",
+    "source": {
+      "type": "pdf",
+      "fichier": "ethnie du burkina.pdf"
+    },
     "langues": {
       "fr": {
         "intention": "information",
-        "question_type": "calendrier",
-        "reponse_courte": "En zone sahélienne, le mil se sème généralement au début des pluies, entre juin et juillet.",
-        "reponse_detaillee": "Dans de nombreuses régions du Burkina Faso, le mil se sème juste après les premières pluies utiles, souvent entre début juin et mi-juillet. Si on sème trop tôt, les jeunes plants peuvent souffrir d'une longue pause pluviométrique. Si on sème trop tard, la plante n'aura pas le temps de bien mûrir avant la fin des pluies.",
-        "conseil": "Observe la régularité des pluies sur une à deux semaines avant de semer tout ton champ.",
-        "avertissement": "Les conseils de calendrier peuvent varier selon les zones agroclimatiques, renseigne-toi auprès du service agricole local."
-      }
+        "question_type": "explication",
+        "reponse": "DÉMOGRAPHIE ET CULTURES Colloque international de Québec (Canada, 25-29 août 2008) ASSOCIATION INTERNATIONALE DES DÉMOGRAPHES DE LANGUE FRANÇAISE A I D E L F – 133, boulevard Davout – 75980 Paris Cedex 20 (France) – http://www.aidelf.org AIDELF. 2008. DÉMOGRAPHIE ET CULTURES - Actes du colloque de Québec (Canada, 25-29 août 2008), Association internationale des démographes de langue française, 1 212 pages. Pour affiche.indd 1 27/03/07 15:20:44 Appartenance ethnique et comportement démographique des populations au Burkina Faso Zourkaléini YOUNOUSSI Institut Supérieur des Sciences de la Population(ISSP) Introduction Le Burkina Faso, comme d’autres pays africains, est peuplé de plusieurs groupes ethniques. Les disparités observées en termes de mortalité des enfants, de fécondité et de nuptialité peuvent être expliquées par l'appartenance ethnique. S’agissant de la mortalité, l'action des différences ethniques sur la mortalité de moins de cinq ans peut s'exercer par l'intermédiaire du concept d'étiologie qui influence le choix du système de soins ainsi que le type d'intervention sur la maladie de l'enfant (Veron, 1978). Des études empiriques montrent une forte association entre la mortalité des enfants de moins de cinq ans et l’appartenance ethnique au Kenya, au Cameroun et au Rwanda (Podlewski 1988 ; Tabutin et Akoto, 1992). Sur la base d’enquêtes réalisées dans les années 1990 dans 11 pays (Côte d’Ivoire, Ghana, Kenya, Mali, Namibie, Niger, Ouganda, République Centrafricaine, Rwanda, Sénégal et Zambie), Brockerhoff et Hewett (2000) montrent que la probabilité de décès pendant les premiers mois ou avant l’âge de cinq ans varie significativement d’un groupe ethnique à l’autre. Ces auteurs précisent que pour les pays sahéliens (Mali, Niger, Sénégal) les différences interethniques de la mortalité des enfants sont étroitement liées aux écarts dans le recours aux services de santé. De même au Cameroun, Podlewski (1988) montre que dans 30 groupes ethniques du nord du pays les taux de mortalité différaient en fonction du cadre écologique ainsi que du degré d’assimilation à la culture islamique. S’agissant du Burkina Faso des études montrent que les Peuls seraient plus résistants au paludisme, la première cause de mortalité du pays (Modiano et al. 1999). L’ethnie peut influencer la nuptialité et la fécondité par"
+      },
+      "mo": {},
+      "di": {}
     }
   },
   {
-    "categorie": "Agriculture",
-    "sous_categorie": "Conservation du maïs",
+    "id": "cffaa5a0-40a4-4389-8d09-318394e97ea3",
+    "categorie": "general",
+    "sous_categorie": "general",
     "niveau": "grand_public",
-    "langues": {
-      "fr": {
-        "intention": "conservation_recolte",
-        "question_type": "procedure",
-        "reponse_courte": "Pour bien conserver le maïs, il faut le sécher correctement, le trier et le stocker dans un endroit sec et aéré.",
-        "reponse_detaillee": "Après la récolte, le maïs doit être bien séché au soleil sur des nattes propres ou sur des claies, en le remuant régulièrement. Ensuite, il faut enlever les épis ou grains abîmés. Le stockage se fait dans des greniers propres, des sacs jute ou polypropylène bien fermés, posés sur des palettes, à l'abri de l'humidité et des rongeurs. L'utilisation de méthodes traditionnelles (feuilles de neem, cendres propres) peut aider à limiter les insectes.",
-        "conseil": "Évite de poser les sacs directement sur le sol, utilise des palettes ou des pierres pour les surélever.",
-        "avertissement": "En cas d'attaque importante d'insectes ou de moisissures, le maïs peut devenir impropre à la consommation."
-      }
-    }
-  },
-  {
-    "categorie": "Agriculture",
-    "sous_categorie": "Compost organique",
-    "niveau": "grand_public",
-    "langues": {
-      "fr": {
-        "intention": "amelioration_sol",
-        "question_type": "procedure",
-        "reponse_courte": "Le compost est un engrais organique fabriqué à partir de résidus végétaux et de fumier bien décomposés.",
-        "reponse_detaillee": "Pour préparer du compost au village, on peut creuser une fosse peu profonde ou faire un tas à l'ombre. On alterne des couches de résidus végétaux (pailles, feuilles, résidus de récolte) et de fumier ou déjections animales. On humidifie légèrement sans détremper et on recouvre le tas. Il faut retourner le compost plusieurs fois pendant la saison sèche ou la saison des pluies afin d'accélérer la décomposition. Au bout de quelques mois, on obtient un compost sombre, friable, qui améliore la fertilité et la structure du sol.",
-        "conseil": "Évite de mettre dans le compost des plastiques, du métal ou des produits chimiques.",
-        "avertissement": "Le compost ne remplace pas totalement les engrais minéraux dans les sols très pauvres, mais il les complète efficacement."
-      }
-    }
-  },
-  {
-    "categorie": "Agriculture",
-    "sous_categorie": "Lutte contre les oiseaux",
-    "niveau": "grand_public",
-    "langues": {
-      "fr": {
-        "intention": "protection_culture",
-        "question_type": "strategie",
-        "reponse_courte": "Pour protéger les champs des oiseaux granivores, on utilise des épouvantails, des rubans brillants et la présence humaine.",
-        "reponse_detaillee": "Dans les champs de mil ou de riz au Burkina Faso, les oiseaux granivores peuvent causer de grosses pertes. Les producteurs utilisent souvent des épouvantails en forme humaine, des rubans plastiques brillants, des boîtes métalliques qui font du bruit avec le vent, et des cris coordonnés des enfants ou des adultes au moment critique de la maturité. La surveillance plus intense se fait surtout le matin et en fin d'après-midi, pendant la période de remplissage des grains.",
-        "conseil": "Organise une surveillance collective avec les voisins pour réduire la fatigue et protéger plusieurs champs en même temps.",
-        "avertissement": "Évite les méthodes dangereuses pour les enfants ou qui détruisent d'autres animaux utiles."
-      }
-    }
-  },
-  {
-    "categorie": "Agriculture",
-    "sous_categorie": "Rotation mil-niébé",
-    "niveau": "grand_public",
-    "langues": {
-      "fr": {
-        "intention": "gestion_parcelle",
-        "question_type": "strategie",
-        "reponse_courte": "Alterner mil et niébé sur la même parcelle permet d'améliorer la fertilité du sol et de réduire certaines maladies.",
-        "reponse_detaillee": "Le niébé est une légumineuse qui aide à fixer l'azote de l'air dans le sol. En pratiquant la rotation des cultures, par exemple mil une année puis niébé l'année suivante, on limite l'épuisement du sol, on réduit certains ravageurs et maladies spécifiques à une culture et on améliore les rendements à long terme. Cette pratique est particulièrement intéressante dans les sols pauvres des zones soudano-sahéliennes.",
-        "conseil": "Planifie la rotation sur plusieurs années et garde une trace simple de ce que tu as cultivé sur chaque parcelle.",
-        "avertissement": "La rotation n'empêche pas tous les problèmes de ravageurs, mais elle limite et doit être complétée par d'autres bonnes pratiques."
-      }
-    }
-  },
-
-  {
-    "categorie": "Santé",
-    "sous_categorie": "Paludisme - symptômes",
-    "niveau": "grand_public",
-    "langues": {
-      "fr": {
-        "intention": "information_sante",
-        "question_type": "information",
-        "reponse_courte": "Les principaux symptômes du paludisme sont la fièvre, les frissons, les maux de tête et la grande fatigue.",
-        "reponse_detaillee": "Le paludisme est très fréquent en Afrique de l'Ouest. Les signes classiques sont une forte fièvre, des frissons, des maux de tête, des courbatures, parfois des vomissements et une grande fatigue. Chez l'enfant, il peut aussi y avoir un refus de s'alimenter ou de boire, et une somnolence inhabituelle. Un accès grave peut provoquer des convulsions et une perte de connaissance.",
-        "conseil": "En cas de fièvre, surtout pendant la saison des pluies, il est important de faire rapidement un test de diagnostic rapide au CSPS.",
-        "avertissement": "Le paludisme grave peut entraîner la mort, surtout chez les enfants et les femmes enceintes. Consulte toujours un agent de santé dès les premiers signes."
-      }
-    }
-  },
-  {
-    "categorie": "Santé",
-    "sous_categorie": "Paludisme - prévention",
-    "niveau": "grand_public",
-    "langues": {
-      "fr": {
-        "intention": "prevention_sante",
-        "question_type": "conseil",
-        "reponse_courte": "La meilleure prévention du paludisme est l'utilisation régulière de moustiquaires imprégnées.",
-        "reponse_detaillee": "Dormir chaque nuit sous une moustiquaire imprégnée d'insecticide réduit fortement le risque de paludisme. Les femmes enceintes et les enfants de moins de 5 ans doivent être prioritaires. Il est aussi conseillé de limiter les eaux stagnantes autour des habitations, de couvrir les récipients d'eau et de participer aux campagnes de pulvérisation quand elles sont organisées.",
-        "conseil": "Contrôle régulièrement ta moustiquaire pour vérifier qu'il n'y a pas de trous et répare-les rapidement.",
-        "avertissement": "Même avec la moustiquaire, si des symptômes apparaissent, il faut consulter sans attendre."
-      }
-    }
-  },
-  {
-    "categorie": "Santé",
-    "sous_categorie": "Hydratation chaleur",
-    "niveau": "grand_public",
-    "langues": {
-      "fr": {
-        "intention": "prevention_sante",
-        "question_type": "conseil",
-        "reponse_courte": "Pendant les fortes chaleurs, il faut boire régulièrement de l'eau potable, même sans soif.",
-        "reponse_detaillee": "En saison chaude au Sahel, le corps perd beaucoup d'eau par la transpiration. Il est recommandé de boire plusieurs fois par jour de l'eau propre, bouillie ou traitée, même si on ne ressent pas encore la soif. Les personnes âgées, les enfants et les travailleurs de plein air (champs, chantiers) sont les plus exposés aux coups de chaleur.",
-        "conseil": "Évite l'exposition prolongée au soleil aux heures les plus chaudes et cherche l'ombre pour te reposer.",
-        "avertissement": "Les signes de déshydratation ou de coup de chaleur (vertiges, maux de tête intenses, confusion) nécessitent une consultation médicale urgente."
-      }
-    }
-  },
-  {
-    "categorie": "Santé",
-    "sous_categorie": "Diarrhée enfant",
-    "niveau": "grand_public",
-    "langues": {
-      "fr": {
-        "intention": "prevention_sante",
-        "question_type": "conseil",
-        "reponse_courte": "Pour prévenir la diarrhée chez l'enfant, il faut utiliser de l'eau potable et se laver les mains avant de préparer les repas.",
-        "reponse_detaillee": "Beaucoup de diarrhées chez les enfants sont liées à l'eau contaminée et au manque d'hygiène. Il est important de donner à boire une eau sûre (bouillie, filtrée ou traitée) et de bien se laver les mains avec de l'eau et du savon avant de préparer la nourriture, après être allé aux latrines et après avoir changé un enfant. L'allaitement maternel exclusif les six premiers mois protège aussi contre certaines infections.",
-        "conseil": "Garde les ustensiles de cuisine propres et couverts, à l'abri des mouches.",
-        "avertissement": "Une diarrhée avec sang, fièvre élevée, ou un enfant très abattu nécessite une consultation rapide au centre de santé."
-      }
-    }
-  },
-  {
-    "categorie": "Santé",
-    "sous_categorie": "Signes d'alerte",
-    "niveau": "grand_public",
-    "langues": {
-      "fr": {
-        "intention": "information_sante",
-        "question_type": "liste",
-        "reponse_courte": "Certains signes comme la difficulté à respirer, la convulsion ou la perte de connaissance sont des urgences.",
-        "reponse_detaillee": "Chez l'adulte comme chez l'enfant, la difficulté importante à respirer, la peau très pâle ou jaunâtre, les convulsions, la perte de connaissance, les vomissements répétés ou l'incapacité à boire sont des signes de gravité. Ces situations nécessitent une prise en charge immédiate au CSPS ou à l'hôpital le plus proche.",
-        "conseil": "Prévois un moyen rapide de transport vers le centre de santé en cas d'urgence (moto, tricycle, voiture partagée).",
-        "avertissement": "Ne donne pas de médicaments forts ou de remèdes traditionnels en grande quantité sans avis d'un agent de santé, cela peut aggraver la situation."
-      }
-    }
-  },
-
-  {
-    "categorie": "Histoire",
-    "sous_categorie": "Nom du pays",
-    "niveau": "grand_public",
+    "source": {
+      "type": "pdf",
+      "fichier": "ethnie du burkina.pdf"
+    },
     "langues": {
       "fr": {
         "intention": "information",
-        "question_type": "information",
-        "reponse_courte": "Le nom Burkina Faso signifie « pays des hommes intègres ».",
-        "reponse_detaillee": "En 1984, le président Thomas Sankara a changé le nom de la Haute-Volta pour Burkina Faso. « Burkina » vient du mooré et signifie « intègre » ou « honnête ». « Faso » vient du dioula et signifie « patrie » ou « maison du père ». Ensemble, cela donne « pays des hommes intègres », pour valoriser la dignité et la probité du peuple.",
-        "conseil": "Ce nom peut servir de point de départ pour sensibiliser les jeunes à l'importance de l'honnêteté dans la vie publique et privée.",
-        "avertissement": ""
-      }
+        "question_type": "explication",
+        "reponse": "études montrent que les Peuls seraient plus résistants au paludisme, la première cause de mortalité du pays (Modiano et al. 1999). L’ethnie peut influencer la nuptialité et la fécondité par les modèles culturels (organisation sociale, environnement, etc.), les normes, les idées, les croyances et attitudes qui sont véhiculés par ses membres. Dans le cas spécifique des pays du Sahel, Hill (1985), à partir de données d’enquêtes effectuées au Mali, souligne que : « les modes de vie très différents des divers groupes ethniques composant la population nationale de n’importe quel pays du Sahel ont des chances de correspondre à des caractéristiques différentes de la mortalité et de la fécondité, même si les groupes se trouvent placés dans des milieux physiques à peu près comparables (p. 63) ». Toutefois, avec le développement de la scolarisation, de l’urbanisation et l’influence des modèles culturels étrangers véhiculés par la religion, il y a des évolutions en cours qui peuvent remettre en question certaines valeurs et/ou cultures liées à l’ethnie. Comme l’affirme Gaisie (1990, p. 613) « les cadres ethniques sont nécessairement les déterminants les plus importants du degré d’adaptation au modernisme », et notamment à l’évolution du comportement en matière de santé, de procréation et de l’adoption de nouveaux comportement sociaux (élargissement de l’espace familial de l’individu, liberté de choix du conjoint,…). La question posée est de savoir si le nouvel environnement social et culturel n’a pas influencé les écarts entre groupes ethniques, concernant par exemple, la mortalité des enfants de moins de cinq ans, l’âge d’entrée en première union et le nombre d’enfants. Notre objectif, dans cet article est d’étudier l’influence de l’appartenance ethnique, en présence uniquement des variables culturelles et contextuelles, sur les comportements démographiques des populations du Burkina Faso. AIDELF. 2008. DÉMOGRAPHIE ET CULTURES - Actes du colloque de Québec (Canada, 25-29 août 2008), Association internationale des démographes de langue française, 1 212 pages. V/Réf.: Québec/Séance 18/ Younoussi.doc Dernière impression le12/07/2009 10:58 Mise en pages : P.A.O. Assistance - 13109 SimianeCollongue- Tél.: 33 (0)971 2408 40 SiteInternet et E-Mailà l’adresse : http://www.pao-assistance.fr 1162 DÉMOGRAPHIE ET CULTURES 1.Le concept « ethnie »"
+      },
+      "mo": {},
+      "di": {}
     }
   },
   {
-    "categorie": "Histoire",
-    "sous_categorie": "Indépendance",
+    "id": "f64d22f3-34e6-446f-bcd9-d2db71dbbd2a",
+    "categorie": "general",
+    "sous_categorie": "general",
     "niveau": "grand_public",
+    "source": {
+      "type": "pdf",
+      "fichier": "ethnie du burkina.pdf"
+    },
     "langues": {
       "fr": {
         "intention": "information",
-        "question_type": "information",
-        "reponse_courte": "La Haute-Volta a obtenu son indépendance le 5 août 1960.",
-        "reponse_detaillee": "Ancienne colonie de l'Afrique-Occidentale française, la Haute-Volta est devenue un État indépendant le 5 août 1960. Plus tard, en 1984, le pays a été rebaptisé Burkina Faso. Cette histoire fait partie du mouvement plus large des indépendances africaines des années 1950-1960.",
-        "conseil": "Les enseignants peuvent utiliser cette date pour organiser des activités éducatives sur l'histoire du pays.",
-        "avertissement": ""
-      }
+        "question_type": "explication",
+        "reponse": "10:58 Mise en pages : P.A.O. Assistance - 13109 SimianeCollongue- Tél.: 33 (0)971 2408 40 SiteInternet et E-Mailà l’adresse : http://www.pao-assistance.fr 1162 DÉMOGRAPHIE ET CULTURES 1.Le concept « ethnie » Il existe une multitude de définition de l’ethnie. L’ethnie désigne, au départ, l’Autre, mais avec une connotation négative : c’est à dire le « barbare », le « sauvage » (Amselle et Mbokolo, 1985). Par la suite, les anthropologues s’accordent à dire (en général) que pour qu’il y ait ethnie, il faut : un territoire commun, une tradition de descendance commune, un langage propre, une culture équivalente et un même nom. En effet, c’est la définition qu’on retrouve à peu près dans les dictionnaires : « groupement humain caractérisé principalement par une même culture, une même langue » (Bonte et Izard, 1991). Malgré tout, la notion d'ethnie est discutée, voire refusée, suivant plusieurs argumentations. L'une d'elles refuse l'usage de la notion dans la mesure où elle est grevée d'un lourd héritage, celui d'une pratique qui en fait un simple substitut à la notion de race (Ghebali, 1998). Ainsi de nombreux auteurs considèrent que l'ethnie n'est qu'une « traduction politiquement correcte » de la race et se refusent son emploi. Une critique plus complexe se fonde sur une contestation de la réalité même des « groupes ethniques » dans les sociétés où ils ont été le plus souvent reconnus, comme celles de l'Afrique subsaharienne. Les ethnies sont donc considérées comme des « inventions coloniales » (Amselle et Mbokolo, 1985). Cependant, pour certain il s'agit moins d'invention que de transformation, pour deux raisons : du côté colonial, le souci était de fixer les populations. On a donc dessiné des frontières linéaires, délimité des circonscriptions, grossièrement calquées dans l'ensemble sur des espaces ethniques antérieurs. Ainsi, on a systématisé les différenciations tout en cherchant, bien entendu, à diviser pour bien régner. Du côté des Africains, il s'est agi de résister à l'intrusion coloniale. Ils appréhendent et reconnaissent aux ethnies des racines qui leur confèrent un niveau de réalité certain. Pour eux, il est tout à fait naturel de se référer à leur passé, à"
+      },
+      "mo": {},
+      "di": {}
     }
   },
   {
-    "categorie": "Histoire",
-    "sous_categorie": "Chefferies traditionnelles",
+    "id": "7f1b967e-af7a-44c8-9932-4b7bf01df095",
+    "categorie": "general",
+    "sous_categorie": "general",
     "niveau": "grand_public",
+    "source": {
+      "type": "pdf",
+      "fichier": "ethnie du burkina.pdf"
+    },
     "langues": {
       "fr": {
         "intention": "information",
-        "question_type": "information",
-        "reponse_courte": "Les chefferies traditionnelles jouent un rôle important dans la cohésion sociale et la gestion des conflits locaux.",
-        "reponse_detaillee": "Dans de nombreuses communautés du Burkina Faso, les chefs coutumiers, chefs de terre ou de village conservent une autorité morale forte. Ils interviennent dans la gestion des terres, la résolution des conflits familiaux ou fonciers, et l'organisation des cérémonies. Leur collaboration avec les autorités administratives et religieuses est souvent essentielle pour maintenir la paix locale.",
-        "conseil": "Lorsque tu as un problème foncier ou un conflit de voisinage, il est souvent utile de passer d'abord par les instances coutumières.",
-        "avertissement": ""
-      }
+        "question_type": "explication",
+        "reponse": "appréhendent et reconnaissent aux ethnies des racines qui leur confèrent un niveau de réalité certain. Pour eux, il est tout à fait naturel de se référer à leur passé, à leur histoire antérieure, bref à leur ethnie et à sa représentation mythique (Coquery-Vidrovitch, 2000). Le redécoupage territorial lors de la colonisation a eu comme conséquence une désarticulation des relations entre les sociétés locales (Amselle et Mbokolo, 1985). C’est d’abord à l’époque coloniale que se sont renforcées les différenciations ethniques, d’autant que l’ethnie est souvent inscrite sur la carte d’identité (Coquery-Vidrovitch, 2000). Dès lors on s’aperçoit parfois que l’affirmation d’appartenir à une ethnie devient un moyen de lutte pour arriver au pouvoir. Aujourd’hui, avec l’avènement des élections dites « démocratiques », nous assistons très souvent à des manipulations politiques d’héritages culturels diffus et déformés pour cueillir des voix électorales. Cette lutte entre les ethnies pour être au sommet des États est souvent perçue comme étant à la base des conflits dans plusieurs pays d’Afrique subsaharienne (ex-Zaïre, Rwanda, Nigéria, Côte d’Ivoire, Togo, Niger, Mali,…) (Ghebali, 1998 ; Coquery- Vidrovitch, 2000). Le mot « ethnie » devient alors un tabou, voire un danger, puisqu’il est parfois banni du langage ou soustrait de la collecte des données dans certains pays africains afin d’éviter qu’il soit source de conflit. Quelle que soit l’histoire de sa dénomination, qu’elle ait une ancienneté certaine ou qu’elle ait été renforcée, voire fabriquée récemment, l’ethnie est devenue aujourd’hui une réalité avec laquelle il faut compter. Dans cette mesure il n’est donc pas question de la nier. Peut-être faut-il voir dans la vitalité d'un mot controversé un résultat d'un fait assez simple (l'existence de groupes humains plus larges que les familles les plus étendues, fondés sur le partage de comportements et de représentations et sur une reconnaissance par soi et pas les autres) qui est fortement inscrit dans la réalité ; il faut donc bien le nommer. Malgré le poids de certains héritages ou de marquages historiques, et de dérives qui en résultent, le terme « ethnie » est un moyen commode qui ne peut cependant être manié qu'avec de grandes"
+      },
+      "mo": {},
+      "di": {}
     }
   },
   {
-    "categorie": "Histoire",
-    "sous_categorie": "Fête nationale",
+    "id": "866c8ec6-4ade-42bf-9824-8a40a5075b73",
+    "categorie": "general",
+    "sous_categorie": "general",
     "niveau": "grand_public",
+    "source": {
+      "type": "pdf",
+      "fichier": "ethnie du burkina.pdf"
+    },
     "langues": {
       "fr": {
         "intention": "information",
-        "question_type": "information",
-        "reponse_courte": "La fête nationale du Burkina Faso est célébrée le 11 décembre.",
-        "reponse_detaillee": "Le 11 décembre marque la commémoration de la proclamation de la République de Haute-Volta en 1958. Aujourd'hui, cette date est célébrée comme la fête nationale. Chaque année, une ville différente accueille les festivités, avec des défilés, des discours et des activités culturelles.",
-        "conseil": "C'est une occasion d'enseigner aux jeunes l'histoire du pays et ses valeurs de cohésion.",
-        "avertissement": ""
-      }
+        "question_type": "explication",
+        "reponse": "certains héritages ou de marquages historiques, et de dérives qui en résultent, le terme « ethnie » est un moyen commode qui ne peut cependant être manié qu'avec de grandes précautions. AIDELF. 2008. DÉMOGRAPHIE ET CULTURES - Actes du colloque de Québec (Canada, 25-29 août 2008), Association internationale des démographes de langue française, 1 212 pages. V/Réf.: Québec/Séance 18/ Younoussi.doc Dernière impression le12/07/2009 10:58 Mise en pages : P.A.O. Assistance – 13109SimianeCollongue - Tél.: 33 (0)971 24 0840 SiteInternet et E-Mailà l’adresse : http://www.pao-assistance.fr APPARTENANCE ETHNIQUE ET COMPORTEMENT DÉMOGRAPHIQUE DES POPULATIONS AU BURKINA FASO. 1163 2.Le contexte Pays sahélien, le Burkina Faso est habité par une soixantaine d'ethnies dont la répartition ne correspond pas aux frontières actuelles, héritage d'un lourd passé colonial, et peut déborder sur les pays voisins (Mali, Niger, Bénin, Togo, Ghana et Côte d'Ivoire). Les Mossis constituent l'ethnie majoritaire (49%) et vivent dans le centre du pays. Les autres groupes importants sont au Nord les Peuls (7,8%), à l'Est les Gourmantchés (7% de la population), au Sud les Gourounsis (6%) et les Bissas (3%), au Sud-ouest les Samos (2%), Markas (1,7%), Bobos (1,6%), Sénoufos (2,2%), Dagara (3,7%) et Lobis (2,5%). Tous ces peuples parlent des langues qui leur sont propres et ont des valeurs culturelles et des organisations qui leur sont également propres. Aussi, serait-il prétentieux de réaliser en quelques phrases une étude sur la culture de chacun d’eux. Soulignons simplement que l'un des traits caractéristiques du pays est incontestablement, l'attachement de ses fils à leur culture. Ce n'est pas un hasard si le pays abrite les plus grandes manifestations culturelles du continent africain. Tous les deux ans, la capitale abrite le Festival Panafricain du Cinéma et de la Télévision de Ouagadougou (FESPACO). Une Semaine Nationale de la Culture exprime, tous les deux ans à Bobo-Dioulasso, deuxième ville, la diversité culturelle du pays. La culture rationnelle, légale de l’État se heurte aux cultures traditionnelles de la société. Au sein de chaque groupe, le mariage apparaît comme une institution obligatoire, qui mobilise l'ensemble de la communauté lignagère. La quasi-totalité de ces groupes privilégie le mariage par alliance. Ils"
+      },
+      "mo": {},
+      "di": {}
     }
   },
   {
-    "categorie": "Histoire",
-    "sous_categorie": "Langues nationales",
+    "id": "f7f4df0d-5b82-4512-b684-d48609ca787a",
+    "categorie": "general",
+    "sous_categorie": "general",
     "niveau": "grand_public",
+    "source": {
+      "type": "pdf",
+      "fichier": "ethnie du burkina.pdf"
+    },
     "langues": {
       "fr": {
         "intention": "information",
-        "question_type": "information",
-        "reponse_courte": "Le Burkina Faso compte de nombreuses langues nationales en plus du français.",
-        "reponse_detaillee": "En plus du français, langue officielle, le Burkina Faso compte des dizaines de langues nationales, comme le mooré, le dioula, le fulfuldé, le gulmancema, le bissa, le dagara et bien d'autres. Ces langues sont utilisées dans la vie quotidienne, les marchés, les radios locales et de plus en plus dans les écoles et les campagnes de sensibilisation.",
-        "conseil": "Utiliser les langues locales dans la communication permet de mieux toucher les populations rurales et les personnes peu scolarisées.",
-        "avertissement": ""
-      }
-    }
-  },
-
-  {
-    "categorie": "Finance",
-    "sous_categorie": "Épargne villageoise",
-    "niveau": "grand_public",
-    "langues": {
-      "fr": {
-        "intention": "education_financiere",
-        "question_type": "conseil",
-        "reponse_courte": "Les groupes d'épargne villageoise permettent aux membres de mettre de côté de petites sommes régulièrement.",
-        "reponse_detaillee": "Les associations villageoises d'épargne et de crédit (AVEC) ou tontines sont des groupes où chaque membre contribue un montant fixé à intervalles réguliers. Le fonds ainsi constitué sert à octroyer des prêts aux membres ou à distribuer les sommes épargnées à tour de rôle. Ce système aide les ménages à faire face aux dépenses scolaires, aux soins de santé ou à investir dans de petites activités génératrices de revenus.",
-        "conseil": "Choisis un groupe où les règles sont claires et écrites, et participe régulièrement pour profiter pleinement du système.",
-        "avertissement": "Même dans un groupe de confiance, il est bon de tenir un registre écrit des contributions et des prêts pour éviter les conflits."
-      }
+        "question_type": "explication",
+        "reponse": "Au sein de chaque groupe, le mariage apparaît comme une institution obligatoire, qui mobilise l'ensemble de la communauté lignagère. La quasi-totalité de ces groupes privilégie le mariage par alliance. Ils ont une préférence pour les mariages précoces en particulier pour les filles. Les stratégies matrimoniales ont en général pour fondement de « disposer » de plusieurs femmes, d'avoir une descendance nombreuse, d'étendre plus loin les réseaux d'alliance (Burkina Faso, 2000). Parmi les normes et pratiques culturelles qui exercent une influence sur les pratiques d’espacement des naissances figurent la pression sociale exercée sur les femmes pour qu’elles donnent la preuve de leur fécondité mais aussi de leurs possibilités d’allaitement et des pratiques de continence sexuelle après l’accouchement. Les préférences pour des fils peuvent aussi intervenir dans le choix des intervalles entre les naissances (Setty-Venugopal et Upadhyay, 2002). Il existe une grande diversité de pratiques traditionnelles dont entre autres les mutilations génitales féminines (MGF), les mariages précoces, le « sororat », le lévirat, la violence sexuelle, l’exclusion périodique des femmes de leur ménage en cas de grossesse ou de maternité et des interdits alimentaires et tabous nutritionnels qui peuvent affecter la santé des populations en particulier celle des femmes et des enfants. La pratique des MGF est courante au Burkina (plus de 50% des femmes sont excisées) et parmi les problèmes de santé souvent considérés comme étant liés à cette pratique on peut citer entre autres, les hémorragies trop abondantes au moment de l’accouchement et les décès des nourrissons pour cause de travail prolongé et autres infections. Les mariages précoces/forcés (28% des femmes de moins de 15 ans sont mariées) sont une pratique traditionnelle qui peut avoir de graves répercussions sur la santé en matière de procréation des filles. L’immaturité anatomique et physiologique des adolescentes les exposent à toutes les complications liées aux grossesses précoces : avortement, accouchements prématurés, déchirure du périnée, dystocie, infections, etc. Aussi, les mariages précoces/forcés peuvent entraîner l’interruption de l’éducation des adolescentes, qui ont en conséquence très peu de chances d’être, par la suite, intégrées dans le tissu économique. Outres ces mariages précoces/forcés, il y a les mariages"
+      },
+      "mo": {},
+      "di": {}
     }
   },
   {
-    "categorie": "Finance",
-    "sous_categorie": "Crédit et surendettement",
+    "id": "a4d30e15-90cc-4bef-9adb-faa1f2be0826",
+    "categorie": "general",
+    "sous_categorie": "general",
     "niveau": "grand_public",
-    "langues": {
-      "fr": {
-        "intention": "education_financiere",
-        "question_type": "avertissement",
-        "reponse_courte": "Avant de prendre un crédit, il faut vérifier sa capacité à rembourser.",
-        "reponse_detaillee": "Les microcrédits, les achats à crédit ou les prêts entre particuliers peuvent aider à lancer une activité ou faire face à une urgence. Mais si l'on emprunte sans plan de remboursement, on risque le surendettement, la vente de biens importants ou des tensions familiales. Il est important de comparer les taux d'intérêt, de lire les conditions et de s'assurer qu'une partie du revenu futur pourra couvrir les remboursements.",
-        "conseil": "Évite de multiplier les crédits dans plusieurs institutions ou chez plusieurs personnes en même temps.",
-        "avertissement": "Ne t'engage pas comme garant pour un crédit si tu n'es pas prêt à payer à la place de la personne."
-      }
-    }
-  },
-  {
-    "categorie": "Finance",
-    "sous_categorie": "Budget familial",
-    "niveau": "grand_public",
-    "langues": {
-      "fr": {
-        "intention": "education_financiere",
-        "question_type": "procedure",
-        "reponse_courte": "Un budget familial simple aide à prévoir les dépenses et à éviter les surprises.",
-        "reponse_detaillee": "Faire un budget consiste à lister les revenus attendus (vente de récoltes, petit commerce, salaire, transferts) et les dépenses prévues (alimentation, scolarité, santé, cérémonies, investissements). Même avec un petit revenu, noter ces éléments sur un cahier aide à mieux décider : différer certaines dépenses, épargner un peu, ou discuter en famille des priorités.",
-        "conseil": "Prends un moment chaque mois pour revoir le budget avec les membres clés de la famille.",
-        "avertissement": "Un budget n'empêche pas toutes les difficultés, mais l'absence de plan augmente le risque de dettes non maîtrisées."
-      }
-    }
-  },
-  {
-    "categorie": "Finance",
-    "sous_categorie": "Diversification des revenus",
-    "niveau": "grand_public",
-    "langues": {
-      "fr": {
-        "intention": "education_financiere",
-        "question_type": "conseil",
-        "reponse_courte": "Avoir plusieurs petites sources de revenus réduit les risques liés à une seule activité.",
-        "reponse_detaillee": "Dans un contexte de forte variabilité climatique et économique, dépendre uniquement d'une seule culture ou d'un seul emploi est risqué. Diversifier peut signifier avoir une culture de rente et une culture vivrière, pratiquer un petit élevage, tenir un petit commerce saisonnier, ou développer un artisanat. Cette diversification permet de mieux absorber les chocs comme une mauvaise récolte ou une baisse de prix.",
-        "conseil": "Commence petit, avec une activité complémentaire que tu maîtrises déjà un peu et qui ne demande pas un gros investissement.",
-        "avertissement": "Évite de te lancer dans plusieurs nouvelles activités à la fois sans expérience ni accompagnement, car cela peut disperser tes forces."
-      }
-    }
-  },
-  {
-    "categorie": "Finance",
-    "sous_categorie": "Prudence numérique",
-    "niveau": "grand_public",
-    "langues": {
-      "fr": {
-        "intention": "education_financiere",
-        "question_type": "avertissement",
-        "reponse_courte": "Il faut se méfier des offres de gains rapides sur téléphone ou Internet.",
-        "reponse_detaillee": "De plus en plus d'escroqueries utilisent le téléphone et les réseaux sociaux pour promettre des gains rapides, des doubles mises ou des prêts sans conditions. Souvent, ces offres demandent d'envoyer d'abord de l'argent ou des codes de transfert. Beaucoup de personnes en Afrique de l'Ouest ont perdu de l'argent ainsi.",
-        "conseil": "Ne communique jamais ton code secret ou les codes de retrait d'argent à quelqu'un par téléphone.",
-        "avertissement": "Si une offre semble trop belle pour être vraie, il s'agit probablement d'une arnaque."
-      }
-    }
-  },
-
-  {
-    "categorie": "Environnement",
-    "sous_categorie": "Arbres et ombre",
-    "niveau": "grand_public",
-    "langues": {
-      "fr": {
-        "intention": "sensibilisation_environnement",
-        "question_type": "information",
-        "reponse_courte": "Les arbres protègent les sols, donnent de l'ombre et améliorent le microclimat.",
-        "reponse_detaillee": "Dans les villages sahéliens, les arbres autour des concessions et des champs réduisent la force du vent, apportent de l'ombre et améliorent l'humidité du sol. Certaines espèces comme le néré, le karité ou le moringa fournissent aussi des produits alimentaires ou médicinaux. Planter et protéger les jeunes arbres contribue à lutter contre la dégradation des terres.",
-        "conseil": "Protège les jeunes plants avec des grillages simples ou des branches pour éviter que les animaux ne les broutent.",
-        "avertissement": "Évite de couper des arbres utiles sans autorisation, cela peut entraîner des sanctions et appauvrir le milieu."
-      }
-    }
-  },
-  {
-    "categorie": "Environnement",
-    "sous_categorie": "Zai et demi-lunes",
-    "niveau": "grand_public",
-    "langues": {
-      "fr": {
-        "intention": "amelioration_sol",
-        "question_type": "procedure",
-        "reponse_courte": "Les techniques de zai et de demi-lunes permettent de retenir l'eau de pluie sur les sols dégradés.",
-        "reponse_detaillee": "Le zai consiste à creuser de petits trous dans lesquels on met du fumier et on sème des cultures comme le mil ou le sorgho. Les demi-lunes sont des cuvettes en forme de croissant qui retiennent l'eau de ruissellement. Ces techniques, utilisées au Burkina Faso et au Niger, ont permis de restaurer des sols très pauvres et d'augmenter les rendements dans certaines zones sèches.",
-        "conseil": "Commence sur une petite surface pour maîtriser la technique avant de l'étendre à tout ton champ.",
-        "avertissement": "Ces techniques demandent du travail manuel important, il est donc utile de s'organiser en groupe ou en chantier collectif."
-      }
-    }
-  },
-  {
-    "categorie": "Environnement",
-    "sous_categorie": "Feux de brousse",
-    "niveau": "grand_public",
-    "langues": {
-      "fr": {
-        "intention": "sensibilisation_environnement",
-        "question_type": "avertissement",
-        "reponse_courte": "Les feux de brousse non maîtrisés détruisent la végétation, la faune et les biens des populations.",
-        "reponse_detaillee": "Dans plusieurs régions, les feux de brousse sont encore utilisés pour la chasse ou le nettoyage des parcelles. Mal contrôlés, ils détruisent les jeunes arbres, les herbes fourragères, la faune et parfois les maisons et greniers. Ils augmentent aussi la dégradation des sols. De nombreuses communes ont mis en place des comités de lutte contre les feux et des pare-feux.",
-        "conseil": "Participe aux campagnes locales de sensibilisation et respecte les périodes et zones interdites de brûlis.",
-        "avertissement": "Allumer un feu de brousse sans autorisation peut être puni par la loi et mettre des vies en danger."
-      }
-    }
-  },
-  {
-    "categorie": "Environnement",
-    "sous_categorie": "Eau et puits",
-    "niveau": "grand_public",
-    "langues": {
-      "fr": {
-        "intention": "sensibilisation_environnement",
-        "question_type": "conseil",
-        "reponse_courte": "La protection des puits et forages est essentielle pour garantir une eau de qualité.",
-        "reponse_detaillee": "Autour des puits et des forages, il faut éviter les eaux stagnantes, les dépôts d'ordures et la présence d'animaux. Des aménagements simples comme une dalle, un caniveau pour évacuer l'eau usée et une clôture améliorent la qualité de l'eau et réduisent les risques de maladies hydriques.",
-        "conseil": "Organise, avec le comité de point d'eau, des journées de nettoyage régulièrement.",
-        "avertissement": "Boire une eau contaminée peut provoquer des diarrhées, des parasitoses et d'autres maladies graves."
-      }
-    }
-  },
-  {
-    "categorie": "Environnement",
-    "sous_categorie": "Déchets plastiques",
-    "niveau": "grand_public",
-    "langues": {
-      "fr": {
-        "intention": "sensibilisation_environnement",
-        "question_type": "conseil",
-        "reponse_courte": "Les déchets plastiques jetés dans la nature polluent durablement les sols et l'eau.",
-        "reponse_detaillee": "Les sachets plastiques, bouteilles et autres emballages abandonnés dans la nature mettent des dizaines d'années à se décomposer. Ils bouchent les caniveaux, polluent les sols et les cours d'eau, et peuvent être mangés par les animaux. Dans plusieurs villes africaines, des initiatives de collecte, de tri ou de valorisation du plastique (pavés, objets) se développent.",
-        "conseil": "Réduis l'utilisation des sachets jetables, réutilise les contenants solides et participe aux journées de nettoyage communautaires.",
-        "avertissement": "Brûler les plastiques à l'air libre dégage des fumées toxiques pour la santé et l'environnement."
-      }
-    }
-  },
-  {
-    "categorie": "Education",
-    "sous_categorie": "Scolarisation primaire",
-    "niveau": "grand_public",
+    "source": {
+      "type": "pdf",
+      "fichier": "ethnie du burkina.pdf"
+    },
     "langues": {
       "fr": {
         "intention": "information",
-        "question_type": "information",
-        "reponse_courte": "L'école primaire au Burkina Faso commence généralement à 6 ans et dure 6 ans.",
-        "reponse_detaillee": "Au Burkina Faso, l'école primaire est accessible à tous les enfants dès l'âge de 6 ans. Elle dure 6 ans et se termine par le Certificat d'Études Primaires (CEP). L'accès à l'école est gratuit dans les établissements publics, mais certains frais annexes peuvent exister.",
-        "conseil": "Encourage les enfants à fréquenter régulièrement l'école pour améliorer leurs chances de réussite.",
-        "avertissement": "L'abandon scolaire peut limiter les opportunités futures."
-      }
+        "question_type": "explication",
+        "reponse": "de l’éducation des adolescentes, qui ont en conséquence très peu de chances d’être, par la suite, intégrées dans le tissu économique. Outres ces mariages précoces/forcés, il y a les mariages entre générations où des hommes de plus de 70 ans prennent pour épouses des adolescentes, dans l’idée que celles-ci leur apporteront la jeunesse, de l’énergie et une longue vie. Les conséquences de ces mariages viennent s’ajouter au risque AIDELF. 2008. DÉMOGRAPHIE ET CULTURES - Actes du colloque de Québec (Canada, 25-29 août 2008), Association internationale des démographes de langue française, 1 212 pages. V/Réf.: Québec/Séance 18/ Younoussi.doc Dernière impression le12/07/2009 10:58 Mise en pages : P.A.O. Assistance – 13109SimianeCollongue - Tél.: 33 (0)971 24 0840 SiteInternet et E-Mailà l’adresse : http://www.pao-assistance.fr 1164 DÉMOGRAPHIE ET CULTURES de veuvage prématuré pour ces adolescentes. Les enfants nés de ces mariages peuvent avoir peu de chance de se développer normalement (Union Africaine, 2006). La violence à l’égard des femmes et des petites filles est très répandue dans de nombreuses parties du pays. Entre autres violences basées sur le sexe, on peut citer, les agressions physiques ou les brutalités du mari, des amis proches, des membres de la famille ou des parents, de même que les agressions ou le harcèlement sexuel, notamment le viol, au cours duquel une femme ou une fille peut être obligée d’avoir des rapports sexuels sans son consentement (Union Africaine, 2006). Le « sororat » consiste à remplacer une femme décédée par sa sœur. Le lévirat est la pratique qui consiste à donner en mariage une veuve au frère de son mari. Ces deux pratiques traditionnelles, moins répandues maintenant en ville, peuvent avoir de graves conséquences sur la santé en matière de procréation des partenaires, étant donné que les causes du décès sont rarement prises en compte. Les maladies infectieuses et transmissibles, en particulier le VIH/SIDA, peuvent donc se propager au sein des familles avec des conséquences désastreuses. Enfin, certaines pratiques nutritionnelles comme le gavage et l’application des interdits alimentaires peuvent contribuer au développement de la malnutrition infantile (Cheysson, 2004). Soulignons qu’à côté de ces pratiques traditionnelles parfois néfastes à la"
+      },
+      "mo": {},
+      "di": {}
     }
   },
   {
-    "categorie": "Education",
-    "sous_categorie": "Importance de l'éducation des filles",
+    "id": "6502ab6f-4611-4c61-8a96-cdf3a71956e0",
+    "categorie": "general",
+    "sous_categorie": "general",
     "niveau": "grand_public",
-    "langues": {
-      "fr": {
-        "intention": "sensibilisation",
-        "question_type": "information",
-        "reponse_courte": "L'éducation des filles favorise le développement de toute la communauté.",
-        "reponse_detaillee": "Lorsque les filles sont scolarisées, elles ont plus de chances d'améliorer leur santé, de participer à la vie économique et de soutenir l'éducation de leurs propres enfants. Cela réduit aussi les mariages précoces et les grossesses non désirées.",
-        "conseil": "Soutiens la scolarisation des filles dans ta famille et ton quartier.",
-        "avertissement": "Priver une fille d'éducation peut avoir des conséquences négatives sur sa vie et celle de sa communauté."
-      }
-    }
-  },
-  {
-    "categorie": "Education",
-    "sous_categorie": "Education générale",
-    "niveau": "grand_public",
+    "source": {
+      "type": "pdf",
+      "fichier": "ethnie du burkina.pdf"
+    },
     "langues": {
       "fr": {
         "intention": "information",
-        "question_type": "information",
-        "reponse_courte": "L'éducation est essentielle pour le développement du Burkina Faso.",
-        "reponse_detaillee": "L'éducation permet aux enfants et aux adultes d'acquérir des connaissances, des compétences et des valeurs utiles pour la vie. Au Burkina Faso, investir dans l'éducation favorise la croissance économique, la santé, la cohésion sociale et la réduction de la pauvreté. L'accès à l'éducation pour tous, filles et garçons, est une priorité nationale.",
-        "conseil": "Encourage l'éducation dans ta famille et ta communauté pour améliorer les opportunités de chacun.",
-        "avertissement": "Le manque d'éducation limite les chances de réussite et le développement du pays."
-      }
+        "question_type": "explication",
+        "reponse": "nutritionnelles comme le gavage et l’application des interdits alimentaires peuvent contribuer au développement de la malnutrition infantile (Cheysson, 2004). Soulignons qu’à côté de ces pratiques traditionnelles parfois néfastes à la santé se pratique également une médecine traditionnelle. Au Burkina Faso, en milieu rural, la médecine traditionnelle constitue très souvent le premier recours pour la majorité des patients. En milieu urbain, les patients ont l’habitude de consulter à la fois les agents de santé et les tradipraticiens de santé. En 2004, le ministre de la Santé, M. Alain Yoda, déclare : « ces tradipraticiens traitent la plupart des maladies soignées par la médecine conventionnelle ; paludisme, hypertension, hépatites virales, hémorroïdes, affections respiratoires aiguës, maladies diarrhéiques, drépanocytose, cancers, sinusites, épilepsie, rhumatismes articulaires, blennorragies, Zona, carences nutritionnelles, fractures, etc. Certains soins s’adressent à des pathologies non reconnues par la médecine conventionnelles, par exemple les envoûtements et les sorcelleries ». Cela dit, le recours à la Médecine Traditionnelle remonte à la nuit des temps. En effet, pour restaurer ou maintenir sa santé, l’homme a, de tout temps, utilisé ses connaissances, des pratiques, des techniques et des substances d’origine végétale, animale et minérale. Ces connaissances, pratiques, techniques et substances, accumulées et transmises de génération en génération, constituent un patrimoine inestimable qui suscite un intérêt sans cesse croissant au Burkina Faso. Ainsi, l’intérêt porté à la Médecine Traditionnelle s’explique d’abord par le fait que cette dernière est une partie intégrante de la culture des populations qui y recourent. Il s’explique ensuite par le fait que la riche et diversifiée flore du Burkina Faso constitue une source importante pour la recherche scientifique. En effet, les recherches déjà entreprises montrent que certaines plantes concentrent des molécules originales dans leurs propriétés pharmacologiques, pharmacodynamiques et thérapeutiques (Burkina Faso, 2005). La création d’un Institut de Recherche sur les Substances Naturelles en 1978 marquera un réel point de départ de la promotion et de la valorisation de la Médecine et de la Pharmacopée Traditionnelles. La volonté de promouvoir et de valoriser ces domaines se manifestera ensuite par la création, en 1984, d’une Direction de l’Approvisionnement et de la Pharmacopée Traditionnelle. Par ailleurs,"
+      },
+      "mo": {},
+      "di": {}
     }
   },
   {
-    "categorie": "Education",
-    "sous_categorie": "Education des filles",
+    "id": "ab96ff85-7656-4ed0-8576-948b44f59744",
+    "categorie": "general",
+    "sous_categorie": "general",
     "niveau": "grand_public",
-    "langues": {
-      "fr": {
-        "intention": "sensibilisation",
-        "question_type": "information",
-        "reponse_courte": "L'éducation des filles est très importante pour le développement du Burkina Faso.",
-        "reponse_detaillee": "L'éducation des filles au Burkina Faso améliore la santé, réduit la pauvreté et favorise l'égalité. Une fille instruite a plus de chances de participer à la vie économique, de prendre soin de sa famille et de soutenir l'éducation de ses enfants. Cela contribue à un développement durable et à une société plus juste.",
-        "conseil": "Soutiens la scolarisation des filles et lutte contre les obstacles comme le mariage précoce ou le travail domestique excessif.",
-        "avertissement": "Priver une fille d'éducation a des conséquences négatives sur sa vie et celle de la communauté."
-      }
-    }
-  },
-  {
-    "categorie": "Education",
-    "sous_categorie": "Apprentissage en langue nationale",
-    "niveau": "grand_public",
+    "source": {
+      "type": "pdf",
+      "fichier": "ethnie du burkina.pdf"
+    },
     "langues": {
       "fr": {
         "intention": "information",
-        "question_type": "information",
-        "reponse_courte": "Apprendre à lire et écrire en mooré ou dioula facilite la compréhension des élèves.",
-        "reponse_detaillee": "L'enseignement en langue nationale permet aux enfants de mieux comprendre les notions de base avant d'apprendre le français. Plusieurs écoles au Burkina Faso proposent des cours en mooré, dioula ou fulfuldé pour faciliter l'apprentissage.",
-        "conseil": "Encourage l'apprentissage dans la langue maternelle pour renforcer les bases scolaires.",
-        "avertissement": "Ne pas valoriser les langues locales peut freiner la réussite scolaire."
-      }
+        "question_type": "explication",
+        "reponse": "Pharmacopée Traditionnelles. La volonté de promouvoir et de valoriser ces domaines se manifestera ensuite par la création, en 1984, d’une Direction de l’Approvisionnement et de la Pharmacopée Traditionnelle. Par ailleurs, en 2001, la Médecine et la Pharmacopée Traditionnelles sont prises en compte dans le Plan National de Développement Sanitaire 2001-2010. Enfin, en 2004, un décret portant adoption du document cadre de Politique Nationale en matière de Médecine et de Pharmacopée Traditionnelles consacre l’intégration des deux médecines (Burkina Faso, 2005). AIDELF. 2008. DÉMOGRAPHIE ET CULTURES - Actes du colloque de Québec (Canada, 25-29 août 2008), Association internationale des démographes de langue française, 1 212 pages. V/Réf.: Québec/Séance 18/ Younoussi.doc Dernière impression le12/07/2009 10:58 Mise en pages : P.A.O. Assistance – 13109SimianeCollongue - Tél.: 33 (0)971 24 0840 SiteInternet et E-Mailà l’adresse : http://www.pao-assistance.fr APPARTENANCE ETHNIQUE ET COMPORTEMENT DÉMOGRAPHIQUE DES POPULATIONS AU BURKINA FASO. 1165 Parlant d’intégration, soulignons que la plupart des expériences tentées pour introduire les langues dans l'enseignement ont échoué. On parle d'alphabétisation pour les langues nationales, mais de scolarisation pour le français. C'est pourquoi seul le français est enseigné, tant au primaire qu'au secondaire. Seuls 17% des enfants réussissent à terminer leurs études secondaires et à peine 1% des Burkinabés atteignent le niveau universitaire (INSD, 2000). Ainsi, parmi les pays d’Afrique subsaharienne, le Burkina Faso reste l’un des pays ayant les taux les plus faibles de scolarisation et d’alphabétisation. De plus, on note de très grandes disparités géographiques; par exemple le taux brut de scolarisation en 1999-2000 varie de 19,5% au Nord-Est à 77,1% au Centre. Le taux d’urbanisation est estimé à 15,5% en 1996 (INSD, 2000). Ce taux est un des plus faibles1 de l’Afrique de l’Ouest. Mais l’importance de la population urbaine devrait s’affirmer davantage dans l’avenir avec les politiques de décentralisation et de déconcentration en cours. Tout comme partout dans les milieux urbains en Afrique, de nouveaux comportements sociaux se révèlent de jour en jour dans cette société urbaine et les infrastructures socio-sanitaires de développement y sont beaucoup plus concentrées. L’homme et la femme s’affirment davantage par l’affaiblissement du contrôle familial et l’accès plus faciles aux"
+      },
+      "mo": {},
+      "di": {}
     }
   },
   {
-    "categorie": "Education",
-    "sous_categorie": "Éducation informelle",
+    "id": "af72ad5d-0f3a-42ce-aa67-f8ff7c8e1e8f",
+    "categorie": "general",
+    "sous_categorie": "general",
     "niveau": "grand_public",
+    "source": {
+      "type": "pdf",
+      "fichier": "ethnie du burkina.pdf"
+    },
     "langues": {
       "fr": {
         "intention": "information",
-        "question_type": "information",
-        "reponse_courte": "L'éducation informelle inclut l'apprentissage à la maison, au marché ou dans la communauté.",
-        "reponse_detaillee": "En dehors de l'école, les enfants apprennent beaucoup par l'observation, la participation aux activités familiales, les discussions avec les aînés et les jeux. Cette éducation informelle complète l'école et prépare à la vie quotidienne.",
-        "conseil": "Valorise les savoirs transmis par les parents et les anciens.",
-        "avertissement": "L'éducation informelle ne remplace pas l'école mais la complète."
-      }
+        "question_type": "explication",
+        "reponse": "cette société urbaine et les infrastructures socio-sanitaires de développement y sont beaucoup plus concentrées. L’homme et la femme s’affirment davantage par l’affaiblissement du contrôle familial et l’accès plus faciles aux services sociaux de base. S’agissant des pratiques religieuses, à côté des religions traditionnelles, le christianisme et l’islam ont une forte présence et cohabitent en parfaite symbiose : les chrétiens déclarés sont 21% des Burkinabé et ceux qui se disent musulmans composent 52% de la population. Les musulmans, plus nombreux que les chrétiens, sont insuffisamment représentés sur le plan politique et administratif mais ils contrôlent des secteurs importants de l’économie (commerce, transport, bâtiment). L’Église catholique, qui a formé l’élite dans ses écoles, joue un rôle politique sans commune mesure avec l’importance numérique des catholiques (Englebert, 1997). 3.Données et méthodes 3.1. Données Les analyses empiriques de cette étude reposent sur les données de l’enquête nationale sur « Migrations, insertion urbaine et environnement au Burkina Faso » réalisée en 2000. Cette enquête est l’une des rares opérations de collecte qui nous renseigne sur les ethnies au Burkina Faso2. Elle a porté sur 8647 biographies migratoires d’hommes (4076) et de femmes (4571) d’âge compris entre 15 et 64 ans, recueillies auprès de 3517 ménages et a couvert cinq types d’évènements historiques : l’origine familiale, la mobilité résidentielle, la biographie professionnelle, l’histoire matrimoniale et l’histoire génésique des femmes âgées de 15 à 64 ans. Pour les besoins de cette étude, nous utilisons les informations recueillies sur trois des cinq modules. D’abord les informations recueillies sur l’histoire matrimoniale, soit les questions du module 4 qui tiennent compte, entre autres, du début de la cohabitation, des années de la célébration religieuse, coutumière ou civile. L’enregistrement du mariage s’appuie uniquement sur le critère de co-résidence du couple et il avait été dénombré près de 10533 unions (en cours ou non au moment de l’enquête). Ensuite, les informations sur l’histoire génésique des femmes (module 5). Au total 17544 naissances vivantes ont été déclarées dont 3259 décès. Enfin, les informations sur l’origine familiale (module 1) nous 1 En 1995 ce taux est estimé respectivement à 43%, 36%, 27% et 18%"
+      },
+      "mo": {},
+      "di": {}
     }
   },
   {
-    "categorie": "Education",
-    "sous_categorie": "Formation professionnelle",
+    "id": "8e742769-a74a-4e21-82f4-fdbd1d1c480d",
+    "categorie": "general",
+    "sous_categorie": "general",
     "niveau": "grand_public",
+    "source": {
+      "type": "pdf",
+      "fichier": "ethnie du burkina.pdf"
+    },
     "langues": {
       "fr": {
         "intention": "information",
-        "question_type": "information",
-        "reponse_courte": "La formation professionnelle prépare à des métiers utiles comme la couture, la mécanique ou l'agriculture.",
-        "reponse_detaillee": "Au Burkina Faso, de nombreux centres proposent des formations en artisanat, agriculture, informatique, mécanique, couture, etc. Ces formations permettent aux jeunes d'acquérir des compétences pratiques pour trouver un emploi ou créer leur propre activité.",
-        "conseil": "Renseigne-toi sur les centres de formation près de chez toi pour les jeunes en recherche d'emploi.",
-        "avertissement": "La formation professionnelle demande de la motivation et de la régularité."
-      }
+        "question_type": "explication",
+        "reponse": "vivantes ont été déclarées dont 3259 décès. Enfin, les informations sur l’origine familiale (module 1) nous 1 En 1995 ce taux est estimé respectivement à 43%, 36%, 27% et 18% pour la Côte d’Ivoire, le Ghana, le Mali et le Niger (PNUD, 1998). 2 Des quatre recensements généraux de la population et de l’habitation (1975, 1985, 1996, 2006) qu’a déjà connu le pays aucun n’a saisi cette variable. AIDELF. 2008. DÉMOGRAPHIE ET CULTURES - Actes du colloque de Québec (Canada, 25-29 août 2008), Association internationale des démographes de langue française, 1 212 pages. V/Réf.: Québec/Séance 18/ Younoussi.doc Dernière impression le12/07/2009 10:58 Mise en pages : P.A.O. Assistance – 13109SimianeCollongue - Tél.: 33 (0)971 24 0840 SiteInternet et E-Mailà l’adresse : http://www.pao-assistance.fr 1166 DÉMOGRAPHIE ET CULTURES renseignent sur l’ethnie des parents biologiques, le lieu de résidence au moment de l’enquête, le niveau d’éducation atteint et la religion déclarée des enquêtés. Soulignons que c’est une enquête par sondage aléatoire stratifié à deux degrés. Environ un individu sur deux a été sélectionné parmi les 15-24 ans dans chaque ménage, et tous les individus de 25-64 ans des ménages étaient éligibles pour l’enquête (tous n’ont toutefois pas participé, du fait d’absences, refus,…). Pour obtenir les coefficients de pondération l’approche utilisée a consisté à calculer des pondérations au niveau des biographies qui tiennent compte simultanément de la probabilité de sélection d’un demi pour les individus de 15-24 ans et des taux de non-réponses dans les groupes d’âges 15-24 ans et 25-64 ans (Schoumaker, 2002). Dans notre analyse nous avons toujours eu recours à ces coefficients de pondération. 3.2. Méthodes L’ethnie de l’individu est celle du père, déclarée à l’enquête. Les effectifs observés pour certaines ethnies ne sont pas statistiquement importants pour une analyse démographique. Cependant d’autres ethnies se reconnaissent une origine et participent à la même culture à plusieurs égards. Dans le but d’étudier les phénomènes démographiques dans différentes groupes ethniques, nous avons donc mis ensemble des ethnies dont les cultures semblent objectivement plus proches en nous référant aux critères de différenciations ethniques généralement utilisés par les ethnologues (voir annexe 1). L’analyse a été conduite"
+      },
+      "mo": {},
+      "di": {}
     }
   },
   {
-    "categorie": "Plantes Medicinales",
-    "sous_categorie": "Moringa",
+    "id": "40ec530b-ae05-4403-b6e8-00a767529bd6",
+    "categorie": "general",
+    "sous_categorie": "general",
     "niveau": "grand_public",
+    "source": {
+      "type": "pdf",
+      "fichier": "ethnie du burkina.pdf"
+    },
     "langues": {
       "fr": {
         "intention": "information",
-        "question_type": "utilisation",
-        "reponse_courte": "Le moringa est utilisé pour lutter contre la fatigue et l'anémie.",
-        "reponse_detaillee": "Les feuilles de moringa sont riches en vitamines et minéraux. Au Burkina Faso, on les consomme en poudre ou en sauce pour renforcer l'énergie et prévenir l'anémie.",
-        "conseil": "Consomme une cuillère à soupe de poudre de feuilles séchées par jour, mélangée à la bouillie ou à la sauce.",
-        "avertissement": "En cas de maladie grave, consulte un agent de santé."
-      }
+        "question_type": "explication",
+        "reponse": "ensemble des ethnies dont les cultures semblent objectivement plus proches en nous référant aux critères de différenciations ethniques généralement utilisés par les ethnologues (voir annexe 1). L’analyse a été conduite de la façon suivante : d’abord nous mettons en exergue les différences socioculturelles ; ensuite des analyses bivariées entre groupes ethniques et phénomènes démographiques (nuptialité, fécondité, mortalité) ; enfin des analyses multivariées de ces phénomènes par des régressions adaptées. Les variables explicatives retenues sont, outre le groupe ethnique, la génération, le niveau d’instruction, le milieu de résidence et la religion déclarée. Le recours à d’autres variables culturelles s’explique par la recherche de savoir si les différences ethniques sont déjà neutralisées par celles des cultures nouvelles (religion, éducation) ou de l’urbanisation. Pour chacun des phénomènes étudiés nous avons retenu deux modèles. Le premier permet de privilégier l’approche en termes de groupes ethniques et le second modèle intègre l’ensemble des variables explicatives retenues. La comparaison d’un modèle à l’autre permet de mettre en évidence l’effet « net » de l’ethnie d’appartenance. Notre objet n’est pas de déterminer les déterminants de la fécondité ou de la nuptialité et encore moins de la mortalité des enfants, mais de vérifier si les effets d’autres variables culturelles ont pu gommer ceux de l’appartenance ethnique sur ces phénomènes démographiques. L’âge médian à la première union est calculé par la méthode des tables de survie sur l’ensemble des hommes d’âge compris entre 18 et 64 ans et celui des femmes d’âge compris entre 12-64 ans. Pour l’analyse multivariée, la technique utilisée est celle de la régression semi- paramétrique à risques proportionnels de Cox qui semble être la mieux indiquée (Antoine et Djiré, 1998). La fécondité est mesurée par le nombre moyen d’enfants nés vivant des femmes d’âge compris entre 35 et 54 ans. Le premier groupe est exclu par sa descendance très incomplète et le second par son effectif réduit du fait de la mortalité. Les effets des variables explicatives sur la fécondité sont estimés par régression de poisson. L’intérêt de cette méthode est d’une part de permettre de calculer le nombre moyen d’enfants sur de faibles effectifs"
+      },
+      "mo": {},
+      "di": {}
     }
   },
   {
-    "categorie": "Plantes Medicinales",
-    "sous_categorie": "Neem",
+    "id": "cea90e08-220f-46da-85dd-a415cbb91bc5",
+    "categorie": "general",
+    "sous_categorie": "general",
     "niveau": "grand_public",
+    "source": {
+      "type": "pdf",
+      "fichier": "ethnie du burkina.pdf"
+    },
     "langues": {
       "fr": {
         "intention": "information",
-        "question_type": "utilisation",
-        "reponse_courte": "Le neem est utilisé pour ses propriétés antiparasitaires et médicinales.",
-        "reponse_detaillee": "Les feuilles et l'huile de neem sont utilisées pour traiter les infections de la peau, repousser les moustiques et protéger les récoltes contre les insectes.",
-        "conseil": "Utilise les feuilles de neem en infusion ou en décoction pour les soins de la peau.",
-        "avertissement": "Ne pas utiliser l'huile de neem pure sur les enfants sans avis médical."
-      }
+        "question_type": "explication",
+        "reponse": "variables explicatives sur la fécondité sont estimés par régression de poisson. L’intérêt de cette méthode est d’une part de permettre de calculer le nombre moyen d’enfants sur de faibles effectifs mais surtout de pouvoir inclure d’autres variables explicatives dans le modèle permettant de comparer les rapports d’incidence avant et après le contrôle (Schoumaker, 2005). Les niveaux de mortalité infantile et infanto-juvénile sont mesurés à partir des naissances survenues au cours de la période 5-9 avant l’enquête, pour tenir compte d’une durée d’exposition complète au risque de mortalité de tous les enfants de moins de cinq ans. AIDELF. 2008. DÉMOGRAPHIE ET CULTURES - Actes du colloque de Québec (Canada, 25-29 août 2008), Association internationale des démographes de langue française, 1 212 pages. V/Réf.: Québec/Séance 18/ Younoussi.doc Dernière impression le12/07/2009 10:58 Mise en pages : P.A.O. Assistance – 13109SimianeCollongue - Tél.: 33 (0)971 24 0840 SiteInternet et E-Mailà l’adresse : http://www.pao-assistance.fr APPARTENANCE ETHNIQUE ET COMPORTEMENT DÉMOGRAPHIQUE DES POPULATIONS AU BURKINA FASO. 1167 L’analyse multivariée, utilise la régression logistique (mieux indiquée pour une variable dépendante dichotomique), en tenant compte des effets de l’appartenance ethnique ainsi que d’autres variables culturelles pour déterminer si les différences de mortalité infantile ou infanto-juvénile entre les groupes ethniques ne masquent pas les effets de celles-ci. Nous utilisons la religion déclarée à l’enquête. S’agissant du niveau d’instruction, nous distinguons ceux n’ayant jamais fréquenté une école de ceux ayant un niveau primaire et ceux ayant atteint un niveau secondaire ou plus (pour tenir compte du faible effectif de ceux ayant atteint le niveau supérieur). Seules les localités de plus de 10 000 habitants sont considérées comme des centres urbains. 4.Les résultats 4.1. Différences socioculturelles Le tableau 1 présente trois caractéristiques des groupes ethniques : la religion, le niveau d’instruction et le milieu de résidence. La pratique religieuse semble présenter des disparités selon l’ethnie. Dans l’ensemble, l’ethnie ne s’identifie pas à une seule religion. Certaines sont restées conservatrices, d’autres ont préféré l’assimilation à une religion et d’autres encore ont adhéré à plusieurs religions. Certains groupes ethniques, hommes et femmes, semblent être essentiellement des animistes (Dagara, Lobi), d’autres des musulmans (Peul, Bissa,"
+      },
+      "mo": {},
+      "di": {}
     }
   },
   {
-    "categorie": "Plantes Medicinales",
-    "sous_categorie": "Bissap",
+    "id": "36ae4fcb-f688-4022-8c42-3c1454868d95",
+    "categorie": "general",
+    "sous_categorie": "general",
     "niveau": "grand_public",
+    "source": {
+      "type": "pdf",
+      "fichier": "ethnie du burkina.pdf"
+    },
     "langues": {
       "fr": {
         "intention": "information",
-        "question_type": "utilisation",
-        "reponse_courte": "Le bissap est utilisé pour ses vertus rafraîchissantes et digestives.",
-        "reponse_detaillee": "La fleur d'hibiscus (bissap) est consommée en jus ou en infusion pour faciliter la digestion et rafraîchir le corps pendant la saison chaude.",
-        "conseil": "Prépare le bissap en infusion ou en jus, sucré selon le goût.",
-        "avertissement": "Éviter une consommation excessive chez les personnes souffrant d'hypertension."
-      }
+        "question_type": "explication",
+        "reponse": "l’assimilation à une religion et d’autres encore ont adhéré à plusieurs religions. Certains groupes ethniques, hommes et femmes, semblent être essentiellement des animistes (Dagara, Lobi), d’autres des musulmans (Peul, Bissa, Samo, Marka) alors que d’autres encore sont partagés entre les religions musulmane et chrétienne (Gourounsi, Bissa) ou entre l’animisme et l’islam (Senoufo) ou encore entre les trois religions (Bobo, Gourmantché). Le niveau d’instruction, des hommes et des femmes, varie énormément selon le groupe ethnique en allant d’environ 1% et 8% respectivement pour les femmes Lobis et les hommes Peuls ayant fréquenté l’école à plus de 38% et 44% pour les femmes Gourounsis et les hommes Bobo. À l’intérieur de chaque groupe ethnique les femmes sont toujours en retrait par rapport aux hommes. Il y a diverses raisons de penser que les disparités entre groupes ethniques sont liées à la concentration relative de certains ressortissants dans les centres urbains. Les avantages des hommes et des femmes Bobo en scolarisation par exemple peuvent être imputables à une forte présence en milieu urbain alors que l’attachement des Lobis et des Dagaras à la religion traditionnelle pourrait s’expliquer par une forte concentration en milieu rural. Toutefois les Gourounsis semblent posséder un avantage en scolarisation malgré une faible concentration en milieu urbain. AIDELF. 2008. DÉMOGRAPHIE ET CULTURES - Actes du colloque de Québec (Canada, 25-29 août 2008), Association internationale des démographes de langue française, 1 212 pages. V/Réf.: Québec/Séance 18/ Younoussi.doc Dernière impression le12/07/2009 10:58 Mise en pages : P.A.O. Assistance – 13109SimianeCollongue - Tél.: 33 (0)971 24 0840 SiteInternet et E-Mailà l’adresse : http://www.pao-assistance.fr 1168 DÉMOGRAPHIE ET CULTURES TABLEAU 1 : RÉPARTITION DES GROUPES ETHNIQUES PAR SEXE SELON LA RELIGION, LA FRÉQUENTATION SCOLAIRE ET LE DEGRÉ D’URBANISATION Groupe Religion A fréquenté Effectif Urbain Ethnique Animiste Musulmane Chrétienne l'école total Homme Mossi 15,05 63,37 21,58 24,02 39,34 1799 Gourmantche 59,52 21,44 19,04 9,22 7,07 312 Peul 1,27 98,34 0,4 7,81 20,74 328 Gourounsi 5,44 46,46 48,1 43,97 10,66 156 Samo 10,69 68 21,32 24,16 12,37 309 Bobo 36,98 25,71 37,31 44,14 39,38 225 Dagara 82,17 1,83 15,99 15,99 8,93 109 Lobi 93,46 2,92 3,62 10,86"
+      },
+      "mo": {},
+      "di": {}
     }
   },
   {
-    "categorie": "Plantes Medicinales",
-    "sous_categorie": "Gingembre",
+    "id": "72e79efd-dc35-4794-b1e6-c2266bc1af9d",
+    "categorie": "general",
+    "sous_categorie": "general",
     "niveau": "grand_public",
+    "source": {
+      "type": "pdf",
+      "fichier": "ethnie du burkina.pdf"
+    },
     "langues": {
       "fr": {
         "intention": "information",
-        "question_type": "utilisation",
-        "reponse_courte": "Le gingembre est utilisé pour stimuler la digestion et lutter contre les nausées.",
-        "reponse_detaillee": "Le gingembre frais ou en poudre est utilisé dans la cuisine et en infusion pour améliorer la digestion, réduire les nausées et apporter de l'énergie.",
-        "conseil": "Ajoute du gingembre frais dans les sauces ou prépare une infusion avec du citron.",
-        "avertissement": "Éviter chez les personnes souffrant d'ulcères gastriques sans avis médical."
-      }
+        "question_type": "explication",
+        "reponse": "48,1 43,97 10,66 156 Samo 10,69 68 21,32 24,16 12,37 309 Bobo 36,98 25,71 37,31 44,14 39,38 225 Dagara 82,17 1,83 15,99 15,99 8,93 109 Lobi 93,46 2,92 3,62 10,86 4,11 84 Bissa 0 61,93 38,07 23,25 19,12 78 Sénoufo 41,01 50,58 8,41 26,85 16,9 198 Maraka 29,71 62,27 8,03 8,96 6,06 49 Autre BF 10,4 87,27 2,33 23,47 17,44 347 Autre Afrique 0 79,12 20,88 50,99 48,73 81 Total 21,41 58,15 20,44 23,36 27,61 4075 Femme Mossi 21,73 57,56 20,71 14,41 31,86 1957 Gourmantche 58,82 20,52 20,66 8,03 5,93 373 Peul 0,47 99,05 0,48 3,59 24,47 346 Gourounsi 9,21 38,27 52,52 38,46 7,49 166 Samo 12 59,56 28,44 17,13 17,22 347 Bobo 43,59 23,09 33,32 23,31 40,67 259 Dagara 88,25 0,06 11,69 2,66 3,76 124 Lobi 94,63 2,96 2,41 1,49 3,58 134 Bissa 0 54,55 45,45 12,39 12,62 99 Sénoufo 55,55 35,58 8,87 17,42 21,55 204 Maraka 25,97 65,59 8,44 9,17 13,69 39 Autre BF 9,77 85,72 4,51 12,44 14,32 406 Autre Afrique 0,99 81,95 17,06 31,3 55,21 110 Total 26,79 51,96 21,25 14,53 23,73 4564 BF : Burkina Faso 4.2. Différence d’entrée en première union Le mariage est une union qui a fait l’objet d’une formalité coutumière (mariage coutumier), civile (mariage civil) ou religieuse (mariage religieux) visant à le consacrer socialement. Ces trois formes ne sont pas mutuellement exclusives mais la totalité de leur célébration marque la fin du processus du mariage. Néanmoins l’existence de ces différentes formes rend difficile la détermination du moment où un couple est marié. Il faut, en effet, l’utilisation de données appropriées qui permettent de tenir compte de ces multiples situations socialement reconnues. Prenant en compte la première célébration de mariage parmi les trois il a été possible de AIDELF. 2008. DÉMOGRAPHIE ET CULTURES - Actes du colloque de Québec (Canada, 25-29 août 2008), Association internationale des démographes de langue française, 1 212 pages. V/Réf.: Québec/Séance 18/ Younoussi.doc Dernière impression le12/07/2009 10:58 Mise en pages : P.A.O. Assistance – 13109SimianeCollongue - Tél.: 33 (0)971 24 0840 SiteInternet et E-Mailà l’adresse : http://www.pao-assistance.fr APPARTENANCE ETHNIQUE ET COMPORTEMENT DÉMOGRAPHIQUE DES POPULATIONS AU BURKINA FASO. 1169"
+      },
+      "mo": {},
+      "di": {}
     }
   },
   {
-    "categorie": "Plantes Medicinales",
-    "sous_categorie": "Baobab",
+    "id": "71d295ee-8f95-4acb-bb5f-17f54b780b21",
+    "categorie": "general",
+    "sous_categorie": "general",
     "niveau": "grand_public",
+    "source": {
+      "type": "pdf",
+      "fichier": "ethnie du burkina.pdf"
+    },
     "langues": {
       "fr": {
         "intention": "information",
-        "question_type": "utilisation",
-        "reponse_courte": "Le fruit du baobab est riche en vitamine C et utilisé pour renforcer l'immunité.",
-        "reponse_detaillee": "La pulpe du fruit de baobab (pain de singe) est consommée en boisson ou ajoutée à la bouillie pour ses propriétés antioxydantes et son apport en vitamine C.",
-        "conseil": "Ajoute la pulpe de baobab à la bouillie ou prépare une boisson rafraîchissante.",
-        "avertissement": "Conserve la pulpe dans un endroit sec pour éviter la moisissure."
-      }
+        "question_type": "explication",
+        "reponse": "en pages : P.A.O. Assistance – 13109SimianeCollongue - Tél.: 33 (0)971 24 0840 SiteInternet et E-Mailà l’adresse : http://www.pao-assistance.fr APPARTENANCE ETHNIQUE ET COMPORTEMENT DÉMOGRAPHIQUE DES POPULATIONS AU BURKINA FASO. 1169 déterminer l’âge médian au mariage. Dans tous les groupes ethniques, il semble que la cohabitation et le mariage coïncident ou que celle-ci précède le mariage. Ce schéma reste invariable selon le milieu de résidence, la religion déclarée ou le niveau d’instruction atteint. Comme la cohabitation peut intervenir avant une célébration qui rend l’union socialement reconnue ou expose le couple à une procréation c’est plutôt sur elle que nous nous focalisons ici. Rappelons qu’au Burkina Faso, le code des personnes et de la famille fixe l’âge d’entrée en union à 17 ans pour les filles et à 20 ans pour les garçons. En général, aussi bien pour les filles que pour les garçons, pour tous les groupes ethniques, l’âge médian à la première cohabitation semble respecter ce principe qui, très certainement, a été établi pour tenir compte de ces pratiques courantes. Ainsi, conformément à la règle établie par le code, on peut noter que pour tous les groupes ethniques l’âge d’entrée en première union reste très précoce pour les femmes. En effet, il varie entre 16 et 18 ans pour les femmes contre 22 et 29 ans pour les hommes. On peut souligner cependant que la disparité entre groupes ethniques est plus forte pour les hommes par rapport aux femmes. Cependant, aussi bien chez les hommes que chez les femmes, des différences significatives apparaissent entre groupes ethniques. Cette différence reste beaucoup plus marquée pour certains groupes et, en général, l’introduction des variables de contrôle n’entame en rien ces écarts constatés (tableau 2). Indépendamment du groupe ethnique, la religion et le milieu de résidence semblent avoir un effet différent selon le sexe. Les femmes musulmanes semblent entrer plus rapidement en union que les animistes alors que chez les hommes la différence est significative du côté de ceux de religion protestante. Les femmes en milieu urbain entrent plus tardivement en union par rapport à celles du milieu rural alors que les hommes du"
+      },
+      "mo": {},
+      "di": {}
+    }
+  },
+  {
+    "id": "498b502d-ddf6-41f3-874f-1bf56caf71ff",
+    "categorie": "general",
+    "sous_categorie": "general",
+    "niveau": "grand_public",
+    "source": {
+      "type": "pdf",
+      "fichier": "ethnie du burkina.pdf"
+    },
+    "langues": {
+      "fr": {
+        "intention": "information",
+        "question_type": "explication",
+        "reponse": "significative du côté de ceux de religion protestante. Les femmes en milieu urbain entrent plus tardivement en union par rapport à celles du milieu rural alors que les hommes du milieu urbain ne se distinguent pas de ceux du milieu rural. 4.3. Fécondité différentielle Le nombre moyen d’enfants nés vivants varie entre 4,6 et 7,2 enfants en passant d’un groupe ethnique à l’autre. Très surprenant, pour chacun des groupes ethniques, la religion déclarée ne semble apporter aucun changement sur le niveau de fécondité des femmes. Cependant, le niveau d’instruction et la résidence en milieu urbain semblent influencer négativement la fécondité de chacun des groupes ethniques. Prenant en compte la fréquentation scolaire cet intervalle se ramène à 3,7 et 5,5 enfants présentant des écarts plus importants que la résidence en milieu urbain (4,8 et 6,4 enfants). Par ailleurs la fréquentation scolaire et la résidence en milieu urbain semble être aussi des facteurs de différentiation indépendamment de l’appartenance ethnique (modèle 1 et 2). Aussi, l’introduction des variables de contrôle n’a pas altéré le niveau de signification des différences entre groupes ethniques constatées ; bien au contraire, certaines associations se sont renforcées (Tableau 2). Compte tenu de la relation assez étroite entre l’âge à la première union et le début de la vie féconde on pourrait croire que les groupes qui entrent plus rapidement en union auront une fécondité plus élevée que ceux qui entrent en union moins rapidement. La comparaison des niveaux de fécondité infirme à moitié cette hypothèse. Si, pour certains groupes ethniques, la relation semble être vérifiée, pour d’autres on observe une différence non significative ou encore une fécondité significativement inférieure. 4.4. Mortalité différentielle Pour la mortalité infantile, en l’absence de variables de contrôle, seuls les enfants de mère Gourmantché semblent être en retrait par rapport à ceux de mère Mossi. Mais en définitive, après l’introduction des variables de contrôle, l’appartenance ethnique ne semble pas être un facteur de différenciation de la mortalité infantile. S’agissant de la mortalité juvénile, deux groupes ethniques semblent se distinguer par une faible mortalité des enfants en l’absence ou en présence des variables de contrôle"
+      },
+      "mo": {},
+      "di": {}
+    }
+  },
+  {
+    "id": "ccc90913-8088-499f-9f63-4d082047b146",
+    "categorie": "general",
+    "sous_categorie": "general",
+    "niveau": "grand_public",
+    "source": {
+      "type": "pdf",
+      "fichier": "ethnie du burkina.pdf"
+    },
+    "langues": {
+      "fr": {
+        "intention": "information",
+        "question_type": "explication",
+        "reponse": "de la mortalité infantile. S’agissant de la mortalité juvénile, deux groupes ethniques semblent se distinguer par une faible mortalité des enfants en l’absence ou en présence des variables de contrôle (tableau 2). AIDELF. 2008. DÉMOGRAPHIE ET CULTURES - Actes du colloque de Québec (Canada, 25-29 août 2008), Association internationale des démographes de langue française, 1 212 pages. V/Réf.: Québec/Séance 18/ Younoussi.doc Dernière impression le12/07/2009 10:58 Mise en pages : P.A.O. Assistance – 13109SimianeCollongue - Tél.: 33 (0)971 24 0840 SiteInternet et E-Mailà l’adresse : http://www.pao-assistance.fr 1170 DÉMOGRAPHIE ET CULTURES AIDELF. 2008. DÉMOGRAPHIE ET CULTURES - Actes du colloque de Québec (Canada, 25-29 août 2008), Association internationale des démographes de langue française, 1 212 pages. V/Réf.: Québec/Séance 18/ Younoussi.doc Dernière impression le12/07/2009 10:58 Mise en pages : P.A.O. Assistance – 13109SimianeCollongue - Tél.: 33 (0)971 24 0840 SiteInternet et E-Mailà l’adresse : http://www.pao-assistance.fr APPARTENANCE ETHNIQUE ET COMPORTEMENT DÉMOGRAPHIQUE DES POPULATIONS AU BURKINA FASO. 1171 Par ailleurs, aucune tendance ne semble se dégager sur la relation entre la religion et la mortalité des enfants de moins de cinq ans. Cependant, nos résultats confirment ce qui est suffisamment documenté, à savoir que la résidence en milieu urbain et la fréquentation scolaire diminuent fortement la mortalité des enfants de moins de cinq ans. Toutefois, si certains groupes ethniques se distinguent par une moindre fécondité, l’hypothèse selon laquelle plus la mortalité des enfants est basse plus la fécondité est contrôlée ne semble pas être vérifiée. Par ailleurs, malgré l’entrée précoce de femmes peules en union leurs enfants semblent avoir plus de chances de survie entre 1 et 5 ans à côté de ceux des Bissa. Pour les enfants de mère peules tout porte à croire en l’hypothèse selon laquelle ce groupe ethnique serait plus résistant au paludisme, première cause de la mortalité du pays. Par ailleurs, les deux groupes ethniques se singularisent par leur mode de vie et d’organisation. Les peuls, éleveurs en général, peuvent avoir un régime alimentaire très différent des autres si le lait qu’ils obtiennent directement des animaux est utilisé pour l’autoconsommation. Aussi, le nomadisme leur permet de changer de localité de"
+      },
+      "mo": {},
+      "di": {}
+    }
+  },
+  {
+    "id": "39aeda54-f08e-4d40-86d7-aa9cce8c82f4",
+    "categorie": "general",
+    "sous_categorie": "general",
+    "niveau": "grand_public",
+    "source": {
+      "type": "pdf",
+      "fichier": "ethnie du burkina.pdf"
+    },
+    "langues": {
+      "fr": {
+        "intention": "information",
+        "question_type": "explication",
+        "reponse": "avoir un régime alimentaire très différent des autres si le lait qu’ils obtiennent directement des animaux est utilisé pour l’autoconsommation. Aussi, le nomadisme leur permet de changer de localité de résidence en cas d’épidémie. Les Bissa sont reconnus par une solidarité communautaire marquée par une entraide très vivace. Toutefois, les résultats de ce groupe ethnique doivent être pris avec beaucoup de réserves pour tenir compte de la faiblesse de l’effectif des enfants. Conclusion La présente étude a révélé l’existence de grandes disparités démographiques entre divers groupes ethniques. Les analyses suggèrent une étroite correspondance entre les différences d’entrée en union et/ou de fécondité et l’appartenance ethnique et cela indépendamment de la religion déclarée, de la fréquentation scolaire ou de la concentration dans les villes du pays. L’analyse fait apparaître l’absence de différences interethniques de mortalité des enfants de moins d’un an. Aussi cette mortalité de l’enfance semble être moins directement liée aux comportements démographiques et à la condition culturelle de la femme. Tout laisse donc à croire que les différences de mortalité infantile sont beaucoup plus liées aux inégalités économiques, à l’accessibilité des services de santé des enfants, au milieu de résidence et à la scolarisation des parents. On pourrait donc soustraire l’appartenance ethnique dans un schéma d’analyse des déterminants de la survie des enfants de moins d’un an. Si l’influence du nouvel environnement culturel était prépondérante, toutes les ethnies auraient des comportements très voisins en termes de fécondité, de mortalité ou de nuptialité. Nos résultats montrent donc qu’au Burkina, le nouvel environnement culturel est bien loin de déterminer seul les évolutions démographiques. Aussi, les modifications économiques et sociales n’ont pas conduit à la totale disparition des différences entre groupes ethniques. L’analyse effectuée ici n’est qu’une simple esquisse descriptive de la relation entre l’appartenance ethnique et les comportements démographiques. Les aspects concrets tels que l’accès aux services de santé, la situation socio-économique ne sont pas envisagés. Une telle démarche paraît nécessaire pour une meilleure compréhension de la complexité de la relation entre les deux groupes de variables. Ce travail peut être ainsi considéré comme une première étape dans l’explication de la"
+      },
+      "mo": {},
+      "di": {}
+    }
+  },
+  {
+    "id": "5fb71441-6659-46dd-8b72-8ee9cf70e0d7",
+    "categorie": "general",
+    "sous_categorie": "general",
+    "niveau": "grand_public",
+    "source": {
+      "type": "pdf",
+      "fichier": "ethnie du burkina.pdf"
+    },
+    "langues": {
+      "fr": {
+        "intention": "information",
+        "question_type": "explication",
+        "reponse": "pour une meilleure compréhension de la complexité de la relation entre les deux groupes de variables. Ce travail peut être ainsi considéré comme une première étape dans l’explication de la relation entre l’appartenance ethnique et les comportements démographiques. AIDELF. 2008. DÉMOGRAPHIE ET CULTURES - Actes du colloque de Québec (Canada, 25-29 août 2008), Association internationale des démographes de langue française, 1 212 pages. V/Réf.: Québec/Séance 18/ Younoussi.doc Dernière impression le12/07/2009 10:58 Mise en pages : P.A.O. Assistance – 13109SimianeCollongue - Tél.: 33 (0)971 24 0840 SiteInternet et E-Mailà l’adresse : http://www.pao-assistance.fr 1172 DÉMOGRAPHIE ET CULTURES BIBLIOGRAPHIE ANTOINE Ph. et DJIRÉ M. (1998) : « Un célibat en crise », in Antoine Ph., Ouédraogo D et Piché V. trois générations de citadins au sahel, trente ans d’histoire sociale à Dakar et Bamako, Éditions L’Harmattan, pp. 117-143. AMSELLE J-L. et MBOKOLO E. (1985) : Au cœur de l’ethnie. Ethnie, tribalisme et État en Afrique, Éditions La Découverte, Paris, 225 p. BONTE P. et IZARD M. (1991) : Dictionnaire de l'anthropologie et de l'ethnologie, Paris PUF BROCKERHOFF M. et P. HEWETT (2000) : « Inégalités de la mortalité de l’enfant chez des groupes ethniques de l’Afrique subsaharienne », Bulletin of the World Health Organization, 78 (1), pp. 30-41. BURKINA FASO ( 2000) : politique nationale de population, Ministère de l’Économie et des Finances, Conseil National de la population, Ouagadougou, 47 p. BURKINA FASO (2005) : Décret n° 2004-567/PRES/PM/MS/MCPEA/MECV/ MESSRS du 14 décembre 2004 portant adoption du document cadre de Politique Nationale en matière de Médecine et de Pharmacopée Traditionnelles ; Journal Officiel n° 3 du 20 janvier 2005, Ouagadougou, 4 p. CHEYSSON Danièle (2004) : État sanitaire au Burkina Faso, Enfant et développement : Bulletin trimestriel n° 78 – Décembre 2004. COQUERY-VIDROVITCH C. (2000) : « Histoire et intégration des communautés : le cas du Burkina Faso », Journal of world-system research, Vol. IV Number 3, pp. 827-839. ENGLEBERT P. (1997) : « Burkina Faso : Unsteady Statehood in West Africa », The International Journal of African Historical Studies, Vol. 30, No. 3, pp. 650-652. GAISIE S. (1990) : « Culture and health"
+      },
+      "mo": {},
+      "di": {}
+    }
+  },
+  {
+    "id": "1212c407-5ea3-4cea-97ae-19e6526aad41",
+    "categorie": "general",
+    "sous_categorie": "general",
+    "niveau": "grand_public",
+    "source": {
+      "type": "pdf",
+      "fichier": "ethnie du burkina.pdf"
+    },
+    "langues": {
+      "fr": {
+        "intention": "information",
+        "question_type": "explication",
+        "reponse": "Burkina Faso : Unsteady Statehood in West Africa », The International Journal of African Historical Studies, Vol. 30, No. 3, pp. 650-652. GAISIE S. (1990) : « Culture and health in sub-Saharan Africa », in : Caldwell J et al. What we know about health transition : the cultural, social, and behavioural determinants of health. Proceedings of an International Workshop, Canberra, May 1989, Vol. 2. Canberra, Health Transition Centre, Australian National University, pp. 609-627. GHEBALI V.Y. (1998) : Ethnicity in international conflict. Graduate Institute for International Studies. Geneva. (www.Tamilnation.org.), 9 p. HILL AG.(1985) : Population, health, and nutrition in the Sahel : issues in the welfare of selected West African communities, Londres, KPI Limited, 399 p. INSD (2000) : Analyse des résultats du recensement général de la population et de l’habitation, Vol I, Ministère de l’Économie et des Finances, Ouagadougou, Burkina Faso, 347 p. Leclerc J. (2001) : L'aménagement linguistique dans le monde http://www.tlfq.ulaval.ca/axl/index.shtml MODIANO D., V. PETRARCA, B.S. SIRIMA, G. LUONI, I. NÉBIÉ, D.A. DIALLO, F. ESPOSITO, M.COLUZZI (1999) : « Different response to plasmodium falciparum in West Africa sympatric ethnic groups : possible implications for malaria control strategies », Parassitologia 41, pp. 193-197. PNUD (1998) : Rapport sur le développement humain 1998, Economica, 137 p. PODLEWSKI A. (1988) : Contribution des démographes de l’ORSTOM. Document soumis au XXth International Congress of the International Union for the Scientific Study of Population, Florence, 5-12 June 1985. Marseille, Université de Provence-ORSTOM, Impression Laboratoire Population Environnement, pp. 135-144. AIDELF. 2008. DÉMOGRAPHIE ET CULTURES - Actes du colloque de Québec (Canada, 25-29 août 2008), Association internationale des démographes de langue française, 1 212 pages. V/Réf.: Québec/Séance 18/ Younoussi.doc Dernière impression le12/07/2009 10:58 Mise en pages : P.A.O. Assistance – 13109SimianeCollongue - Tél.: 33 (0)971 24 0840 SiteInternet et E-Mailà l’adresse : http://www.pao-assistance.fr APPARTENANCE ETHNIQUE ET COMPORTEMENT DÉMOGRAPHIQUE DES POPULATIONS AU BURKINA FASO. 1173 SCHOUMAKER B. (2005) : « pauvreté et fécondité en Afrique subsaharienne: une analyse comparative des enquêtes démographiques de santé », Étude de la population africaine, supplément A, vol 19, pp. 13-45. SCHOUMAKER, B. (2002) : Note de synthèse sur le"
+      },
+      "mo": {},
+      "di": {}
+    }
+  },
+  {
+    "id": "87aceb39-5d5d-48e8-a8a3-d08013b7662c",
+    "categorie": "general",
+    "sous_categorie": "general",
+    "niveau": "grand_public",
+    "source": {
+      "type": "pdf",
+      "fichier": "ethnie du burkina.pdf"
+    },
+    "langues": {
+      "fr": {
+        "intention": "information",
+        "question_type": "explication",
+        "reponse": "subsaharienne: une analyse comparative des enquêtes démographiques de santé », Étude de la population africaine, supplément A, vol 19, pp. 13-45. SCHOUMAKER, B. (2002) : Note de synthèse sur le plan de sondage et le calcul des pondérations dans l’enquête biographique EMIUB 2000, 13 p. SETTY-VENUGOPAL, V. and UPADHYAY, U.D. (2002) : Birth Spacing : Three to Five Saves Lives. Population Reports, Series L, No. 13. Baltimore, Johns Hopkins Bloomberg School of Public Health, Population Information Program, Summer 2002 TABUTIN D, AKOTO E. (1992) : « Socioeconomic and cultural differentials in the mortality of Sub-Saharan Africa », in : van de Walle E, Pison G, Sala-Diakanda M. Mortality and society in sub-Saharan Africa. Oxford, Clarendon Press, pp. 32-64. UNION AFRICAINE (2006) : élimination des pratiques traditionnelles néfastes au titre de la mise en œuvre du cadre d’orientation continental pour la santé et les droits de santé en matière de sexualité et de reproduction en Afrique ; session spéciale de la conférence des Ministres de la santé de l’Union Africaine 18-22 septembre 2006 Maputo (Mozambique) ; Sp/EXP/CAMH/3d(I). VÉRON J. (1978) : « Appartenance ethnique et comportement des populations de Malaisie et de Singapour », Population, n0 4/5, pp. 937-950. ANNEXE 1 : Les principaux groupes ethniques du Burkina Groupe Composition Mossi Mossi Gourmantché Gourmantché Peul Peul Gourounssi Gourounssi, Kassena, Lele, Koussacé, Sissala Samo Samo, Dafing Bobo Bobo, Bwaba, Nounouma, Ko Dagara Dagara, Birifor Lobi Lobi Bissa Bissa Sénoufo Senoufo, Goin, Dogon, Mirianka, Siamou, Sambla Marka Marka Autres ethnies du Burkina Autres ethnies du Burkina : Bella, Tamasheq, Dioula et autres non identifiables dans la base Autres ethnies de l’Afrique Autres ethnies de l’Afrique Source : Leclerc(2001), complété après des entretiens au niveau de la ville de Ouagadougou. AIDELF. 2008. DÉMOGRAPHIE ET CULTURES - Actes du colloque de Québec (Canada, 25-29 août 2008), Association internationale des démographes de langue française, 1 212 pages. V/Réf.: Québec/Séance 18/ Younoussi.doc Dernière impression le12/07/2009 10:58 Mise en pages : P.A.O. Assistance – 13109SimianeCollongue - Tél.: 33 (0)971 24 0840 SiteInternet et E-Mailà l’adresse : http://www.pao-assistance.fr 1174 DÉMOGRAPHIE ET CULTURES V/Réf. : Québec/Séance 18/ Younoussi.doc Dernière impression"
+      },
+      "mo": {},
+      "di": {}
+    }
+  },
+  {
+    "id": "b02f02db-d22c-41d9-9dab-0a8eac064c01",
+    "categorie": "general",
+    "sous_categorie": "general",
+    "niveau": "grand_public",
+    "source": {
+      "type": "pdf",
+      "fichier": "ethnie du burkina.pdf"
+    },
+    "langues": {
+      "fr": {
+        "intention": "information",
+        "question_type": "explication",
+        "reponse": "en pages : P.A.O. Assistance – 13109SimianeCollongue - Tél.: 33 (0)971 24 0840 SiteInternet et E-Mailà l’adresse : http://www.pao-assistance.fr 1174 DÉMOGRAPHIE ET CULTURES V/Réf. : Québec/Séance 18/ Younoussi.doc Dernière impression le 12/07/2009 10:58 Mise en pages : P.A.O. Assistance – 13109 Simiane Collongue - Tél. : 33 (0)971 24 08 40 Site Internet et E-Mail à l’adresse : http://www.pao-assistance.fr"
+      },
+      "mo": {},
+      "di": {}
+    }
+  },
+  {
+    "id": "b6cee528-89a9-4e63-8cdf-cd6da702e6ca",
+    "categorie": "general",
+    "sous_categorie": "general",
+    "niveau": "grand_public",
+    "source": {
+      "type": "pdf",
+      "fichier": "ethnie du burkina.pdf"
+    },
+    "langues": {
+      "fr": {
+        "intention": "information",
+        "question_type": "explication",
+        "reponse": "impression le 12/07/2009 10:58 Mise en pages : P.A.O. Assistance – 13109 Simiane Collongue - Tél. : 33 (0)971 24 08 40 Site Internet et E-Mail à l’adresse : http://www.pao-assistance.fr"
+      },
+      "mo": {},
+      "di": {}
     }
   }
 ]

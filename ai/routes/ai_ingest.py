@@ -18,9 +18,9 @@ except ImportError:
     from backend.mongodb import db  # type: ignore
 
 try:
-    from ...security import require_expert
+    from ...security import require_admin_or_expert
 except ImportError:
-    from security import require_expert
+    from security import require_admin_or_expert
 
 logger = logging.getLogger(__name__)
 
@@ -47,7 +47,7 @@ class IngestRequest(BaseModel):
 # Endpoint pour ingérer du texte
 # -------------------------------
 @router.post("/ingest")
-def ingest_text(req: IngestRequest, user=Depends(require_expert)):
+def ingest_text(req: IngestRequest, user=Depends(require_admin_or_expert)):
     try:
         # Ajouter chaque texte dans RAG + MongoDB documents
         for t in req.texts:
@@ -71,7 +71,7 @@ def ingest_text(req: IngestRequest, user=Depends(require_expert)):
 def ingest_photo(
     file: UploadFile = File(...),
     source: str = Form("unknown"),
-    user=Depends(require_expert)
+    user=Depends(require_admin_or_expert)
 ):
     try:
         # 1️⃣ Sauvegarde du fichier temporaire
