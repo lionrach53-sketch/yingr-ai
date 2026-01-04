@@ -554,14 +554,14 @@ async def guest_chat(req: GuestChatRequest):
 
 @app.get("/health", response_model=HealthResponse, tags=["Public"])
 async def health():
-    """Health check endpoint"""
+    """Health check endpoint (legacy root path)."""
     try:
         stats = db.get_system_stats()  # REMPLACE Database.load()
-        
+
         uptime_seconds = time.time() - START_TIME
         days = int(uptime_seconds // 86400)
         hours = int((uptime_seconds % 86400) // 3600)
-        
+
         return HealthResponse(
             status="healthy",
             timestamp=datetime.now().isoformat(),
@@ -580,6 +580,12 @@ async def health():
             expert_count=0,
             pending_validations=0
         )
+
+
+@app.get("/api/health", response_model=HealthResponse, tags=["Public"])
+async def api_health():
+    """Health check endpoint sous le préfixe /api pour les frontends."""
+    return await health()
 
 # Routes expert
 @app.post("/api/expert/login", response_model=ExpertInfo, tags=["Expert"])
@@ -1326,6 +1332,10 @@ async def delete_admin_knowledge(
 # ROUTES ADMIN - GESTION RAG/FAISS
 # ============================================
 
+class AdminRagIngestRequest(BaseModel):
+    texts: List[str]
+    source: str = "admin"
+
 @app.get("/api/admin/rag/stats", tags=["Admin", "RAG"])
 async def get_rag_stats(_: bool = Depends(verify_admin)):
     """Obtenir les statistiques de la base RAG/FAISS"""
@@ -1343,6 +1353,49 @@ async def get_rag_stats(_: bool = Depends(verify_admin)):
     
     except Exception as e:
         logger.error(f"Erreur stats RAG: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/api/admin/rag/ingest-text", tags=["Admin", "RAG"])
+async def admin_rag_ingest_text(
+    req: AdminRagIngestRequest,
+    _: bool = Depends(verify_admin)
+):
+    """Ingérer un ou plusieurs textes directement dans la base RAG/FAISS côté admin.
+
+    Utilisé par le panel admin pour coller du texte (issu de PDF, Word, etc.)
+    sans passer par les routes /ai réservées à l'IA.
+    """
+    try:
+      if not rag or not rag.vector_store:
+          raise HTTPException(status_code=503, detail="RAG non initialisé")
+
+      ingested = 0
+      for t in req.texts:
+          if not t.strip():
+              continue
+          rag.ingest([t], req.source)
+          ingested += 1
+
+          if db is not None:
+              db.add_document({
+                  "content": t,
+                  "source": req.source,
+                  "uploaded_by": "admin-panel",
+                  "uploaded_at": datetime.utcnow(),
+                  "type": "text"
+              })
+
+      return {
+          "success": True,
+          "ingested_count": ingested,
+          "source": req.source
+      }
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Erreur ingestion texte RAG (admin): {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
 
