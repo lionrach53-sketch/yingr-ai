@@ -84,11 +84,23 @@ class VectorStore:
         """Supprime des documents par leurs indices"""
         if not indices_to_delete:
             return
-        
+
+        # Normaliser les indices à supprimer
+        # On se base sur la taille réelle de l'index FAISS pour éviter
+        # les erreurs lorsque meta et index sont désynchronisés.
+        ntotal = self.index.ntotal
+        if ntotal == 0:
+            # Rien à supprimer côté index, on vide simplement les métadonnées
+            self.meta = []
+            self._save()
+            return
+
+        indices_to_delete_set = {i for i in indices_to_delete if 0 <= i < ntotal}
+
         # FAISS ne supporte pas la suppression directe
         # Il faut recréer l'index sans les documents supprimés
-        indices_to_keep = [i for i in range(len(self.meta)) if i not in indices_to_delete]
-        
+        indices_to_keep = [i for i in range(ntotal) if i not in indices_to_delete_set]
+
         if not indices_to_keep:
             # Tous les docs supprimés, réinitialiser
             dim = self.index.d
@@ -98,24 +110,28 @@ class VectorStore:
             # Récupérer les vecteurs à garder
             vectors_to_keep = []
             meta_to_keep = []
-            
+
             for i in indices_to_keep:
-                # Récupérer le vecteur depuis l'index
+                # Récupérer le vecteur depuis l'index en toute sécurité
                 vector = faiss.vector_to_array(self.index.reconstruct(i))
                 vectors_to_keep.append(vector)
-                meta_to_keep.append(self.meta[i])
-            
+                # Protéger l'accès aux métadonnées si meta est plus court
+                if i < len(self.meta):
+                    meta_to_keep.append(self.meta[i])
+                else:
+                    meta_to_keep.append({"source": "unknown", "text": ""})
+
             # Créer nouvel index
             dim = self.index.d
             self.index = faiss.IndexFlatL2(dim)
             self.meta = []
-            
+
             # Ré-ajouter les vecteurs conservés
             if vectors_to_keep:
                 vectors_array = np.array(vectors_to_keep).astype('float32')
                 self.index.add(vectors_array)
                 self.meta = meta_to_keep
-        
+
         self._save()
     
     def delete_by_source(self, source_pattern):
