@@ -202,18 +202,21 @@ except Exception as e:
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
+        # Frontend locaux (développement)
         "http://localhost:5175",
         "http://localhost:5173",
         "http://localhost:5174",
         "http://localhost:3000",
         "http://localhost:5176",
-        # Frontend prod servi par `serve` sur la VM
-        # Frontend user prod servi par `serve` sur la VM
+        # Anciennes URLs de test sur IP directe
         "http://34.173.253.235:4173",
-        # Frontend admin prod (autre port sur la même VM)
         "http://34.173.253.235:4174",
-        # Frontend expert prod (encore un autre port)
         "http://34.173.253.235:4175",
+        # Domaines de production
+        "https://yingr-ai.com",          # frontend user
+        "https://admin.yingr-ai.com",    # panel admin
+        "https://expert.yingr-ai.com",   # panel expert
+        "https://api.yingr-ai.com",      # éventuel domaine API
     ],
     allow_credentials=True,
     allow_methods=["*"],
@@ -1406,6 +1409,41 @@ def _extract_language(source: str) -> str:
     elif '-di' in source:
         return 'di'
     return 'unknown'
+
+
+@app.get("/api/admin/rag/documents/{index}", tags=["Admin", "RAG"])
+async def get_rag_document_detail(
+    index: int,
+    _: bool = Depends(verify_admin)
+):
+    """Récupérer le texte complet et les métadonnées d'un document RAG."""
+    try:
+        if not rag or not rag.vector_store:
+            raise HTTPException(status_code=503, detail="RAG non initialisé")
+
+        all_docs = rag.vector_store.get_all_metadata()
+
+        if index < 0 or index >= len(all_docs):
+            raise HTTPException(status_code=404, detail=f"Document index {index} non trouvé")
+
+        _, meta = all_docs[index]
+        text = meta.get("text", "")
+        source = meta.get("source", "")
+
+        return {
+            "success": True,
+            "index": index,
+            "text": text,
+            "source": source,
+            "language": _extract_language(source),
+            "full_text_length": len(text),
+        }
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Erreur détail document RAG: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 @app.delete("/api/admin/rag/documents/{index}", tags=["Admin", "RAG"])
